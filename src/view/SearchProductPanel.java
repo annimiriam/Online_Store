@@ -3,7 +3,7 @@ import control.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class SearchPanel extends JPanel {
+public class SearchProductPanel extends JPanel {
 
     private JPanel gridPanel;
     private JLabel lblProductCode;
@@ -18,10 +18,9 @@ public class SearchPanel extends JPanel {
 
     private JButton btnSearch;
 
-    public SearchPanel() {
+    public SearchProductPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Sök Produkt"));
-
         createElements();
         addElements();
     }

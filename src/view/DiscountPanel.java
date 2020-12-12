@@ -4,8 +4,12 @@ import control.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class DiscountPanel extends JPanel {
+
+    private JPanel panelAddDiscount;
+
     private DefaultTableModel discountData;
     private JTable discountTable;
     private JScrollPane scrollPane;
@@ -15,12 +19,15 @@ public class DiscountPanel extends JPanel {
     private JButton btnRemoveDiscount;
 
     public DiscountPanel () {
-        setBorder(new EmptyBorder(10,10,10,10));
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Rabatter"));
         createElements();
         addElements();
     }
 
     public void createElements(){
+        panelAddDiscount = new JPanel();
+
         discountData = new DefaultTableModel();
         discountTable = new JTable();
         discountTable.setFillsViewportHeight(true);
@@ -33,9 +40,11 @@ public class DiscountPanel extends JPanel {
     }
 
     public void addElements(){
-        add(scrollPane);
-        add(btnRemoveDiscount);
-        add(btnAddDiscount);
+        panelAddDiscount.add(btnRemoveDiscount);
+        panelAddDiscount.add(btnAddDiscount);
+
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelAddDiscount, BorderLayout.SOUTH);
     }
 
 }

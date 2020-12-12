@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class ShoppingListPanel extends JPanel {
+
+    private JPanel panelSouth;
     private DefaultTableModel shoppingListData;
     private JTable shoppingListTable;
     private JScrollPane scrollPane;
@@ -15,13 +17,14 @@ public class ShoppingListPanel extends JPanel {
     private JButton btnCreateOrder;
 
     public ShoppingListPanel(){
-        setPreferredSize(new Dimension(200,500));
-        setBorder(new EmptyBorder(10,10,10,10));
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Shopplinglista"));
         createElements();
         addElements();
     }
 
     public void createElements(){
+        panelSouth = new JPanel();
         shoppingListData = new DefaultTableModel();
         shoppingListTable = new JTable();
         shoppingListTable.setFillsViewportHeight(true);
@@ -33,10 +36,11 @@ public class ShoppingListPanel extends JPanel {
     };
 
     public void addElements(){
+        panelSouth.add(btnRemove);
+        panelSouth.add(btnCreateOrder);
 
-        add(scrollPane);
-        add(btnRemove);
-        add(btnCreateOrder);
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelSouth, BorderLayout.SOUTH);
     }
 
 }

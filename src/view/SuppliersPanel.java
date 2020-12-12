@@ -1,9 +1,13 @@
 package view;
-import control.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class SuppliersPanel extends JPanel {
+
+    private JPanel panelAddSupplier;
+
+
     private DefaultTableModel supplierData;
     private JTable supplierTable;
     private JScrollPane scrollPane;
@@ -13,11 +17,15 @@ public class SuppliersPanel extends JPanel {
     private JButton btnAddSupplier;
 
     public SuppliersPanel(){
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Leverantörer"));
         createElements();
         addElements();
     }
 
     public void createElements(){
+        panelAddSupplier = new JPanel();
+
         supplierData = new DefaultTableModel();
         supplierTable = new JTable();
         supplierTable.setFillsViewportHeight(true);
@@ -29,9 +37,12 @@ public class SuppliersPanel extends JPanel {
     };
 
     public void addElements(){
-        add(scrollPane);
-        add(btnRemoveSupplier);
-        add(btnAddSupplier);
+
+        panelAddSupplier.add(btnAddSupplier);
+        panelAddSupplier.add(btnRemoveSupplier);
+
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelAddSupplier, BorderLayout.SOUTH);
     }
 
 }

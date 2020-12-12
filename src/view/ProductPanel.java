@@ -1,11 +1,13 @@
 package view;
-import control.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class ProductPanel extends JPanel {
+
+    private SearchProductPanel panelSearchProducts;
+    private JPanel panelSouth;
 
     private DefaultTableModel productData;
     private JTable productsTable;
@@ -16,13 +18,16 @@ public class ProductPanel extends JPanel {
     private JButton btnSaleProducts;
 
     public ProductPanel () {
+        setLayout(new BorderLayout());
         setPreferredSize(new Dimension(500,500));
-        setBorder(new EmptyBorder(10,10,10,10));
         createElements();
         addElements();
     }
 
     public void createElements(){
+        panelSearchProducts = new SearchProductPanel();
+        panelSouth = new JPanel();
+
         productData = new DefaultTableModel();
         productsTable = new JTable();
         productsTable.setFillsViewportHeight(true);
@@ -35,10 +40,12 @@ public class ProductPanel extends JPanel {
     }
 
     public void addElements(){
-        add(scrollPane);
-        add(btnAllProducts);
-        add(btnSaleProducts);
-    }
+        panelSouth.add(btnAllProducts);
+        panelSouth.add(btnSaleProducts);
 
+        add(panelSearchProducts, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+        add(panelSouth, BorderLayout.SOUTH);
+    }
 
 }

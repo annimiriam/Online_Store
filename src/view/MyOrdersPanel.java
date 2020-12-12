@@ -1,34 +1,54 @@
 package view;
-import control.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class MyOrdersPanel extends JPanel {
+    private JPanel panelMyOrders;
+    private JPanel panelOrderDetails;
+
     private DefaultTableModel myOrdersData;
-    private JTable myOrdersTable;
-    private JScrollPane scrollPane;
-    private String[] columnNames = {"Ordernr", "Datum", "Pris" };
+    private DefaultTableModel orderDetailsData;
+    private JTable tblMyOrders;
+    private JTable tblOrderDetails;
+
+    private JScrollPane scrollPaneMyOrders;
+    private JScrollPane scrollPaneOrderDetails;
+    private String[] columnNamesMyOrders = {"Ordernr", "Datum", "Pris" };
+    private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris" };
 
 
     public MyOrdersPanel(){
-        setBorder(new EmptyBorder(10,10,10,10));
+        setBorder(BorderFactory.createTitledBorder("Mina beställningar"));
+        setLayout(new BorderLayout());
         createElements();
         addElements();
     }
 
     public void createElements(){
+        panelMyOrders = new JPanel();
         myOrdersData = new DefaultTableModel();
-        myOrdersTable = new JTable();
-        myOrdersTable.setFillsViewportHeight(true);
-        scrollPane = new JScrollPane(myOrdersTable);
-        myOrdersData.setColumnIdentifiers(columnNames);
-        myOrdersTable.setModel(myOrdersData);
+        tblMyOrders = new JTable();
+        tblMyOrders.setFillsViewportHeight(true);
+        scrollPaneMyOrders = new JScrollPane(tblMyOrders);
+        myOrdersData.setColumnIdentifiers(columnNamesMyOrders);
+        tblMyOrders.setModel(myOrdersData);
 
+        panelOrderDetails = new JPanel();
+        orderDetailsData = new DefaultTableModel();
+        tblOrderDetails = new JTable();
+        tblOrderDetails.setFillsViewportHeight(true);
+        scrollPaneOrderDetails = new JScrollPane(tblOrderDetails);
+        orderDetailsData.setColumnIdentifiers(columnNamesOrderDetails);
+        tblOrderDetails.setModel(orderDetailsData);
     };
 
     public void addElements(){
-        add(scrollPane);
+        panelMyOrders.add(scrollPaneMyOrders);
+        panelOrderDetails.add(scrollPaneOrderDetails);
+
+        add(panelMyOrders, BorderLayout.CENTER);
+        add(panelOrderDetails, BorderLayout.SOUTH);
     }
 
 }

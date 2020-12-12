@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 public class LoginPanel extends JPanel {
 
     private Controller controller;
-    private JPanel gridPanel;
+    private JPanel gridPanel1;
+    private JPanel gridPanel2;
     private JLabel lblUserName;
     private JLabel lblPassword;
 
@@ -21,14 +22,15 @@ public class LoginPanel extends JPanel {
 
     public LoginPanel(Controller controller) {
         this.controller = controller;
-        setBorder(new EmptyBorder(10, 10, 10, 10));
+        setBorder(BorderFactory.createTitledBorder("Logga in"));
         createElements();
         addElements();
         addListeners();
     }
 
     public void createElements() {
-        gridPanel = new JPanel(new GridLayout(2, 2));
+        gridPanel1 = new JPanel(new GridLayout(2, 2));
+        gridPanel2 = new JPanel(new GridLayout(2, 1));
         lblUserName = new JLabel("Användarnamn: ");
         lblPassword = new JLabel("Lösenord: ");
 
@@ -40,15 +42,18 @@ public class LoginPanel extends JPanel {
     }
 
     public void addElements() {
-        gridPanel.add(lblUserName);
-        gridPanel.add(txtUsername);
+        gridPanel1.add(lblUserName);
+        gridPanel1.add(txtUsername);
 
-        gridPanel.add(lblPassword);
-        gridPanel.add(txtPassword);
+        gridPanel1.add(lblPassword);
+        gridPanel1.add(txtPassword);
 
-        add(gridPanel);
-        add(btnLogIn);
-        add(btnRegister);
+
+        gridPanel2.add(btnLogIn);
+        gridPanel2.add(btnRegister);
+
+        add(gridPanel1);
+        add(gridPanel2);
     }
 
     public void addListeners() {
@@ -65,7 +70,7 @@ public class LoginPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Registrera ny kund");
-                controller.registerCustomer();
+                controller.showRegisterCustomerPanel();
             }
         });
     }

@@ -9,41 +9,41 @@ public class Controller {
 
     public Controller() {
         mainPanel = new MainPanel(this);
-        mainFrame = new MainFrame(this, mainPanel);
+        mainFrame = new MainFrame(mainPanel);
     }
 
+    // Kontrollerar angivet användarnamn och lösenord om admin eller kund
     public void checkLogin(String user, String password) {
         if (user.equals("admin") && password.equals("admin")) {
             System.out.println("admin inloggad");
-            setupAdminPanel();
+            showAdminPanel();
         } else if (user.equals("kund") && password.equals("kund")) {
             System.out.println("kund inloggad");
-            setupCustomerPanel();
+            showCustomerPanel();
         }
+        mainFrame.setExtendedState(mainFrame.MAXIMIZED_BOTH); // maximerar fönsterstorlek för att ge plats åt paneler
     }
 
-    public void setupAdminPanel(){
-        mainPanel.add(new SearchPanel(), BorderLayout.NORTH);
-        mainPanel.add(new SuppliersPanel(), BorderLayout.CENTER);
+    // Visar registrera-kund-panelen
+    public void showRegisterCustomerPanel(){
+        mainPanel.add(new RegisterPanel(this), BorderLayout.SOUTH);
         mainPanel.repaint();
         mainPanel.revalidate();
+        mainFrame.pack();
     }
 
-    public void setupCustomerPanel(){
+    // Ritar upp kundpanelen
+    public void showCustomerPanel(){
         mainPanel.removeAll();
+        mainPanel.add(new CustomerPanel(), BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
-
-        mainPanel.add(new SearchPanel(), BorderLayout.NORTH);
-        mainPanel.add(new ProductPanel(), BorderLayout.CENTER);
-        mainPanel.add(new ShoppingListPanel(), BorderLayout.EAST);
-        mainPanel.repaint();
-        mainPanel.revalidate();
-
     }
 
-    public void registerCustomer(){
-        mainPanel.add(new RegisterPanel(this), BorderLayout.EAST);
+    // Ritar upp adminpanelen
+    public void showAdminPanel(){
+        mainPanel.removeAll();
+        mainPanel.add(new AdminPanel(), BorderLayout.CENTER);
         mainPanel.repaint();
         mainPanel.revalidate();
     }
