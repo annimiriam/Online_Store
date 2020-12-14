@@ -1,8 +1,6 @@
 package view;
-import control.*;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -46,5 +44,7 @@ public class DiscountPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         add(panelAddDiscount, BorderLayout.SOUTH);
     }
+
+    // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
 
 }
