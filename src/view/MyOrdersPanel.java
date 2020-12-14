@@ -17,7 +17,6 @@ public class MyOrdersPanel extends JPanel {
     private String[] columnNamesMyOrders = {"Ordernr", "Datum", "Pris" };
     private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris" };
 
-
     public MyOrdersPanel(){
         setBorder(BorderFactory.createTitledBorder("Mina beställningar"));
         setLayout(new BorderLayout());

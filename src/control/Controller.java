@@ -8,7 +8,7 @@ public class Controller {
     private MainPanel mainPanel;
 
     public Controller() {
-        mainPanel = new MainPanel(this);
+        mainPanel = new MainPanel(new LoginPanel(this) );
         mainFrame = new MainFrame(mainPanel);
     }
 

@@ -7,7 +7,6 @@ public class SuppliersPanel extends JPanel {
 
     private JPanel panelAddSupplier;
 
-
     private DefaultTableModel supplierData;
     private JTable supplierTable;
     private JScrollPane scrollPane;
@@ -37,12 +36,13 @@ public class SuppliersPanel extends JPanel {
     };
 
     public void addElements(){
-
         panelAddSupplier.add(btnAddSupplier);
         panelAddSupplier.add(btnRemoveSupplier);
 
         add(scrollPane, BorderLayout.CENTER);
         add(panelAddSupplier, BorderLayout.SOUTH);
     }
+
+    // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
 
 }

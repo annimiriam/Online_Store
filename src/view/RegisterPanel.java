@@ -84,4 +84,6 @@ public class RegisterPanel extends JPanel {
 
     }
 
+    // Metod eller metoder för att returnera strängar från textfälten till controllern. Via MainPanel?
+
 }
