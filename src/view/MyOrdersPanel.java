@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MyOrdersPanel extends JPanel {
     private JPanel panelMyOrders;
-    private JPanel panelOrderDetails;
+    private JPanel panelOrderInventory;
 
     private DefaultTableModel myOrdersData;
     private DefaultTableModel orderDetailsData;
@@ -33,7 +33,7 @@ public class MyOrdersPanel extends JPanel {
         myOrdersData.setColumnIdentifiers(columnNamesMyOrders);
         tblMyOrders.setModel(myOrdersData);
 
-        panelOrderDetails = new JPanel();
+        panelOrderInventory = new JPanel();
         orderDetailsData = new DefaultTableModel();
         tblOrderDetails = new JTable();
         tblOrderDetails.setFillsViewportHeight(true);
@@ -44,10 +44,10 @@ public class MyOrdersPanel extends JPanel {
 
     public void addElements(){
         panelMyOrders.add(scrollPaneMyOrders);
-        panelOrderDetails.add(scrollPaneOrderDetails);
+        panelOrderInventory.add(scrollPaneOrderDetails);
 
         add(panelMyOrders, BorderLayout.CENTER);
-        add(panelOrderDetails, BorderLayout.SOUTH);
+        add(panelOrderInventory, BorderLayout.SOUTH);
     }
 
 }
