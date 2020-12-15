@@ -1,5 +1,7 @@
 package control;
+
 import view.*;
+
 import java.awt.*;
 
 public class Controller {
@@ -7,9 +9,15 @@ public class Controller {
     private MainFrame mainFrame;
     private MainPanel mainPanel;
 
+    private String user = "hej";
+    private String password = "secret";
+
     public Controller() {
-        mainPanel = new MainPanel(new LoginPanel(this) );
-        mainFrame = new MainFrame(mainPanel);
+//        mainPanel = new MainPanel(new LoginPanel(this) );
+//        mainFrame = new MainFrame(mainPanel);
+
+        // Skapar ny koppling mot databas med användarnamn och lösen
+        new JdbcSQLServerConnection(user, password);
     }
 
     // Kontrollerar angivet användarnamn och lösenord om admin eller kund
@@ -25,7 +33,7 @@ public class Controller {
     }
 
     // Visar registrera-kund-panelen
-    public void showRegisterCustomerPanel(){
+    public void showRegisterCustomerPanel() {
         mainPanel.add(new RegisterPanel(this), BorderLayout.SOUTH);
         mainPanel.repaint();
         mainPanel.revalidate();
@@ -33,7 +41,7 @@ public class Controller {
     }
 
     // Ritar upp kundpanelen
-    public void showCustomerPanel(){
+    public void showCustomerPanel() {
         mainPanel.removeAll();
         mainPanel.add(new CustomerPanel(), BorderLayout.CENTER);
         mainPanel.repaint();
@@ -41,7 +49,7 @@ public class Controller {
     }
 
     // Ritar upp adminpanelen
-    public void showAdminPanel(){
+    public void showAdminPanel() {
         mainPanel.removeAll();
         mainPanel.add(new AdminPanel(), BorderLayout.CENTER);
         mainPanel.repaint();
