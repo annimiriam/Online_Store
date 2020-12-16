@@ -16,7 +16,7 @@ public class JdbcSQLServerConnection {
 
     public void connectToDatabase(String user, String password) throws ClassNotFoundException, SQLException {
 
-        String dbURL = "jdbc:sqlserver://localhost;DatabaseName=OnlineStore;user=" + user + ";password=" + password;
+        String dbURL = "jdbc:sqlserver://localhost;DatabaseName=OnlineStore";
         Connection connection = DriverManager.getConnection(dbURL, user, password);
 
         //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
