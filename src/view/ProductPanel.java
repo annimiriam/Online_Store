@@ -1,4 +1,5 @@
 package view;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,21 +12,18 @@ public class ProductPanel extends JPanel {
     private DefaultTableModel productData;
     private JTable productsTable;
     private JScrollPane scrollPane;
-    private String[] columnNames = {"Produktkod", "Namn", "Baspris", "Leverantör", "Antal i lager" };
+    private String[] columnNames = {"Produktkod", "Namn", "Baspris", "Leverantör", "Antal i lager"};
 
-    private JButton btnAllProducts;
-    private JButton btnSaleProducts;
-
-    public ProductPanel () {
+    public ProductPanel(JPanel panelSouth) {
+        this.panelSouth = panelSouth;
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(500,500));
+        setPreferredSize(new Dimension(500, 500));
         createElements();
         addElements();
     }
 
-    public void createElements(){
+    public void createElements() {
         panelSearchProducts = new SearchProductPanel();
-        panelSouth = new JPanel();
 
         productData = new DefaultTableModel();
         productsTable = new JTable();
@@ -34,19 +32,21 @@ public class ProductPanel extends JPanel {
         productData.setColumnIdentifiers(columnNames);
         productsTable.setModel(productData);
 
-        btnAllProducts = new JButton("Alla produkter");
-        btnSaleProducts = new JButton("Reaprodukter");
     }
 
-    public void addElements(){
-        panelSouth.add(btnAllProducts);
-        panelSouth.add(btnSaleProducts);
-
+    public void addElements() {
         add(panelSearchProducts, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         add(panelSouth, BorderLayout.SOUTH);
     }
 
-    // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
+    public SearchProductPanel getSearchProductPanel() {
+        return panelSearchProducts;
+    }
+
+    public JPanel getPanelSouth() {
+        return panelSouth;
+    }
+
 
 }

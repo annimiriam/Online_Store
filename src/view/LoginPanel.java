@@ -75,5 +75,12 @@ public class LoginPanel extends JPanel {
         });
     }
 
+    public String getTxtUsername() {
+        return txtUsername.getText();
+    }
+
+    public String getTxtPassword() {
+        return txtPassword.getText();
+    }
 }
 

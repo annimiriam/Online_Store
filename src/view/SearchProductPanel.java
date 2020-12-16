@@ -1,4 +1,5 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -53,6 +54,20 @@ public class SearchProductPanel extends JPanel {
         add(btnSearch, this);
     }
 
-    // Metod eller metoder för att returnera strängar från textfälten till controllern. Via MainPanel?
+    public String getTxtProductCode() {
+        return txtProductCode.getText();
+    }
+
+    public String getTxtProductName() {
+        return txtProductName.getText();
+    }
+
+    public String getTxtSupplier() {
+        return txtSupplier.getText();
+    }
+
+    public String getTxtPrice() {
+        return txtPrice.getText();
+    }
 
 }
