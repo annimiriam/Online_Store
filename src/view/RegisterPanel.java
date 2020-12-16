@@ -84,6 +84,38 @@ public class RegisterPanel extends JPanel {
 
     }
 
-    // Metod eller metoder för att returnera strängar från textfälten till controllern. Via MainPanel?
+    // Metoder för att returnera strängar från textfälten till controllern. Via MainPanel?
+
+    public String getTxtFirstName(){
+        return txtFirstName.getText();
+    }
+
+    public String getTxtLastName(){
+        return txtLastName.getText();
+    }
+
+    public String getTxtEmail(){
+        return txtEmail.getText();
+    }
+
+    public String getTxtPassword(){
+        return txtPassword.getText();
+    }
+
+    public String getTxtAddress(){
+        return txtAddress.getText();
+    }
+
+    public String getTxtCity(){
+        return txtCity.getText();
+    }
+
+    public String getTxtCountry(){
+        return txtCountry.getText();
+    }
+
+    public String getTxtPhonenumber(){
+        return txtPhonenumber.getText();
+    }
 
 }

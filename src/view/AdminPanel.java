@@ -1,16 +1,21 @@
 package view;
 
+import view.admin.AddProductsAdmin;
+import view.admin.DiscountPanel;
+import view.admin.SuppliersPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class AdminPanel extends JPanel {
+
     private SuppliersPanel panelSuppliers;
     private ProductPanel panelProducts;
     private DiscountPanel panelDiscount;
 
     public AdminPanel (){
         panelSuppliers = new SuppliersPanel();
-        panelProducts = new ProductPanel();
+        panelProducts = new ProductPanel(new AddProductsAdmin());
         panelDiscount = new DiscountPanel();
 
         setLayout(new BorderLayout());
@@ -18,6 +23,18 @@ public class AdminPanel extends JPanel {
         add(panelSuppliers, BorderLayout.WEST);
         add(panelProducts, BorderLayout.CENTER);
         add(panelDiscount, BorderLayout.EAST);
+
     }
 
+    public SuppliersPanel getPanelSuppliers() {
+        return panelSuppliers;
+    }
+
+    public ProductPanel getPanelProducts() {
+        return panelProducts;
+    }
+
+    public DiscountPanel getPanelDiscount() {
+        return panelDiscount;
+    }
 }

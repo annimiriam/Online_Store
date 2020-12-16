@@ -13,8 +13,8 @@ public class Controller {
     private String password = "secret";
 
     public Controller() {
-//        mainPanel = new MainPanel(new LoginPanel(this) );
-//        mainFrame = new MainFrame(mainPanel);
+        mainPanel = new MainPanel(new LoginPanel(this) );
+        mainFrame = new MainFrame(mainPanel);
 
         // Skapar ny koppling mot databas med användarnamn och lösen
         new JdbcSQLServerConnection(user, password);
