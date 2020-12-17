@@ -6,6 +6,8 @@
 # Compiled class file
 *.class
 
+misc.xml
+
 # Log file
 *.log
 
