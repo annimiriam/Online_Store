@@ -2,22 +2,24 @@ package control;
 
 import view.*;
 
+
 import java.awt.*;
+
 
 public class Controller {
 
     private MainFrame mainFrame;
     private MainPanel mainPanel;
+    JdbcSQLServerConnection jdbc = new JdbcSQLServerConnection();
 
     private String user = "hej";
     private String password = "secret";
 
     public Controller() {
-        mainPanel = new MainPanel(new LoginPanel(this) );
-        mainFrame = new MainFrame(mainPanel);
+//        mainPanel = new MainPanel(new LoginPanel(this));
+//        mainFrame = new MainFrame(mainPanel);
 
         // Skapar ny koppling mot databas med användarnamn och lösen
-        new JdbcSQLServerConnection(user, password);
     }
 
     // Kontrollerar angivet användarnamn och lösenord om admin eller kund
@@ -58,30 +60,106 @@ public class Controller {
 
 
     //get called when you register and press the register button
-    public void addCustomer(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
-        String name = mainPanel.getTxtFirstNameFromRegisterPanel();
-        String phonenumber = mainPanel.getTxtPhonenumberFromRegisterPanel();
+    public void addCustomer() {
+
+        String fName = mainPanel.getTxtFirstNameFromRegisterPanel();
+        String lName = mainPanel.getTxtLastNameFromRegisterPanel();
+        String email = mainPanel.getTxtEmailFromRegisterPanel();
         String address = mainPanel.getTxtAddressFromRegisterPanel();
+
+        String city = mainPanel.getTxtCityFromRegisterPanel();
+        String country = mainPanel.getTxtCountryFromRegisterPanel();
+        String tel = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
-        jdb.addCustomer(name,phonenumber, address, password1);
+        jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
     }
 
-    public void loginCustomer(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    public void loginCustomer() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+
     }
 
-    public void adminAddProduct(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    public void listAllSuppliers() {
+        jdbc.connectToDatabase(user, password);
+
+        jdbc.disconnectFromDatabase();
     }
-    public void adminAddDiscount(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
-    }
+
     public void adminAddSupplier(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+        jdbc.connectToDatabase(user, password);
+        jdbc.addSupplier();
+        jdbc.disconnectFromDatabase();
     }
-    public void adminAddDiscountToProduct(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+
+    public void adminAddProduct() {
+        jdbc.connectToDatabase(user, password);
+        jdbc.addProduct();
+        jdbc.disconnectFromDatabase();
     }
+
+    public void adminAddDiscount() {
+        jdbc.connectToDatabase(user, password);
+        jdbc.addDiscount();
+        jdbc.disconnectFromDatabase();
+
+    }
+
+    public void customerAddProductToOrder(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.addProductToOrder();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void adminAssignDiscountToProduct() {
+        jdbc.connectToDatabase(user, password);
+        jdbc.assignDiscountToProduct();
+        jdbc.disconnectFromDatabase();
+
+    }
+
+    public void adminUpdateQuantity(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.updateQuantity();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void adminDeleteProduct(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.deleteProduct();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void registerCustomer(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.registerCustomer();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void searchProduct(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.searchProduct();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void listAllProducts(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.listAllProducts();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void searchUnconfirmedOrders(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.searchUnconfirmedOrders();
+        jdbc.disconnectFromDatabase();
+    }
+
+    public void orderHistory(){
+        jdbc.connectToDatabase(user, password);
+        jdbc.orderHistory();
+        jdbc. disconnectFromDatabase();
+    }
+
 
 }
