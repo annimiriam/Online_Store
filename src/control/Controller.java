@@ -2,22 +2,24 @@ package control;
 
 import view.*;
 
+
 import java.awt.*;
+
 
 public class Controller {
 
     private MainFrame mainFrame;
     private MainPanel mainPanel;
+    JdbcSQLServerConnection jdbc = new JdbcSQLServerConnection();
 
     private String user = "hej";
     private String password = "secret";
 
     public Controller() {
-        mainPanel = new MainPanel(new LoginPanel(this) );
-        mainFrame = new MainFrame(mainPanel);
+//        mainPanel = new MainPanel(new LoginPanel(this));
+//        mainFrame = new MainFrame(mainPanel);
 
         // Skapar ny koppling mot databas med användarnamn och lösen
-        new JdbcSQLServerConnection(user, password);
     }
 
     // Kontrollerar angivet användarnamn och lösenord om admin eller kund
@@ -58,30 +60,61 @@ public class Controller {
 
 
     //get called when you register and press the register button
-    public void addCustomer(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    public void addCustomer() {
+
         String name = mainPanel.getTxtFirstNameFromRegisterPanel();
         String phonenumber = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String address = mainPanel.getTxtAddressFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
-        jdb.addCustomer(name,phonenumber, address, password1);
+        jdbc.addCustomer(name, phonenumber, address, password1);
     }
 
-    public void loginCustomer(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    public void loginCustomer() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+
     }
 
-    public void adminAddProduct(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    public void listAllSuppliers() {
+        jdbc.connectToDatabase(user, password);
+
+        jdbc.disconnectFromDatabase();
     }
-    public void adminAddDiscount(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+
+
+    public void adminAddProduct() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
     }
-    public void adminAddSupplier(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+
+    public void adminAddDiscount() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+
     }
-    public void adminAddDiscountToProduct(){
-        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+
+    public void adminAddSupplier() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+
     }
+
+    public void adminAddDiscountToProduct() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+
+    }
+
+    public void listAllProducts() {
+        jdbc.connectToDatabase(user, password);
+        // kod
+        jdbc.disconnectFromDatabase();
+    }
+
 
 }
