@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class RegisterPanel extends JPanel {
 
-    private Controller controller;
+    private MainPanel mainPanel;
     private JPanel gridPanel;
 
 
@@ -30,8 +30,8 @@ public class RegisterPanel extends JPanel {
 
     private JButton btnRegister;
 
-    public RegisterPanel(Controller controller) {
-        this.controller = controller;
+    public RegisterPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         createElements();

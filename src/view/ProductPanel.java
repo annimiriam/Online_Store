@@ -7,15 +7,18 @@ import java.awt.*;
 public class ProductPanel extends JPanel {
 
     private SearchProductPanel panelSearchProducts;
-    private JPanel panelSouth;
+
+
+    private MainPanel mainPanel;
 
     private DefaultTableModel productData;
     private JTable productsTable;
     private JScrollPane scrollPane;
     private String[] columnNames = {"Produktkod", "Namn", "Baspris", "Leverantör", "Antal i lager"};
 
-    public ProductPanel(JPanel panelSouth) {
-        this.panelSouth = panelSouth;
+    public ProductPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
+
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(500, 500));
         createElements();
@@ -37,16 +40,14 @@ public class ProductPanel extends JPanel {
     public void addElements() {
         add(panelSearchProducts, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        add(panelSouth, BorderLayout.SOUTH);
+
     }
 
     public SearchProductPanel getSearchProductPanel() {
         return panelSearchProducts;
     }
 
-    public JPanel getPanelSouth() {
-        return panelSouth;
-    }
+
 
 
 }

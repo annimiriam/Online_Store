@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
 
-    private Controller controller;
+    private MainPanel mainPanel;
     private JPanel gridPanel1;
     private JPanel gridPanel2;
     private JLabel lblUserName;
@@ -20,8 +20,8 @@ public class LoginPanel extends JPanel {
     private JButton btnLogIn;
     private JButton btnRegister;
 
-    public LoginPanel(Controller controller) {
-        this.controller = controller;
+    public LoginPanel( MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         setBorder(BorderFactory.createTitledBorder("Logga in"));
         createElements();
         addElements();
@@ -62,7 +62,7 @@ public class LoginPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //1. Kontrollera användarnamn och lösenord
                 System.out.println("Logga in som: " + txtUsername.getText() + " " + txtPassword.getText());
-                controller.checkLogin(txtUsername.getText(), txtPassword.getText());
+                mainPanel.checkLogin(txtUsername.getText(), txtPassword.getText());
             }
         });
 
@@ -70,7 +70,7 @@ public class LoginPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Registrera ny kund");
-                controller.showRegisterCustomerPanel();
+                mainPanel.showRegisterCustomerPanel();
             }
         });
     }

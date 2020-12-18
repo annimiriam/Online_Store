@@ -12,10 +12,12 @@ public class CustomerPanel extends JPanel {
     private MyOrdersPanel panelMyOrders;
     private ProductPanel panelProducts;
     private ShoppingListPanel panelShoppinglist;
+    private MainPanel mainPanel;
 
-    public CustomerPanel() {
+    public CustomerPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         panelMyOrders = new MyOrdersPanel();
-        panelProducts = new ProductPanel(new AddProductsCustomer());
+        panelProducts = new ProductPanel(mainPanel);
         panelShoppinglist = new ShoppingListPanel();
 
         setLayout(new BorderLayout());

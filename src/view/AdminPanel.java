@@ -1,6 +1,7 @@
 package view;
 
-import view.admin.AddProductsAdmin;
+
+
 import view.admin.DiscountPanel;
 import view.admin.SuppliersPanel;
 
@@ -12,10 +13,13 @@ public class AdminPanel extends JPanel {
     private SuppliersPanel panelSuppliers;
     private ProductPanel panelProducts;
     private DiscountPanel panelDiscount;
+    private MainPanel mainPanel;
 
-    public AdminPanel (){
+
+    public AdminPanel (MainPanel mainPanel){
+        this.mainPanel = mainPanel;
         panelSuppliers = new SuppliersPanel();
-        panelProducts = new ProductPanel(new AddProductsAdmin());
+        panelProducts = new ProductPanel(mainPanel);
         panelDiscount = new DiscountPanel();
 
         setLayout(new BorderLayout());
