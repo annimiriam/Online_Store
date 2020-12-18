@@ -4,6 +4,8 @@ import java.sql.*;
 
 public class JdbcSQLServerConnection {
 
+    private Connection connection;
+
     public JdbcSQLServerConnection(String user, String password) {
         try {
             connectToDatabase(user, password);
@@ -17,7 +19,7 @@ public class JdbcSQLServerConnection {
     public void connectToDatabase(String user, String password) throws ClassNotFoundException, SQLException {
 
         String dbURL = "jdbc:sqlserver://localhost;DatabaseName=OnlineStore";
-        Connection connection = DriverManager.getConnection(dbURL, user, password);
+        connection = DriverManager.getConnection(dbURL, user, password);
 
         //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
@@ -56,11 +58,16 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void addCustomer(String name, String phonenumber, String address, String password){
-        //connect
-        //Create query
-        //Send
-        //disconnect
+    public void addCustomer(String name, String phonenumber, String address, String password) {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "EXECUTE register_customer " + name + ", " + phonenumber + ", " + address + ", " + password + ";";
+            ResultSet resultSet = statement.executeQuery(query);
+            System.out.println(resultSet.getString(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
