@@ -53,6 +53,14 @@ public class JdbcSQLServerConnection {
             throwables.printStackTrace();
         }
 
+
+    }
+
+    public void addCustomer(String name, String phonenumber, String address, String password){
+        //connect
+        //Create query
+        //Send
+        //disconnect
     }
 
 }

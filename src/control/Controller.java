@@ -56,4 +56,32 @@ public class Controller {
         mainPanel.revalidate();
     }
 
+
+    //get called when you register and press the register button
+    public void addCustomer(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+        String name = mainPanel.getTxtFirstNameFromRegisterPanel();
+        String phonenumber = mainPanel.getTxtPhonenumberFromRegisterPanel();
+        String address = mainPanel.getTxtAddressFromRegisterPanel();
+        String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
+        jdb.addCustomer(name,phonenumber, address, password1);
+    }
+
+    public void loginCustomer(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    }
+
+    public void adminAddProduct(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    }
+    public void adminAddDiscount(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    }
+    public void adminAddSupplier(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    }
+    public void adminAddDiscountToProduct(){
+        JdbcSQLServerConnection jdb = new JdbcSQLServerConnection(password, user);
+    }
+
 }
