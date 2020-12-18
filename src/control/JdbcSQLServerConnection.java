@@ -42,6 +42,8 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
+    //Procedures that add, delete and modify database
+
     public void addSupplier(String name, String tel, String address, String postnbr, String city, String country) {
         createStatementAndExecuteProcedure(
                 "add_supplier "
@@ -53,8 +55,6 @@ public class JdbcSQLServerConnection {
                         + country + ";"
         );
     }
-
-    //Procedures that add, delete and modify database
 
     public void addProduct(int id, String name, double baseprice, String supplier, int qty) {
         createStatementAndExecuteProcedure(
@@ -98,7 +98,7 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void changeQuantityOfProduct(int prodId, int qty){
+    public void updateQuantity(int prodId, int qty){
         createStatementAndExecuteProcedure(
                 "add_supplier "
                         + prodId + ", "
@@ -143,13 +143,13 @@ public class JdbcSQLServerConnection {
     }
 
     //TODO - måste vi ha en egen metod som har tomma parametrar?
-//    public void listAllProducts(){
-//        createStatementAndExecuteProcedure();
-//    }
-//
-//    public void searchUnconfirmedOrders(){
-//        createStatementAndExecuteProcedure();
-//    }
+    public void listAllProducts(){
+        createStatementAndExecuteProcedure();
+    }
+
+    public void searchUnconfirmedOrders(){
+        createStatementAndExecuteProcedure();
+    }
 
     public void orderHistory(int customerId){
         createStatementAndExecuteProcedure(
