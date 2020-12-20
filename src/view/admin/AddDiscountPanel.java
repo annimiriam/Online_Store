@@ -1,7 +1,11 @@
 package view.admin;
 
+import view.MainPanel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddDiscountPanel extends JPanel {
 
@@ -19,8 +23,12 @@ public class AddDiscountPanel extends JPanel {
     private JButton btnAddDiscount;
     private JButton btnRemoveDiscount;
 
+    private MainPanel mainPanel;
 
-    public AddDiscountPanel() {
+
+    public AddDiscountPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
+
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Hantera Rabatt"));
         createElements();
@@ -40,6 +48,12 @@ public class AddDiscountPanel extends JPanel {
         txtPercent= new JTextField();
 
         btnAddDiscount = new JButton("Lägg till rabatt");
+        btnAddDiscount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.addDiscount();
+            }
+        });
         btnRemoveDiscount = new JButton("Ta bort rabatt");
     }
 
@@ -71,11 +85,5 @@ public class AddDiscountPanel extends JPanel {
         return txtPercent.getText();
     }
 
-    public JButton getBtnAddDiscount() {
-        return btnAddDiscount;
-    }
 
-    public JButton getBtnRemoveDiscount() {
-        return btnRemoveDiscount;
-    }
 }

@@ -12,12 +12,12 @@ public class AddProductsCustomer extends JPanel {
         addElements();
     }
 
-    public void createElements(){
+    private void createElements(){
         btnAllProducts = new JButton("Alla produkter");
         btnSaleProducts = new JButton("Reaprodukter");
     }
 
-    public void addElements(){
+    private void addElements(){
         add(btnAllProducts);
         add(btnSaleProducts);
     }

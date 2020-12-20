@@ -27,6 +27,9 @@ public class CustomerPanel extends JPanel {
         add(panelShoppinglist, BorderLayout.EAST);
     }
 
-    // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
+    public ProductPanel getPanelProducts() {
+        return panelProducts;
+    }
+// Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
 
 }

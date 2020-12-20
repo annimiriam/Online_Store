@@ -21,7 +21,7 @@ public class ShoppingListPanel extends JPanel {
         addElements();
     }
 
-    public void createElements(){
+    private void createElements(){
         panelSouth = new JPanel();
         shoppingListData = new DefaultTableModel();
         shoppingListTable = new JTable();
@@ -33,12 +33,17 @@ public class ShoppingListPanel extends JPanel {
         btnRemove = new JButton("Ta bort");
     };
 
-    public void addElements(){
+    private void addElements(){
         panelSouth.add(btnRemove);
         panelSouth.add(btnCreateOrder);
 
         add(scrollPane, BorderLayout.CENTER);
         add(panelSouth, BorderLayout.SOUTH);
+    }
+
+
+    public void addItemToShoppingList(String[] item){
+        //TODO
     }
 
     // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?

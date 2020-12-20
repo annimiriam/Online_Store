@@ -3,6 +3,8 @@ import control.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RegisterPanel extends JPanel {
 
@@ -59,6 +61,12 @@ public class RegisterPanel extends JPanel {
         txtPhonenumber = new JTextField();
 
         btnRegister = new JButton("Registrera");
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.registerCustomer();
+            }
+        });
     }
 
     public void addElements() {

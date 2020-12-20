@@ -1,5 +1,7 @@
 package view.admin;
 
+import view.MainPanel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,8 +14,12 @@ public class SuppliersPanel extends JPanel {
     private JTable supplierTable;
     private JScrollPane scrollPane;
     private String[] columnNames = {"Namn", "Adress", "Telefonnr" };
+    private MainPanel mainPanel;
 
-    public SuppliersPanel(){
+
+    public SuppliersPanel(MainPanel mainPanel){
+        this.mainPanel = mainPanel;
+
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Leverantörer"));
         createElements();
@@ -39,5 +45,9 @@ public class SuppliersPanel extends JPanel {
 
     public AddSupplierPanel getPnlAddSupplier() {
         return pnlAddSupplier;
+    }
+
+    public void addItemToSupplierTable(String[] item){
+        //TODO
     }
 }

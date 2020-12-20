@@ -144,11 +144,11 @@ public class JdbcSQLServerConnection {
 
     //TODO - måste vi ha en egen metod som har tomma parametrar?
     public void listAllProducts(){
-        createStatementAndExecuteProcedure();
+        //createStatementAndExecuteProcedure();
     }
 
     public void searchUnconfirmedOrders(){
-        createStatementAndExecuteProcedure();
+        //createStatementAndExecuteProcedure();
     }
 
     public void orderHistory(int customerId){

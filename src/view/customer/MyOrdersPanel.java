@@ -50,4 +50,8 @@ public class MyOrdersPanel extends JPanel {
         add(panelOrderInventory, BorderLayout.SOUTH);
     }
 
+    public void addItemToOrderTable(String[] item){
+        //TODO
+    }
+
 }

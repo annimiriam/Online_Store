@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SearchProductPanel extends JPanel {
 
@@ -15,10 +17,12 @@ public class SearchProductPanel extends JPanel {
     private JTextField txtProductName;
     private JTextField txtSupplier;
     private JTextField txtPrice;
+    private MainPanel mainPanel;
 
     private JButton btnSearch;
 
-    public SearchProductPanel() {
+    public SearchProductPanel(MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Sök Produkt"));
         createElements();
@@ -38,6 +42,12 @@ public class SearchProductPanel extends JPanel {
         txtPrice = new JTextField();
 
         btnSearch = new JButton("Sök");
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.search();
+            }
+        });
     }
 
     public void addElements() {

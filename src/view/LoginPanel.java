@@ -62,7 +62,8 @@ public class LoginPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //1. Kontrollera användarnamn och lösenord
                 System.out.println("Logga in som: " + txtUsername.getText() + " " + txtPassword.getText());
-                mainPanel.checkLogin(txtUsername.getText(), txtPassword.getText());
+                mainPanel.login();
+                mainPanel.checkLogin(txtUsername.getText(), txtPassword.getText());//TODO ta bort sen
             }
         });
 

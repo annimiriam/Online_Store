@@ -20,7 +20,7 @@ public class DiscountPanel extends JPanel {
         addElements();
     }
 
-    public void createElements(){
+    private void createElements(){
         pnlAddDiscount = new AddDiscountPanel();
 
         discountData = new DefaultTableModel();
@@ -32,12 +32,16 @@ public class DiscountPanel extends JPanel {
 
     }
 
-    public void addElements(){
+    private void addElements(){
         add(scrollPane, BorderLayout.CENTER);
         add(pnlAddDiscount, BorderLayout.SOUTH);
     }
 
     public AddDiscountPanel getPnlAddDiscount() {
         return pnlAddDiscount;
+    }
+
+    public void addItemToDiscountTable(String[] item){
+        //TODO
     }
 }

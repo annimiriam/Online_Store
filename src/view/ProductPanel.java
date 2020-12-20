@@ -25,8 +25,8 @@ public class ProductPanel extends JPanel {
         addElements();
     }
 
-    public void createElements() {
-        panelSearchProducts = new SearchProductPanel();
+    private void createElements() {
+        panelSearchProducts = new SearchProductPanel(mainPanel);
 
         productData = new DefaultTableModel();
         productsTable = new JTable();
@@ -37,9 +37,14 @@ public class ProductPanel extends JPanel {
 
     }
 
-    public void addElements() {
+    private void addElements() {
         add(panelSearchProducts, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
+
+    }
+
+    public void presentTableProducts(String[][] productsDataTable){
+        //TODO fixa så den faktiskt presenterar data, kanske ändra formatet om det finns nått lättare sätt att skicka datan än som en matris.
 
     }
 
