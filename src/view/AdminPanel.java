@@ -18,9 +18,9 @@ public class AdminPanel extends JPanel {
 
     public AdminPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
-        panelSuppliers = new SuppliersPanel();
+        panelSuppliers = new SuppliersPanel(mainPanel);
         panelProducts = new ProductPanel(mainPanel);
-        panelDiscount = new DiscountPanel();
+        panelDiscount = new DiscountPanel(mainPanel);
 
         setLayout(new BorderLayout());
 

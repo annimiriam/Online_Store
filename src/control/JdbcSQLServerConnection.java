@@ -128,6 +128,70 @@ public class JdbcSQLServerConnection {
         );
     }
 
+    // Checks if the username and password connected to an admin exists in the database
+    public boolean loginAdmin(String username, String password)
+    {
+        int output = 0;
+
+        try (CallableStatement cstmt = connection.prepareCall("{? = call login_admin(?, ?)}");) {
+
+            cstmt.registerOutParameter(1, Types.INTEGER);
+            cstmt.setString(2, username);
+            cstmt.setString(3, password);
+
+            cstmt.execute();
+            output = cstmt.getInt(1);
+             }
+
+        // Handle any errors that may have occurred.
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (output == 1) {
+            //Öppna Adminpanel
+            System.out.println("Inloggning korrekt");
+            return true;
+        } else {
+            //Felmeddelande
+            System.out.println("Personen existerar inte i databasen");
+            return false;
+        }
+
+    }
+
+    // Checks if the username and password connected to a user exists in the database
+    public boolean loginCustomer(String username, String password)
+    {
+        int output = 0;
+
+        try (CallableStatement cstmt = connection.prepareCall("{? = call login_customer(?, ?)}");) {
+
+            cstmt.registerOutParameter(1, Types.INTEGER);
+            cstmt.setString(2, username);
+            cstmt.setString(3, password);
+
+            cstmt.execute();
+            output = cstmt.getInt(1);
+        }
+
+        // Handle any errors that may have occurred.
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (output == 1) {
+            //Öppna Userpanel
+            System.out.println("Inloggning korrekt, kund inloggad");
+            return true;
+        } else {
+            //Felmeddelande
+            System.out.println("Personen existerar inte i databasen");
+            return false;
+        }
+
+    }
+
     //Procedures search in database
 
     //TODO - vet ej om denna kommer funka med tomma parametrar? Eller är de null?

@@ -1,5 +1,7 @@
 package view.admin;
 
+import view.MainPanel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,8 +14,10 @@ public class DiscountPanel extends JPanel {
     private JTable discountTable;
     private JScrollPane scrollPane;
     private String[] columnNames = {"Rabatt ID", "Namn", "Rabatt %" };
+    private MainPanel mainPanel;
 
-    public DiscountPanel () {
+    public DiscountPanel (MainPanel mainPanel) {
+        this.mainPanel = mainPanel;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Rabatter"));
         createElements();
@@ -21,7 +25,7 @@ public class DiscountPanel extends JPanel {
     }
 
     private void createElements(){
-        pnlAddDiscount = new AddDiscountPanel();
+        pnlAddDiscount = new AddDiscountPanel(mainPanel);
 
         discountData = new DefaultTableModel();
         discountTable = new JTable();

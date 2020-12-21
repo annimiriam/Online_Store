@@ -2,7 +2,7 @@ package control;
 
 import view.*;
 
-import java.awt.*;
+import javax.swing.*;
 import java.util.Date;
 
 
@@ -49,15 +49,39 @@ public class Controller {
         jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
     }
 
+    // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database
     public void login() {
         String username  =  mainPanel.getUsernameFromLoginPanel();
         String password = mainPanel.getPasswordFromLoginPanel();
-        jdbc.connectToDatabase(user, password);
-        if(username.length()==5 && username.contains("@")){
+        jdbc.connectToDatabase(user, this.password);
+
+        // Checks if admin exists in database
+        if(username.length()==5){
             //login admin, jdbc
-        }else{
+            if (jdbc.loginAdmin(username, password))
+            {
+                //Öppna adminpanel
+                mainPanel.showAdminPanel();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
+            }
+        }else if (username.contains("@")){
+
             //login costumer, jdbc
+            if (jdbc.loginCustomer(username, password))
+            {
+                //Öppna adminpanel
+                mainPanel.showCustomerPanel();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
+            }
         }
+        else
+        { JOptionPane.showMessageDialog(null, "Incorrect username or password, try again."); }
         jdbc.disconnectFromDatabase();
 
     }
