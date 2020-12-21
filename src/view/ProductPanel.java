@@ -8,7 +8,6 @@ public class ProductPanel extends JPanel {
 
     private SearchProductPanel panelSearchProducts;
 
-
     private MainPanel mainPanel;
 
     private DefaultTableModel productData;

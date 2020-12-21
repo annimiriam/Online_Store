@@ -3,6 +3,7 @@ package control;
 import view.*;
 
 import java.awt.*;
+import java.util.Date;
 
 
 public class Controller {
@@ -66,36 +67,54 @@ public class Controller {
         //TODO
 
         jdbc.disconnectFromDatabase();
-
     }
 
     public void adminAddSupplier() {
         jdbc.connectToDatabase(user, password);
-        //TODO
-        //jdbc.addSupplier();
+
+        String name = mainPanel.getTxtNameFromAddSupplierPanel();
+        String address = mainPanel.getTxtAddressFromAddSupplierPanel();
+        String postnbr = mainPanel.getTxtPostnbrFromAddSupplierPanel();
+        String city = mainPanel.getTxtCityFromAddSupplierPanel();
+        String country = mainPanel.getTxtCountryFromAddSupplierPanel();
+        String phone = mainPanel.getTxtPhoneFromAddSupplierPanel();
+
+        jdbc.addSupplier(name, address, postnbr, city, country, phone);
+
         jdbc.disconnectFromDatabase();
     }
 
     public void adminAddProduct() {
         jdbc.connectToDatabase(user, password);
-        //jdbc.addProduct();
+
+        int id = Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
+        String name = mainPanel.getTxtNameFromAddProductsPanel();
+        double baseprice = Double.parseDouble(mainPanel.getTxtBasepriceFromAddProductsPanel());
+        String supplier = mainPanel.getTxtSupplierFromAddProductsPanel();
+        int qty = Integer.parseInt(mainPanel.getTxtQuantityFromAddProductsPanel());
+
+        jdbc.addProduct(id, name, baseprice, supplier, qty);
         jdbc.disconnectFromDatabase();
     }
 
     public void adminAddDiscount() {
+
+        int discountId = Integer.parseInt(mainPanel.getDiscountId());
         String discountName = mainPanel.getDiscountName();
-        String discountId = mainPanel.getDiscountId();
-        String discountPercent = mainPanel.getDiscountPercent();
+        int discountPercent = Integer.parseInt(mainPanel.getDiscountPercent());
+        //TODO - vilket format på datum?
+        Date from;
+        Date tom;
 
         jdbc.connectToDatabase(user, password);
-        //TODO
-        //jdbc.addDiscount();
+        jdbc.addDiscount(discountId, discountName, discountPercent, from, tom);
         jdbc.disconnectFromDatabase();
 
     }
 
     public void customerAddProductToOrder() {
         jdbc.connectToDatabase(user, password);
+
         //TODO
         //jdbc.addProductToOrder();
         jdbc.disconnectFromDatabase();
@@ -169,6 +188,5 @@ public class Controller {
         //TODO
         jdbc.disconnectFromDatabase();
     }
-
 
 }
