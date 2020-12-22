@@ -2,7 +2,8 @@ package control;
 
 import view.*;
 
-import java.awt.*;
+import javax.swing.*;
+import java.util.Date;
 
 
 public class Controller {
@@ -13,6 +14,8 @@ public class Controller {
 
     private String user = "hej";
     private String password = "secret";
+
+    private String customer_email = "";
 
     public Controller() {
         mainPanel = new MainPanel(this);
@@ -48,15 +51,40 @@ public class Controller {
         jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
     }
 
+    // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database
     public void login() {
         String username  =  mainPanel.getUsernameFromLoginPanel();
         String password = mainPanel.getPasswordFromLoginPanel();
-        jdbc.connectToDatabase(user, password);
-        if(username.length()==5 && username.contains("@")){
+        jdbc.connectToDatabase(user, this.password);
+
+        // Checks if admin exists in database
+        if(username.length()==5){
             //login admin, jdbc
-        }else{
+            if (jdbc.loginAdmin(username, password))
+            {
+                //Öppna adminpanel
+                mainPanel.showAdminPanel();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
+            }
+        }else if (username.contains("@")){
+
             //login costumer, jdbc
+            if (jdbc.loginCustomer(username, password))
+            {
+                customer_email = username; // Sparar kundens email för order referenser
+                //Öppna adminpanel
+                mainPanel.showCustomerPanel();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
+            }
         }
+        else
+        { JOptionPane.showMessageDialog(null, "Incorrect username or password, try again."); }
         jdbc.disconnectFromDatabase();
 
     }
@@ -66,36 +94,54 @@ public class Controller {
         //TODO
 
         jdbc.disconnectFromDatabase();
-
     }
 
     public void adminAddSupplier() {
         jdbc.connectToDatabase(user, password);
-        //TODO
-        //jdbc.addSupplier();
+
+        String name = mainPanel.getTxtNameFromAddSupplierPanel();
+        String address = mainPanel.getTxtAddressFromAddSupplierPanel();
+        String postnbr = mainPanel.getTxtPostnbrFromAddSupplierPanel();
+        String city = mainPanel.getTxtCityFromAddSupplierPanel();
+        String country = mainPanel.getTxtCountryFromAddSupplierPanel();
+        String phone = mainPanel.getTxtPhoneFromAddSupplierPanel();
+
+        jdbc.addSupplier(name, address, postnbr, city, country, phone);
+
         jdbc.disconnectFromDatabase();
     }
 
     public void adminAddProduct() {
         jdbc.connectToDatabase(user, password);
-        //jdbc.addProduct();
+
+        int id = Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
+        String name = mainPanel.getTxtNameFromAddProductsPanel();
+        double baseprice = Double.parseDouble(mainPanel.getTxtBasepriceFromAddProductsPanel());
+        String supplier = mainPanel.getTxtSupplierFromAddProductsPanel();
+        int qty = Integer.parseInt(mainPanel.getTxtQuantityFromAddProductsPanel());
+
+        jdbc.addProduct(id, name, baseprice, supplier, qty);
         jdbc.disconnectFromDatabase();
     }
 
     public void adminAddDiscount() {
+
+        int discountId = Integer.parseInt(mainPanel.getDiscountId());
         String discountName = mainPanel.getDiscountName();
-        String discountId = mainPanel.getDiscountId();
-        String discountPercent = mainPanel.getDiscountPercent();
+        int discountPercent = Integer.parseInt(mainPanel.getDiscountPercent());
+        //TODO - vilket format på datum?
+        java.sql.Date from = new java.sql.Date(20, 12, 13);
+        java.sql.Date tom = new java.sql.Date(20, 12, 31);
 
         jdbc.connectToDatabase(user, password);
-        //TODO
-        //jdbc.addDiscount();
+        jdbc.addDiscount(discountId, discountName, discountPercent, from, tom);
         jdbc.disconnectFromDatabase();
 
     }
 
     public void customerAddProductToOrder() {
         jdbc.connectToDatabase(user, password);
+
         //TODO
         //jdbc.addProductToOrder();
         jdbc.disconnectFromDatabase();
@@ -169,6 +215,5 @@ public class Controller {
         //TODO
         jdbc.disconnectFromDatabase();
     }
-
 
 }

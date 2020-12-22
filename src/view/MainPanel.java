@@ -2,6 +2,7 @@ package view;
 
 import control.Controller;
 
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -38,9 +39,9 @@ public class MainPanel extends JPanel {
         controller.searchProduct();
     }
 
-   public void addDiscount(){
+    public void addDiscount() {
         controller.adminAddDiscount();
-   }
+    }
 
     //TODO kanske inte ska finnas sedan när vi får det andra att funka
     public void checkLogin(String user, String password) {
@@ -75,6 +76,7 @@ public class MainPanel extends JPanel {
     // Ritar upp kundpanelen
     public void showCustomerPanel() {
         removeAll();
+        controller.setExtendedState();
         add(customerPanel, BorderLayout.CENTER);
         repaint();
         revalidate();
@@ -83,62 +85,100 @@ public class MainPanel extends JPanel {
     // Ritar upp adminpanelen
     public void showAdminPanel() {
         removeAll();
-        // add(new AdminPanel(), BorderLayout.CENTER);
+        controller.setExtendedState();
+         add(new AdminPanel(this), BorderLayout.CENTER);
         repaint();
         revalidate();
     }
 
-
     // Get-metoder för textinput från LoginPanelen
-
     public String getUsernameFromLoginPanel() {
         return loginPanel.getTxtUsername();
     }
-
     public String getPasswordFromLoginPanel() {
         return loginPanel.getTxtPassword();
     }
 
     //Get-metoder för textinput från RegisterPanelen
-
     public String getTxtFirstNameFromRegisterPanel() {
         return registerPanel.getTxtFirstName();
     }
-
     public String getTxtLastNameFromRegisterPanel() {
         return registerPanel.getTxtLastName();
     }
-
     public String getTxtEmailFromRegisterPanel() {
         return registerPanel.getTxtEmail();
     }
-
     public String getTxtPasswordFromRegisterPanel() {
         return registerPanel.getTxtPassword();
     }
-
     public String getTxtAddressFromRegisterPanel() {
         return registerPanel.getTxtAddress();
     }
-
     public String getTxtCityFromRegisterPanel() {
         return registerPanel.getTxtCity();
     }
-
     public String getTxtCountryFromRegisterPanel() {
         return registerPanel.getTxtCountry();
     }
-
     public String getTxtPhonenumberFromRegisterPanel() {
         return registerPanel.getTxtPhonenumber();
     }
+
+    //Get-metoder för textinput från SupplierPanelen
+    public String getTxtNameFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
+    }
+    public String getTxtAddressFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtAddress();
+    }
+    public String getTxtPostnbrFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtPostnbr();
+    }
+    public String getTxtCityFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtCity();
+    }
+    public String getTxtCountryFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtCountry();
+    }
+    public String getTxtPhoneFromAddSupplierPanel() {
+        return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtPhone();
+    }
+
+    //Get-metoder för textinput från AddProduct i SupplierPanelen
+    public String getTxtIdFromAddProductsPanel() {
+        return adminPanel.getAddProductsAdmin().getTxtId();
+    }
+    public String getTxtNameFromAddProductsPanel() {
+        return adminPanel.getAddProductsAdmin().getTxtName();
+    }
+    public String getTxtBasepriceFromAddProductsPanel() {
+        return adminPanel.getAddProductsAdmin().getTxtBaseprice();
+    }
+    public String getTxtSupplierFromAddProductsPanel() {
+        return adminPanel.getAddProductsAdmin().getTxtSupplier();
+    }
+    public String getTxtQuantityFromAddProductsPanel() {
+        return adminPanel.getAddProductsAdmin().getTxtQuantity();
+    }
+
+    //Get-metoder för textinput från AddDiscountPanelen
+    public String getDiscountName() {
+        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
+    }
+    public String getDiscountId() {
+        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtId();
+    }
+    public String getDiscountPercent() {
+        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
+    }
+
 
     public String getSearchProductCode() {
         return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
     }
 
     /**
-     *
      * @return
      */
     public String getSearchProductName() {
@@ -146,7 +186,6 @@ public class MainPanel extends JPanel {
     }
 
     /**
-     *
      * @return
      */
     public String getSearchSupplier() {
@@ -154,7 +193,6 @@ public class MainPanel extends JPanel {
     }
 
     /**
-     *
      * @return
      */
     public String getSearchPrice() {
@@ -162,24 +200,12 @@ public class MainPanel extends JPanel {
     }
 
     /**
-     *
      * @param productsDataTable
      */
     public void presentTableProducts(String[][] productsDataTable) {
         customerPanel.getPanelProducts().presentTableProducts(productsDataTable);
     }
 
-    public String getDiscountName() {
-        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
-    }
-
-    public String getDiscountId() {
-        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtId();
-    }
-
-    public String getDiscountPercent() {
-        return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
-    }
 
 
     public void test() {

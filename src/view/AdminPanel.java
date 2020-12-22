@@ -1,7 +1,7 @@
 package view;
 
 
-
+import view.admin.AddProductsAdmin;
 import view.admin.DiscountPanel;
 import view.admin.SuppliersPanel;
 
@@ -12,15 +12,15 @@ public class AdminPanel extends JPanel {
 
     private SuppliersPanel panelSuppliers;
     private ProductPanel panelProducts;
+    private AddProductsAdmin addProductsAdmin;
     private DiscountPanel panelDiscount;
     private MainPanel mainPanel;
 
-
-    public AdminPanel (MainPanel mainPanel){
+    public AdminPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
-        panelSuppliers = new SuppliersPanel();
+        panelSuppliers = new SuppliersPanel(mainPanel);
         panelProducts = new ProductPanel(mainPanel);
-        panelDiscount = new DiscountPanel();
+        panelDiscount = new DiscountPanel(mainPanel);
 
         setLayout(new BorderLayout());
 
@@ -40,5 +40,9 @@ public class AdminPanel extends JPanel {
 
     public DiscountPanel getPanelDiscount() {
         return panelDiscount;
+    }
+
+    public AddProductsAdmin getAddProductsAdmin() {
+        return addProductsAdmin;
     }
 }
