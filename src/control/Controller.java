@@ -127,8 +127,8 @@ public class Controller {
         String discountName = mainPanel.getDiscountName();
         int discountPercent = Integer.parseInt(mainPanel.getDiscountPercent());
         //TODO - vilket format på datum?
-        Date from;
-        Date tom;
+        java.sql.Date from = new java.sql.Date(20, 12, 13);
+        java.sql.Date tom = new java.sql.Date(20, 12, 31);
 
         jdbc.connectToDatabase(user, password);
         jdbc.addDiscount(discountId, discountName, discountPercent, from, tom);

@@ -132,11 +132,12 @@ public class JdbcSQLServerConnection {
     public boolean loginAdmin(String username, String password)
     {
         int output = 0;
+        int admin_id = Integer.parseInt(username);
 
         try (CallableStatement cstmt = connection.prepareCall("{? = call login_admin(?, ?)}");) {
 
             cstmt.registerOutParameter(1, Types.INTEGER);
-            cstmt.setString(2, username);
+            cstmt.setInt(2, admin_id);
             cstmt.setString(3, password);
 
             cstmt.execute();
