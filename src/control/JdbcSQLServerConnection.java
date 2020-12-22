@@ -213,7 +213,9 @@ public class JdbcSQLServerConnection {
     }
 
     public void searchUnconfirmedOrders(){
-        //createStatementAndExecuteProcedure();
+        ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");
+        // TODO - sätt in resultatet i en objectsmatris som kan sättas i tabellen
+
     }
 
     public void orderHistory(int customerId){

@@ -15,6 +15,8 @@ public class Controller {
     private String user = "hej";
     private String password = "secret";
 
+    private String customer_email = "";
+
     public Controller() {
         mainPanel = new MainPanel(this);
         mainFrame = new MainFrame(mainPanel);
@@ -72,6 +74,7 @@ public class Controller {
             //login costumer, jdbc
             if (jdbc.loginCustomer(username, password))
             {
+                customer_email = username; // Sparar kundens email för order referenser
                 //Öppna adminpanel
                 mainPanel.showCustomerPanel();
             }
