@@ -91,7 +91,7 @@ public class MainPanel extends JPanel {
     public void showAdminPanel() {
         removeAll();
         controller.setExtendedState();
-         add(new AdminPanel(this), BorderLayout.CENTER);
+         add(new AdminPanel(this, controller.listAllSuppliers()), BorderLayout.CENTER);
         repaint();
         revalidate();
     }

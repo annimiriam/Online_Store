@@ -7,6 +7,7 @@ import view.admin.SuppliersPanel;
 import view.admin.UnconfirmedOrdersPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class AdminPanel extends JPanel {
@@ -18,9 +19,9 @@ public class AdminPanel extends JPanel {
     private MainPanel mainPanel;
 
 
-    public AdminPanel(MainPanel mainPanel) {
+    public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata) {
         this.mainPanel = mainPanel;
-        panelSuppliers = new SuppliersPanel(mainPanel);
+        panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
         panelProducts = new ProductPanel(mainPanel);
         panelDiscount = new DiscountPanel(mainPanel);
 

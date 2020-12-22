@@ -13,12 +13,13 @@ public class SuppliersPanel extends JPanel {
     private DefaultTableModel supplierData;
     private JTable supplierTable;
     private JScrollPane scrollPane;
-    private String[] columnNames = {"Namn", "Adress", "Telefonnr" };
+    private String[] columnNames = {"Namn", "Telefonnr", "Gatuadress", "Postnr", "Stad", "Land" };
     private MainPanel mainPanel;
 
 
-    public SuppliersPanel(MainPanel mainPanel){
+    public SuppliersPanel(MainPanel mainPanel, DefaultTableModel supplierData){
         this.mainPanel = mainPanel;
+        this.supplierData = supplierData;
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Leverantörer"));
@@ -29,7 +30,7 @@ public class SuppliersPanel extends JPanel {
     public void createElements(){
         pnlAddSupplier = new AddSupplierPanel();
 
-        supplierData = new DefaultTableModel();
+        //supplierData = new DefaultTableModel();
         supplierTable = new JTable();
         supplierTable.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(supplierTable);

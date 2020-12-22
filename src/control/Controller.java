@@ -3,6 +3,9 @@ package control;
 import view.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -20,6 +23,7 @@ public class Controller {
     public Controller() {
         mainPanel = new MainPanel(this);
         mainFrame = new MainFrame(mainPanel);
+        listAllSuppliers();
 
         // Skapar ny koppling mot databas med användarnamn och lösen
     }
@@ -53,47 +57,61 @@ public class Controller {
 
     // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database
     public void login() {
-        String username  =  mainPanel.getUsernameFromLoginPanel();
+        String username = mainPanel.getUsernameFromLoginPanel();
         String password = mainPanel.getPasswordFromLoginPanel();
         jdbc.connectToDatabase(user, this.password);
 
         // Checks if admin exists in database
-        if(username.length()==5){
+        if (username.length() == 5) {
             //login admin, jdbc
-            if (jdbc.loginAdmin(username, password))
-            {
+            if (jdbc.loginAdmin(username, password)) {
                 //Öppna adminpanel
                 mainPanel.showAdminPanel();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
             }
-        }else if (username.contains("@")){
+        } else if (username.contains("@")) {
 
             //login costumer, jdbc
-            if (jdbc.loginCustomer(username, password))
-            {
+            if (jdbc.loginCustomer(username, password)) {
                 customer_email = username; // Sparar kundens email för order referenser
                 //Öppna adminpanel
                 mainPanel.showCustomerPanel();
-            }
-            else
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
         }
-        else
-        { JOptionPane.showMessageDialog(null, "Incorrect username or password, try again."); }
         jdbc.disconnectFromDatabase();
 
     }
 
-    public void listAllSuppliers() {
+    public DefaultTableModel listAllSuppliers() {
+
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
         jdbc.connectToDatabase(user, password);
-        //TODO
+
+        ResultSet rs = jdbc.listAllSuppliers();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         jdbc.disconnectFromDatabase();
+        return datamodel;
     }
 
     public void adminAddSupplier() {
@@ -174,7 +192,7 @@ public class Controller {
         //TODO
 
         //jdbc.registerCustomer();
-        if(true) {
+        if (true) {
             mainPanel.showCustomerPanel();
         }
 
@@ -216,8 +234,7 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void confirmOrder()
-    {
+    public void confirmOrder() {
         jdbc.connectToDatabase(user, password);
         //jdbc.confirmOrder();   TODO - Finns inte än, lägg till metod i jdbc
         //TODO
