@@ -76,6 +76,7 @@ public class MainPanel extends JPanel {
     // Ritar upp kundpanelen
     public void showCustomerPanel() {
         removeAll();
+        controller.setExtendedState();
         add(customerPanel, BorderLayout.CENTER);
         repaint();
         revalidate();
@@ -84,7 +85,8 @@ public class MainPanel extends JPanel {
     // Ritar upp adminpanelen
     public void showAdminPanel() {
         removeAll();
-        // add(new AdminPanel(), BorderLayout.CENTER);
+        controller.setExtendedState();
+         add(new AdminPanel(this), BorderLayout.CENTER);
         repaint();
         revalidate();
     }
