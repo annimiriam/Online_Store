@@ -19,8 +19,9 @@ public class DiscountPanel extends JPanel {
 
     private UnconfirmedOrdersPanel panelUnconOrders;
 
-    public DiscountPanel (MainPanel mainPanel) {
+    public DiscountPanel (MainPanel mainPanel, DefaultTableModel discoutdata) {
         this.mainPanel = mainPanel;
+        this.discountData=discoutdata;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Rabatter"));
         createElements();
@@ -31,7 +32,7 @@ public class DiscountPanel extends JPanel {
         pnlAddDiscount = new AddDiscountPanel(mainPanel);
         panelUnconOrders = new UnconfirmedOrdersPanel(mainPanel);
 
-        discountData = new DefaultTableModel();
+//        discountData = new DefaultTableModel();
         discountTable = new JTable();
         //discountTable.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(discountTable);

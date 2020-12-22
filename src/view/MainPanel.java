@@ -18,8 +18,8 @@ public class MainPanel extends JPanel {
         this.controller = controller;
         this.loginPanel = new LoginPanel(this);
         this.registerPanel = new RegisterPanel(this);
-        this.customerPanel = new CustomerPanel(this);
-        this.customerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+//        this.customerPanel = new CustomerPanel(this);
+//        this.customerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BorderLayout());
         add(loginPanel, BorderLayout.NORTH);
         this.setPreferredSize(new Dimension(500, 300));
@@ -43,8 +43,7 @@ public class MainPanel extends JPanel {
         controller.adminAddDiscount();
     }
 
-    public void confirmOrder()
-    {
+    public void confirmOrder() {
 
     }
 
@@ -91,7 +90,11 @@ public class MainPanel extends JPanel {
     public void showAdminPanel() {
         removeAll();
         controller.setExtendedState();
-         add(new AdminPanel(this, controller.listAllSuppliers()), BorderLayout.CENTER);
+        add(new AdminPanel(this,
+                        controller.listAllSuppliers(),
+                        controller.listAllProducts(),
+                        controller.listAllDiscounts()),
+                BorderLayout.CENTER);
         repaint();
         revalidate();
     }
@@ -100,6 +103,7 @@ public class MainPanel extends JPanel {
     public String getUsernameFromLoginPanel() {
         return loginPanel.getTxtUsername();
     }
+
     public String getPasswordFromLoginPanel() {
         return loginPanel.getTxtPassword();
     }
@@ -108,24 +112,31 @@ public class MainPanel extends JPanel {
     public String getTxtFirstNameFromRegisterPanel() {
         return registerPanel.getTxtFirstName();
     }
+
     public String getTxtLastNameFromRegisterPanel() {
         return registerPanel.getTxtLastName();
     }
+
     public String getTxtEmailFromRegisterPanel() {
         return registerPanel.getTxtEmail();
     }
+
     public String getTxtPasswordFromRegisterPanel() {
         return registerPanel.getTxtPassword();
     }
+
     public String getTxtAddressFromRegisterPanel() {
         return registerPanel.getTxtAddress();
     }
+
     public String getTxtCityFromRegisterPanel() {
         return registerPanel.getTxtCity();
     }
+
     public String getTxtCountryFromRegisterPanel() {
         return registerPanel.getTxtCountry();
     }
+
     public String getTxtPhonenumberFromRegisterPanel() {
         return registerPanel.getTxtPhonenumber();
     }
@@ -134,18 +145,23 @@ public class MainPanel extends JPanel {
     public String getTxtNameFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
     }
+
     public String getTxtAddressFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtAddress();
     }
+
     public String getTxtPostnbrFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtPostnbr();
     }
+
     public String getTxtCityFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtCity();
     }
+
     public String getTxtCountryFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtCountry();
     }
+
     public String getTxtPhoneFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtPhone();
     }
@@ -154,15 +170,19 @@ public class MainPanel extends JPanel {
     public String getTxtIdFromAddProductsPanel() {
         return adminPanel.getAddProductsAdmin().getTxtId();
     }
+
     public String getTxtNameFromAddProductsPanel() {
         return adminPanel.getAddProductsAdmin().getTxtName();
     }
+
     public String getTxtBasepriceFromAddProductsPanel() {
         return adminPanel.getAddProductsAdmin().getTxtBaseprice();
     }
+
     public String getTxtSupplierFromAddProductsPanel() {
         return adminPanel.getAddProductsAdmin().getTxtSupplier();
     }
+
     public String getTxtQuantityFromAddProductsPanel() {
         return adminPanel.getAddProductsAdmin().getTxtQuantity();
     }
@@ -171,9 +191,11 @@ public class MainPanel extends JPanel {
     public String getDiscountName() {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
     }
+
     public String getDiscountId() {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtId();
     }
+
     public String getDiscountPercent() {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
     }
@@ -210,7 +232,6 @@ public class MainPanel extends JPanel {
     public void presentTableProducts(String[][] productsDataTable) {
         customerPanel.getPanelProducts().presentTableProducts(productsDataTable);
     }
-
 
 
     public void test() {

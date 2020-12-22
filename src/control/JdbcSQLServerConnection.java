@@ -208,15 +208,32 @@ public class JdbcSQLServerConnection {
 
     }
 
-    //TODO - måste vi ha en egen metod som har tomma parametrar?
-    public void listAllProducts(){
-        //createStatementAndExecuteProcedure();
+    public ResultSet listAllProducts(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM product");
+            return rs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     public ResultSet listAllSuppliers(){
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM supplier");
+            return rs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet listAllDiscounts(){
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM discount");
             return rs;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

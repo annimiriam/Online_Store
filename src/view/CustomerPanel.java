@@ -1,6 +1,5 @@
 package view;
 
-import view.customer.AddProductsCustomer;
 import view.customer.MyOrdersPanel;
 import view.customer.ShoppingListPanel;
 
@@ -17,7 +16,7 @@ public class CustomerPanel extends JPanel {
     public CustomerPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         panelMyOrders = new MyOrdersPanel();
-        panelProducts = new ProductPanel(mainPanel);
+       // panelProducts = new ProductPanel(mainPanel);
         panelShoppinglist = new ShoppingListPanel();
 
         setLayout(new BorderLayout());
