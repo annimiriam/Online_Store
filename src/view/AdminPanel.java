@@ -4,6 +4,7 @@ package view;
 import view.admin.AddProductsAdmin;
 import view.admin.DiscountPanel;
 import view.admin.SuppliersPanel;
+import view.admin.UnconfirmedOrdersPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class AdminPanel extends JPanel {
     private DiscountPanel panelDiscount;
     private MainPanel mainPanel;
 
+
     public AdminPanel(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         panelSuppliers = new SuppliersPanel(mainPanel);
@@ -27,6 +29,7 @@ public class AdminPanel extends JPanel {
         add(panelSuppliers, BorderLayout.WEST);
         add(panelProducts, BorderLayout.CENTER);
         add(panelDiscount, BorderLayout.EAST);
+
 
     }
 
