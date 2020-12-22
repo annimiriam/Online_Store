@@ -43,6 +43,11 @@ public class MainPanel extends JPanel {
         controller.adminAddDiscount();
     }
 
+    public void confirmOrder()
+    {
+
+    }
+
     //TODO kanske inte ska finnas sedan när vi får det andra att funka
     public void checkLogin(String user, String password) {
 

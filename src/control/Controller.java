@@ -216,4 +216,12 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    public void confirmOrder()
+    {
+        jdbc.connectToDatabase(user, password);
+        //jdbc.confirmOrder();   TODO - Finns inte än, lägg till metod i jdbc
+        //TODO
+        jdbc.disconnectFromDatabase();
+    }
+
 }
