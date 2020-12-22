@@ -87,32 +87,6 @@ public class Controller {
 
     }
 
-    public DefaultTableModel listAllSuppliers() {
-
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
-        jdbc.connectToDatabase(user, password);
-
-        ResultSet rs = jdbc.listAllSuppliers();
-        try {
-
-            while (rs.next()) {
-                String[] data = {rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6)
-                };
-
-                datamodel.addRow(data);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        jdbc.disconnectFromDatabase();
-        return datamodel;
-    }
 
     public void adminAddSupplier() {
         jdbc.connectToDatabase(user, password);
@@ -213,11 +187,78 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void listAllProducts() {
+    public DefaultTableModel listAllSuppliers() {
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
         jdbc.connectToDatabase(user, password);
-        jdbc.listAllProducts();
-        //TODO
+
+        ResultSet rs = jdbc.listAllSuppliers();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+    public DefaultTableModel listAllProducts() {
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listAllProducts();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+    public DefaultTableModel listAllDiscounts(){
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listAllDiscounts();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
     }
 
     public void searchUnconfirmedOrders() {

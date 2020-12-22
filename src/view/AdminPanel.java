@@ -19,11 +19,11 @@ public class AdminPanel extends JPanel {
     private MainPanel mainPanel;
 
 
-    public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata) {
+    public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata) {
         this.mainPanel = mainPanel;
         panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
-        panelProducts = new ProductPanel(mainPanel);
-        panelDiscount = new DiscountPanel(mainPanel);
+        panelProducts = new ProductPanel(mainPanel, productdata);
+        panelDiscount = new DiscountPanel(mainPanel, discountdata);
 
         setLayout(new BorderLayout());
 
