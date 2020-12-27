@@ -272,10 +272,32 @@ public class Controller {
 
             while (rs.next()) {
                 String[] data = {rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+    public DefaultTableModel listOrderDetails(int orderNbr){
+        DefaultTableModel datamodel = new DefaultTableModel(0,3);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listOrderDetails(orderNbr);
+        System.out.println("Klickat ordernr: " + orderNbr);
+
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
                 };
 
                 datamodel.addRow(data);

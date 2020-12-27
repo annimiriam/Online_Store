@@ -5,6 +5,7 @@ import control.Controller;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
@@ -18,8 +19,6 @@ public class MainPanel extends JPanel {
         this.controller = controller;
         this.loginPanel = new LoginPanel(this);
         this.registerPanel = new RegisterPanel(this);
-//        this.customerPanel = new CustomerPanel(this);
-//        this.customerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BorderLayout());
         add(loginPanel, BorderLayout.NORTH);
         this.setPreferredSize(new Dimension(500, 300));
@@ -236,6 +235,14 @@ public class MainPanel extends JPanel {
         customerPanel.getPanelProducts().presentTableProducts(productsDataTable);
     }
 
+
+    /**
+     *
+     */
+
+    public DefaultTableModel getOrderDetails(int orderNbr){
+       return controller.listOrderDetails(orderNbr);
+    }
 
     public void test() {
         adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();

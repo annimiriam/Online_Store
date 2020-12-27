@@ -195,30 +195,20 @@ public class JdbcSQLServerConnection {
 
     public int getCustomerId(String username) {
 
+        ResultSet rs = createStatementAndExecuteProcedure(
+                "getCustomerId '"
+                        + username + "';"
+        );
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT customer_nbr from customer " +
-                    "WHERE email = '" + username + "';");
-            System.out.println("test:" + rs.getInt(1));
-            //return rs;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return -1;
-
-//        ResultSet rs = createStatementAndExecuteProcedure(
-//                "getCustomerId "
-//                        + "'" + username + "';"
-//        );
-//        System.out.println(username);
-//
-//        try {
-//            System.out.println(rs.getInt(1));
-//            return rs.getInt(1);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return -1;
     }
 
     //Procedures search in database
@@ -270,11 +260,20 @@ public class JdbcSQLServerConnection {
 
     public ResultSet listMyOrders(int customerNbr) {
         ResultSet rs = createStatementAndExecuteProcedure(
-                "order_history"
+                "order_history "
                         + customerNbr + ";"
         );
         return rs;
     }
+
+    public ResultSet listOrderDetails(int orderNbr) {
+        ResultSet rs = createStatementAndExecuteProcedure(
+                "order_details "
+                        + orderNbr + ";"
+        );
+        return rs;
+    }
+
 
     public void searchUnconfirmedOrders() {
         ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");

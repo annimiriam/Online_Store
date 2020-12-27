@@ -14,9 +14,9 @@ public class CustomerPanel extends JPanel {
     private ShoppingListPanel panelShoppinglist;
     private MainPanel mainPanel;
 
-    public CustomerPanel(MainPanel mainPanel, DefaultTableModel ordersdata, DefaultTableModel productdata) {
+    public CustomerPanel(MainPanel mainPanel, DefaultTableModel myOrdersData, DefaultTableModel productdata) {
         this.mainPanel = mainPanel;
-        panelMyOrders = new MyOrdersPanel(mainPanel, ordersdata, productdata);
+        panelMyOrders = new MyOrdersPanel(mainPanel, myOrdersData, productdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
         panelShoppinglist = new ShoppingListPanel();
 
