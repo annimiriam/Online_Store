@@ -4,6 +4,7 @@ import view.customer.MyOrdersPanel;
 import view.customer.ShoppingListPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class CustomerPanel extends JPanel {
@@ -13,10 +14,10 @@ public class CustomerPanel extends JPanel {
     private ShoppingListPanel panelShoppinglist;
     private MainPanel mainPanel;
 
-    public CustomerPanel(MainPanel mainPanel) {
+    public CustomerPanel(MainPanel mainPanel, DefaultTableModel myOrdersData, DefaultTableModel productdata) {
         this.mainPanel = mainPanel;
-        panelMyOrders = new MyOrdersPanel();
-       // panelProducts = new ProductPanel(mainPanel);
+        panelMyOrders = new MyOrdersPanel(mainPanel, myOrdersData, productdata);
+        panelProducts = new ProductPanel(mainPanel, productdata);
         panelShoppinglist = new ShoppingListPanel();
 
         setLayout(new BorderLayout());

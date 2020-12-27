@@ -19,11 +19,11 @@ public class Controller {
     private String password = "secret";
 
     private String customer_email = "";
+    private int customer_id;
 
     public Controller() {
         mainPanel = new MainPanel(this);
         mainFrame = new MainFrame(mainPanel);
-        listAllSuppliers();
 
         // Skapar ny koppling mot databas med användarnamn och lösen
     }
@@ -75,6 +75,9 @@ public class Controller {
             //login costumer, jdbc
             if (jdbc.loginCustomer(username, password)) {
                 customer_email = username; // Sparar kundens email för order referenser
+                System.out.println("mejl: " + customer_email);
+                customer_id = jdbc.getCustomerId(customer_email);
+                System.out.println("customer id: " + customer_id);
                 //Öppna adminpanel
                 mainPanel.showCustomerPanel();
             } else {
@@ -86,7 +89,6 @@ public class Controller {
         jdbc.disconnectFromDatabase();
 
     }
-
 
     public void adminAddSupplier() {
         jdbc.connectToDatabase(user, password);
@@ -249,6 +251,53 @@ public class Controller {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+    public DefaultTableModel listMyOrders(){
+        DefaultTableModel datamodel = new DefaultTableModel(0,5);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listMyOrders(customer_id);
+
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(4),
+                        rs.getString(5),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+    public DefaultTableModel listOrderDetails(int orderNbr){
+        DefaultTableModel datamodel = new DefaultTableModel(0,3);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listOrderDetails(orderNbr);
+        System.out.println("Klickat ordernr: " + orderNbr);
+
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
                 };
 
                 datamodel.addRow(data);
