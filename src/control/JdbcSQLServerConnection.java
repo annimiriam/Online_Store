@@ -1,6 +1,7 @@
 package control;
 
 import java.sql.*;
+
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class JdbcSQLServerConnection {
@@ -69,7 +70,7 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void addDiscount(int id, String name, int percent, Date from, Date tom){
+    public void addDiscount(int id, String name, int percent, Date from, Date tom) {
         createStatementAndExecuteProcedure(
                 "add_discount "
                         + id + ", "
@@ -81,7 +82,7 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void addProductToOrder(int prodId, int orderId, int qty){
+    public void addProductToOrder(int prodId, int orderId, int qty) {
         createStatementAndExecuteProcedure(
                 "add_product_to_order "
                         + prodId + ", "
@@ -91,7 +92,7 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void assignDiscountToProduct(int prodId, int discId){
+    public void assignDiscountToProduct(int prodId, int discId) {
         createStatementAndExecuteProcedure(
                 "add_discount "
                         + prodId + ", "
@@ -99,22 +100,22 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void updateQuantity(int prodId, int qty){
+    public void updateQuantity(int prodId, int qty) {
         createStatementAndExecuteProcedure(
                 "add_supplier "
                         + prodId + ", "
-                        +  qty + ";"
+                        + qty + ";"
         );
     }
 
-    public void deleteProduct(int prodId){
+    public void deleteProduct(int prodId) {
         createStatementAndExecuteProcedure(
                 "delete_product "
                         + prodId + ";"
         );
     }
 
-    public void registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password){
+    public void registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
         createStatementAndExecuteProcedure(
                 "add_procuct"
                         + firstName + ", "
@@ -130,8 +131,7 @@ public class JdbcSQLServerConnection {
     }
 
     // Checks if the username and password connected to an admin exists in the database
-    public boolean loginAdmin(String username, String password)
-    {
+    public boolean loginAdmin(String username, String password) {
         int output = 0;
         int admin_id = Integer.parseInt(username);
 
@@ -143,7 +143,7 @@ public class JdbcSQLServerConnection {
 
             cstmt.execute();
             output = cstmt.getInt(1);
-             }
+        }
 
         // Handle any errors that may have occurred.
         catch (SQLException e) {
@@ -163,8 +163,7 @@ public class JdbcSQLServerConnection {
     }
 
     // Checks if the username and password connected to a user exists in the database
-    public boolean loginCustomer(String username, String password)
-    {
+    public boolean loginCustomer(String username, String password) {
         int output = 0;
 
         try (CallableStatement cstmt = connection.prepareCall("{? = call login_customer(?, ?)}");) {
@@ -194,10 +193,38 @@ public class JdbcSQLServerConnection {
 
     }
 
+    public int getCustomerId(String username) {
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT customer_nbr from customer " +
+                    "WHERE email = '" + username + "';");
+            System.out.println("test:" + rs.getInt(1));
+            //return rs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+
+//        ResultSet rs = createStatementAndExecuteProcedure(
+//                "getCustomerId "
+//                        + "'" + username + "';"
+//        );
+//        System.out.println(username);
+//
+//        try {
+//            System.out.println(rs.getInt(1));
+//            return rs.getInt(1);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return -1;
+    }
+
     //Procedures search in database
 
     //TODO - vet ej om denna kommer funka med tomma parametrar? Eller är de null?
-    public void searchProduct(int prodId, String name, double maxPrice, String supplier){
+    public void searchProduct(int prodId, String name, double maxPrice, String supplier) {
         createStatementAndExecuteProcedure(
                 "search_product "
                         + prodId + ", "
@@ -208,7 +235,7 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public ResultSet listAllProducts(){
+    public ResultSet listAllProducts() {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM product");
@@ -219,7 +246,7 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
-    public ResultSet listAllSuppliers(){
+    public ResultSet listAllSuppliers() {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM supplier");
@@ -230,7 +257,7 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
-    public ResultSet listAllDiscounts(){
+    public ResultSet listAllDiscounts() {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM discount");
@@ -241,13 +268,21 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
-    public void searchUnconfirmedOrders(){
+    public ResultSet listMyOrders(int customerNbr) {
+        ResultSet rs = createStatementAndExecuteProcedure(
+                "order_history"
+                        + customerNbr + ";"
+        );
+        return rs;
+    }
+
+    public void searchUnconfirmedOrders() {
         ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");
         // TODO - sätt in resultatet i en objectsmatris som kan sättas i tabellen
 
     }
 
-    public void orderHistory(int customerId){
+    public void orderHistory(int customerId) {
         createStatementAndExecuteProcedure(
                 "add_procuct"
                         + customerId + ";"

@@ -81,7 +81,10 @@ public class MainPanel extends JPanel {
     public void showCustomerPanel() {
         removeAll();
         controller.setExtendedState();
-        add(customerPanel, BorderLayout.CENTER);
+        add(new CustomerPanel(this,
+                        controller.listMyOrders(),
+                        controller.listAllProducts()),
+                BorderLayout.CENTER);
         repaint();
         revalidate();
     }

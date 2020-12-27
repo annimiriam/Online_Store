@@ -1,4 +1,7 @@
 package view.customer;
+
+import view.MainPanel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -14,17 +17,19 @@ public class MyOrdersPanel extends JPanel {
 
     private JScrollPane scrollPaneMyOrders;
     private JScrollPane scrollPaneOrderDetails;
-    private String[] columnNamesMyOrders = {"Ordernr", "Datum", "Pris" };
-    private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris" };
+    private String[] columnNamesMyOrders = {"Ordernr", "Datum", "Pris"};
+    private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris"};
 
-    public MyOrdersPanel(){
+    public MyOrdersPanel(MainPanel mainPanel, DefaultTableModel myOrdersData, DefaultTableModel orderDetailsData) {
+        this.myOrdersData = myOrdersData;
+        this.orderDetailsData = orderDetailsData;
         setBorder(BorderFactory.createTitledBorder("Mina beställningar"));
         setLayout(new BorderLayout());
         createElements();
         addElements();
     }
 
-    public void createElements(){
+    public void createElements() {
         panelMyOrders = new JPanel();
         myOrdersData = new DefaultTableModel();
         tblMyOrders = new JTable();
@@ -40,9 +45,11 @@ public class MyOrdersPanel extends JPanel {
         scrollPaneOrderDetails = new JScrollPane(tblOrderDetails);
         orderDetailsData.setColumnIdentifiers(columnNamesOrderDetails);
         tblOrderDetails.setModel(orderDetailsData);
-    };
+    }
 
-    public void addElements(){
+    ;
+
+    public void addElements() {
         panelMyOrders.add(scrollPaneMyOrders);
         panelOrderInventory.add(scrollPaneOrderDetails);
 
@@ -50,7 +57,7 @@ public class MyOrdersPanel extends JPanel {
         add(panelOrderInventory, BorderLayout.SOUTH);
     }
 
-    public void addItemToOrderTable(String[] item){
+    public void addItemToOrderTable(String[] item) {
         //TODO
     }
 
