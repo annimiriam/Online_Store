@@ -10,6 +10,7 @@ public class ProductPanel extends JPanel {
 
     private MainPanel mainPanel;
 
+
     private DefaultTableModel productData;
     private JTable productsTable;
     private JScrollPane scrollPane;

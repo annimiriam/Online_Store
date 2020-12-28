@@ -26,12 +26,10 @@ public class AddSupplierPanel extends JPanel {
     private JTextField txtCountry;
     private JTextField txtPhone;
 
-    private JButton btnRemoveSupplier;
     private JButton btnAddSupplier;
-    private JButton btnUpdateSupplier;
 
     public AddSupplierPanel(MainPanel mainPanel) {
-        this.mainPanel=mainPanel;
+        this.mainPanel = mainPanel;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Lägg till leverantör"));
         createElements();
@@ -58,8 +56,7 @@ public class AddSupplierPanel extends JPanel {
         txtPhone = new JTextField();
 
         btnAddSupplier = new JButton("Lägg till leverantör");
-        btnRemoveSupplier = new JButton("Ta bort leverantör");
-        btnUpdateSupplier = new JButton("Uppdatera leverantör");
+
     }
 
     public void addElements() {
@@ -77,8 +74,6 @@ public class AddSupplierPanel extends JPanel {
         pnlInput.add(txtPhone);
 
         pnlButtons.add(btnAddSupplier);
-        pnlButtons.add(btnRemoveSupplier);
-        pnlButtons.add(btnUpdateSupplier);
 
         add(pnlInput, BorderLayout.CENTER);
         add(pnlButtons, BorderLayout.SOUTH);
@@ -121,16 +116,4 @@ public class AddSupplierPanel extends JPanel {
         });
     }
 
-
-    public JButton getBtnRemoveSupplier() {
-        return btnRemoveSupplier;
-    }
-
-    public JButton getBtnAddSupplier() {
-        return btnAddSupplier;
-    }
-
-    public JButton getBtnUpdateSupplier() {
-        return btnUpdateSupplier;
-    }
 }

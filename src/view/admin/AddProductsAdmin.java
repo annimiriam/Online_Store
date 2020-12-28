@@ -25,6 +25,7 @@ public class AddProductsAdmin extends JPanel {
 
     public AddProductsAdmin() {
         setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Lägg till produkt"));
         createElements();
         addElements();
     }
