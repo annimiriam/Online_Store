@@ -59,22 +59,27 @@ public class JdbcSQLServerConnection {
 
         } catch (SQLException throwables) {
             //throwables.printStackTrace();
-            System.out.println("Här kommer ett exception om att queryn inte returnerar ett resultset, men det gör inget");
+            System.out.println("Här kommer ett exception om att queryn add_supplier inte returnerar ett resultset, men det gör inget");
         }
     }
 
     public void addProduct(int id, String name, double baseprice, String supplier, int qty) {
-        createStatementAndExecuteProcedure(
-                "add_procuct"
-                        + id + ", "
-                        + name + ", "
-                        + baseprice + ", "
-                        + supplier + ", "
-                        + qty + ";"
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery("EXECUTE add_product "
+                    + id + ", "
+                    + name + ", "
+                    + baseprice + ", "
+                    + supplier + ", "
+                    + qty + ";");
 
-        );
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+            System.out.println("Här kommer ett exception om att queryn add_product inte returnerar ett resultset, men det gör inget");
+        }
     }
 
+    //TODO - denna blir fel tror pga datumformatet...
     public void addDiscount(int id, String name, int percent, Date from, Date tom) {
         createStatementAndExecuteProcedure(
                 "add_discount "
@@ -84,7 +89,6 @@ public class JdbcSQLServerConnection {
                         + from + ", "
                         + tom + ";"
         );
-
     }
 
     public void addProductToOrder(int prodId, int orderId, int qty) {

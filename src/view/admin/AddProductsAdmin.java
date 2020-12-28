@@ -1,9 +1,15 @@
 package view.admin;
 
+import view.MainPanel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddProductsAdmin extends JPanel {
+
+    private MainPanel mainPanel;
 
     private JPanel pnlInput;
     private JPanel pnlButtons;
@@ -23,7 +29,8 @@ public class AddProductsAdmin extends JPanel {
     private JButton btnAddNewProduct;
     private JButton btnUpdateQuantity;
 
-    public AddProductsAdmin() {
+    public AddProductsAdmin(MainPanel mainpanel) {
+        this.mainPanel = mainpanel;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Lägg till produkt"));
         createElements();
@@ -65,6 +72,8 @@ public class AddProductsAdmin extends JPanel {
         pnlButtons.add(btnAddNewProduct);
         pnlButtons.add(btnUpdateQuantity);
 
+        addListeners();
+
         add(pnlInput, BorderLayout.CENTER);
         add(pnlButtons, BorderLayout.SOUTH);
     }
@@ -88,5 +97,34 @@ public class AddProductsAdmin extends JPanel {
     public String getTxtQuantity() {
         return txtQuantity.getText();
     }
+
+    public void addListeners() {
+        btnAddNewProduct.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("klickat på add product-knappen");
+                mainPanel.addProduct();
+            }
+        });
+
+//        btnUpdateQuantity.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("klickat på uppdatera lager-lnappen");
+//                mainPanel.updateProductQty();
+//            }
+//        });
+
+
+    }
+
+    public void setSelectedProduct(String id, String name, String qty) {
+        txtId.setText(id);
+        txtId.setEnabled(false);
+        txtName.setText(name);
+        txtName.setEnabled(false);
+        txtQuantity.setText(qty);
+    }
+
 
 }
