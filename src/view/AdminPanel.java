@@ -21,7 +21,7 @@ public class AdminPanel extends JPanel {
 
     public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata) {
         this.mainPanel = mainPanel;
-        panelAddProductsAdmin = new AddProductsAdmin();
+        panelAddProductsAdmin = new AddProductsAdmin(mainPanel);
         panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
         panelDiscount = new DiscountPanel(mainPanel, discountdata);
@@ -50,7 +50,15 @@ public class AdminPanel extends JPanel {
         return panelAddProductsAdmin;
     }
 
-    public void setTableData(DefaultTableModel updatedSupplierData) {
+    public void setSupplierTableData(DefaultTableModel updatedSupplierData) {
         panelSuppliers.setSupplierData(updatedSupplierData);
+    }
+
+    public void setProductTableData(DefaultTableModel updatedProductsData) {
+        panelProducts.setProductData(updatedProductsData);
+    }
+
+    public void setDiscountTableData(DefaultTableModel updatedDiscountData){
+        panelDiscount.setDiscountTableData(updatedDiscountData);
     }
 }

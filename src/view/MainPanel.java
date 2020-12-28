@@ -2,9 +2,7 @@ package view;
 
 import control.Controller;
 
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -36,10 +34,6 @@ public class MainPanel extends JPanel {
      */
     public void search() {
         controller.searchProduct();
-    }
-
-    public void addDiscount() {
-        controller.adminAddDiscount();
     }
 
     public void confirmOrder() {
@@ -96,7 +90,7 @@ public class MainPanel extends JPanel {
                 controller.listAllSuppliers(),
                 controller.listAllProducts(),
                 controller.listAllDiscounts()
-                );
+        );
         add(adminPanel, BorderLayout.CENTER);
 
 
@@ -177,11 +171,10 @@ public class MainPanel extends JPanel {
     }
 
     public void addSupplier() {
-        System.out.println("mainpanel.addsupplier");
         controller.adminAddSupplier();
 
         //Uppdaterar tabellen med den tillagda leverantören
-        adminPanel.setTableData(controller.listAllSuppliers());
+        adminPanel.setSupplierTableData(controller.listAllSuppliers());
     }
 
     //Get-metoder för textinput från AddProduct i SupplierPanelen
@@ -205,6 +198,16 @@ public class MainPanel extends JPanel {
         return adminPanel.getAddProductsAdmin().getTxtQuantity();
     }
 
+    public void addProduct() {
+        controller.adminAddProduct();
+        adminPanel.setProductTableData(controller.listAllProducts());
+    }
+
+    public void getSelectedProduct(String id, String name, String qty) {
+        adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
+    }
+
+
     //Get-metoder för textinput från AddDiscountPanelen
     public String getDiscountName() {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
@@ -218,6 +221,10 @@ public class MainPanel extends JPanel {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
     }
 
+    public void addDiscount() {
+        controller.adminAddDiscount();
+        adminPanel.setDiscountTableData(controller.listAllDiscounts());
+    }
 
     public String getSearchProductCode() {
         return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
