@@ -13,11 +13,10 @@ public class SuppliersPanel extends JPanel {
     private DefaultTableModel supplierData;
     private JTable supplierTable;
     private JScrollPane scrollPane;
-    private String[] columnNames = {"Namn", "Telefonnr", "Gatuadress", "Postnr", "Stad", "Land" };
+    private String[] columnNames = {"Namn", "Telefonnr", "Gatuadress", "Postnr", "Stad", "Land"};
     private MainPanel mainPanel;
-
-
-    public SuppliersPanel(MainPanel mainPanel, DefaultTableModel supplierData){
+    
+    public SuppliersPanel(MainPanel mainPanel, DefaultTableModel supplierData) {
         this.mainPanel = mainPanel;
         this.supplierData = supplierData;
 
@@ -27,8 +26,8 @@ public class SuppliersPanel extends JPanel {
         addElements();
     }
 
-    public void createElements(){
-        pnlAddSupplier = new AddSupplierPanel();
+    public void createElements() {
+        pnlAddSupplier = new AddSupplierPanel(mainPanel);
 
         //supplierData = new DefaultTableModel();
         supplierTable = new JTable();
@@ -37,9 +36,9 @@ public class SuppliersPanel extends JPanel {
         supplierData.setColumnIdentifiers(columnNames);
         supplierTable.setModel(supplierData);
 
-    };
+    }
 
-    public void addElements(){
+    public void addElements() {
         add(scrollPane, BorderLayout.CENTER);
         add(pnlAddSupplier, BorderLayout.SOUTH);
     }
@@ -48,7 +47,12 @@ public class SuppliersPanel extends JPanel {
         return pnlAddSupplier;
     }
 
-    public void addItemToSupplierTable(String[] item){
+    public void addItemToSupplierTable(String[] item) {
         //TODO
+    }
+
+    public void setSupplierData(DefaultTableModel updatedSupplierData) {
+        supplierData = updatedSupplierData;
+        supplierTable.setModel(supplierData);
     }
 }

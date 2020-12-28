@@ -1,10 +1,14 @@
 package view.admin;
 
+import view.MainPanel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddSupplierPanel extends JPanel {
-
+    private MainPanel mainPanel;
     private JPanel pnlInput;
     private JPanel pnlButtons;
 
@@ -26,11 +30,13 @@ public class AddSupplierPanel extends JPanel {
     private JButton btnAddSupplier;
     private JButton btnUpdateSupplier;
 
-    public AddSupplierPanel() {
+    public AddSupplierPanel(MainPanel mainPanel) {
+        this.mainPanel=mainPanel;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Lägg till leverantör"));
         createElements();
         addElements();
+        addListeners();
     }
 
     public void createElements() {
@@ -103,6 +109,18 @@ public class AddSupplierPanel extends JPanel {
     public String getTxtPhone() {
         return txtPhone.getText();
     }
+
+    public void addListeners() {
+        btnAddSupplier.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("klickat på add Supplier");
+                System.out.println(txtName.getText());
+                mainPanel.addSupplier();
+            }
+        });
+    }
+
 
     public JButton getBtnRemoveSupplier() {
         return btnRemoveSupplier;

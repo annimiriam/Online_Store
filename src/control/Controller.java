@@ -103,6 +103,7 @@ public class Controller {
         jdbc.addSupplier(name, address, postnbr, city, country, phone);
 
         jdbc.disconnectFromDatabase();
+
     }
 
     public void adminAddProduct() {
@@ -330,5 +331,6 @@ public class Controller {
         //TODO
         jdbc.disconnectFromDatabase();
     }
+
 
 }

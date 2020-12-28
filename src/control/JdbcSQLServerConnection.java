@@ -47,15 +47,20 @@ public class JdbcSQLServerConnection {
     //Procedures that add, delete and modify database
 
     public void addSupplier(String name, String tel, String address, String postnbr, String city, String country) {
-        createStatementAndExecuteProcedure(
-                "add_supplier "
-                        + name + ", "
-                        + tel + ", "
-                        + address + ", "
-                        + postnbr + ", "
-                        + city + ", "
-                        + country + ";"
-        );
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery("EXECUTE add_supplier "
+                    + name + ", "
+                    + tel + ", "
+                    + address + ", "
+                    + postnbr + ", "
+                    + city + ", "
+                    + country + ";");
+
+        } catch (SQLException throwables) {
+            //throwables.printStackTrace();
+            System.out.println("Här kommer ett exception om att queryn inte returnerar ett resultset, men det gör inget");
+        }
     }
 
     public void addProduct(int id, String name, double baseprice, String supplier, int qty) {
@@ -201,7 +206,7 @@ public class JdbcSQLServerConnection {
         );
         try {
 
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getInt(1);
             }
 
