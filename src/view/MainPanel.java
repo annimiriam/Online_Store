@@ -92,11 +92,19 @@ public class MainPanel extends JPanel {
     public void showAdminPanel() {
         removeAll();
         controller.setExtendedState();
-        add(new AdminPanel(this,
-                        controller.listAllSuppliers(),
-                        controller.listAllProducts(),
-                        controller.listAllDiscounts()),
-                BorderLayout.CENTER);
+        adminPanel = new AdminPanel(this,
+                controller.listAllSuppliers(),
+                controller.listAllProducts(),
+                controller.listAllDiscounts()
+                );
+        add(adminPanel, BorderLayout.CENTER);
+
+
+//        add(new AdminPanel(this,
+//                        controller.listAllSuppliers(),
+//                        controller.listAllProducts(),
+//                        controller.listAllDiscounts()),
+//                BorderLayout.CENTER);
         repaint();
         revalidate();
     }
@@ -166,6 +174,14 @@ public class MainPanel extends JPanel {
 
     public String getTxtPhoneFromAddSupplierPanel() {
         return adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtPhone();
+    }
+
+    public void addSupplier() {
+        System.out.println("mainpanel.addsupplier");
+        controller.adminAddSupplier();
+
+        //Uppdaterar tabellen med den tillagda leverantören
+        adminPanel.setTableData(controller.listAllSuppliers());
     }
 
     //Get-metoder för textinput från AddProduct i SupplierPanelen
@@ -240,8 +256,8 @@ public class MainPanel extends JPanel {
      *
      */
 
-    public DefaultTableModel getOrderDetails(int orderNbr){
-       return controller.listOrderDetails(orderNbr);
+    public DefaultTableModel getOrderDetails(int orderNbr) {
+        return controller.listOrderDetails(orderNbr);
     }
 
     public void test() {

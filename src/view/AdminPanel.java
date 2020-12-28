@@ -49,4 +49,8 @@ public class AdminPanel extends JPanel {
     public AddProductsAdmin getAddProductsAdmin() {
         return addProductsAdmin;
     }
+
+    public void setTableData(DefaultTableModel updatedSupplierData) {
+        panelSuppliers.setSupplierData(updatedSupplierData);
+    }
 }
