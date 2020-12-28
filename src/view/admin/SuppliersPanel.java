@@ -15,7 +15,7 @@ public class SuppliersPanel extends JPanel {
     private JScrollPane scrollPane;
     private String[] columnNames = {"Namn", "Telefonnr", "Gatuadress", "Postnr", "Stad", "Land"};
     private MainPanel mainPanel;
-    
+
     public SuppliersPanel(MainPanel mainPanel, DefaultTableModel supplierData) {
         this.mainPanel = mainPanel;
         this.supplierData = supplierData;

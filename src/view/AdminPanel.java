@@ -14,13 +14,14 @@ public class AdminPanel extends JPanel {
 
     private SuppliersPanel panelSuppliers;
     private ProductPanel panelProducts;
-    private AddProductsAdmin addProductsAdmin;
+    private AddProductsAdmin panelAddProductsAdmin;
     private DiscountPanel panelDiscount;
     private MainPanel mainPanel;
 
 
     public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata) {
         this.mainPanel = mainPanel;
+        panelAddProductsAdmin = new AddProductsAdmin();
         panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
         panelDiscount = new DiscountPanel(mainPanel, discountdata);
@@ -30,8 +31,7 @@ public class AdminPanel extends JPanel {
         add(panelSuppliers, BorderLayout.WEST);
         add(panelProducts, BorderLayout.CENTER);
         add(panelDiscount, BorderLayout.EAST);
-
-
+        add(panelAddProductsAdmin, BorderLayout.SOUTH);
     }
 
     public SuppliersPanel getPanelSuppliers() {
@@ -47,7 +47,7 @@ public class AdminPanel extends JPanel {
     }
 
     public AddProductsAdmin getAddProductsAdmin() {
-        return addProductsAdmin;
+        return panelAddProductsAdmin;
     }
 
     public void setTableData(DefaultTableModel updatedSupplierData) {
