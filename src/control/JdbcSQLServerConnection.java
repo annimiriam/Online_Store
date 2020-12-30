@@ -79,7 +79,7 @@ public class JdbcSQLServerConnection {
         }
     }
 
-    //TODO - denna blir fel tror pga datumformatet...
+
     public void addDiscount(int id, String name, int percent, int from, int tom) {
         createStatementAndExecuteProcedure(
                 "add_discount "
@@ -284,10 +284,9 @@ public class JdbcSQLServerConnection {
     }
 
 
-    public void searchUnconfirmedOrders() {
+    public ResultSet searchUnconfirmedOrders() {
         ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");
-        // TODO - sätt in resultatet i en objectsmatris som kan sättas i tabellen
-
+        return rs;
     }
 
     public void orderHistory(int customerId) {

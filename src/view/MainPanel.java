@@ -1,6 +1,7 @@
 package view;
 
 import control.Controller;
+import view.admin.UnconfirmedOrdersPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -230,6 +231,11 @@ public class MainPanel extends JPanel {
     public void addDiscount() {
         controller.adminAddDiscount();
         adminPanel.setDiscountTableData(controller.listAllDiscounts());
+    }
+
+    public DefaultTableModel getUnconfirmedOrders()
+    {
+        return controller.searchUnconfirmedOrders();
     }
 
     public String getSearchProductCode() {

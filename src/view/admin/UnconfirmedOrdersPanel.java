@@ -43,14 +43,17 @@ public class UnconfirmedOrdersPanel extends JPanel{
     private void addElements(){
         add(scrollPane, BorderLayout.CENTER);
         add(pnlConfirmOrder, BorderLayout.SOUTH);
+        addItemToOrderTable(); // TODO, detta bör nog flyttas, se kommentar nedan
     }
 
     public ConfirmOrderPanel getPnlConfirmOrder() {
         return pnlConfirmOrder;
     }
 
-    public void addItemToOrderTable(String[] item){
-        //TODO
+    // TODO gör snyggare MVC, använd metoden ovan istället
+    public void addItemToOrderTable(){
+        DefaultTableModel item = mainPanel.getUnconfirmedOrders();
+        ordersTable.setModel(item);
     }
 
     private class ConfirmOrderPanel extends JPanel

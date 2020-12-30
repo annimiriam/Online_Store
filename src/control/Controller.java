@@ -312,11 +312,29 @@ public class Controller {
         return datamodel;
     }
 
-    public void searchUnconfirmedOrders() {
+    public DefaultTableModel searchUnconfirmedOrders() {
+
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
         jdbc.connectToDatabase(user, password);
-        jdbc.searchUnconfirmedOrders();
-        //TODO
+
+        ResultSet rs = jdbc.searchUnconfirmedOrders();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         jdbc.disconnectFromDatabase();
+        return datamodel;
+
     }
 
     public void orderHistory() {
