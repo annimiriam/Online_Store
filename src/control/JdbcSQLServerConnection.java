@@ -80,7 +80,7 @@ public class JdbcSQLServerConnection {
     }
 
     //TODO - denna blir fel tror pga datumformatet...
-    public void addDiscount(int id, String name, int percent, Date from, Date tom) {
+    public void addDiscount(int id, String name, int percent, int from, int tom) {
         createStatementAndExecuteProcedure(
                 "add_discount "
                         + id + ", "

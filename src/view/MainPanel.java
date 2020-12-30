@@ -221,6 +221,12 @@ public class MainPanel extends JPanel {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
     }
 
+    public String getDiscountDateFrom()
+    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateFrom();}
+
+    public String getDiscountDateTom()
+    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();}
+
     public void addDiscount() {
         controller.adminAddDiscount();
         adminPanel.setDiscountTableData(controller.listAllDiscounts());

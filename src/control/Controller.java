@@ -4,9 +4,9 @@ import view.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 
 public class Controller {
@@ -17,6 +17,7 @@ public class Controller {
 
     private String user = "hej";
     private String password = "secret";
+
 
     private String customer_email = "";
     private int customer_id;
@@ -65,7 +66,7 @@ public class Controller {
         if (username.length() == 5) {
             //login admin, jdbc
             if (jdbc.loginAdmin(username, password)) {
-                //Öppna adminpanel
+                //Open adminpanel
                 mainPanel.showAdminPanel();
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
@@ -78,7 +79,7 @@ public class Controller {
                 System.out.println("mejl: " + customer_email);
                 customer_id = jdbc.getCustomerId(customer_email);
                 System.out.println("customer id: " + customer_id);
-                //Öppna adminpanel
+                //Open customerpanel
                 mainPanel.showCustomerPanel();
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password, try again.");
@@ -118,17 +119,18 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    // Adds a new discount
     public void adminAddDiscount() {
 
         int discountId = Integer.parseInt(mainPanel.getDiscountId());
         String discountName = mainPanel.getDiscountName();
         int discountPercent = Integer.parseInt(mainPanel.getDiscountPercent());
-        //TODO - vilket format på datum?
-        java.sql.Date from = new java.sql.Date(20, 12, 13);
-        java.sql.Date tom = new java.sql.Date(20, 12, 31);
+        int dateFrom = Integer.parseInt(mainPanel.getDiscountDateFrom());
+        int  dateTo = Integer.parseInt(mainPanel.getDiscountDateTom());
+        System.out.println("SQL date: " + dateFrom + ", " + dateTo);
 
         jdbc.connectToDatabase(user, password);
-        jdbc.addDiscount(discountId, discountName, discountPercent, from, tom);
+        jdbc.addDiscount(discountId, discountName, discountPercent, dateFrom, dateTo);
         jdbc.disconnectFromDatabase();
 
     }

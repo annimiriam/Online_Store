@@ -97,5 +97,8 @@ public class AddDiscountPanel extends JPanel {
         return txtPercent.getText();
     }
 
+    public String getDateFrom() {return txtDateFrom.getText();}
+    public String getDateTo() {return txtDateTom.getText();}
+
 
 }
