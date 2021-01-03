@@ -37,8 +37,8 @@ public class MainPanel extends JPanel {
         controller.searchProduct();
     }
 
-    public void confirmOrder() {
-
+    public void confirmOrder(int orderNbr) {
+        controller.confirmOrder(orderNbr);
     }
 
     //TODO kanske inte ska finnas sedan när vi får det andra att funka

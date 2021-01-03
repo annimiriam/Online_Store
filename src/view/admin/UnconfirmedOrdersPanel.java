@@ -84,7 +84,9 @@ public class UnconfirmedOrdersPanel extends JPanel{
             btnConfirmOrder.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    mainPanel.confirmOrder();
+                    mainPanel.confirmOrder(Integer.parseInt(txtOrder.getText()));
+                    txtOrder.setText("");
+                    addItemToOrderTable();
                 }
             });
 
