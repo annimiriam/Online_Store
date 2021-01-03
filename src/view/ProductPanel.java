@@ -61,6 +61,8 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
         productsTable.setModel(productData);
     }
 
+    // TODO: i mainpanel.getSelectedProduct så anropas adminpanel, det ger fel. Adminpanel är null om customer
+    // loggats in.
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
