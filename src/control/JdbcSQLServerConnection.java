@@ -289,6 +289,12 @@ public class JdbcSQLServerConnection {
         return rs;
     }
 
+    // Confirms an order
+    public void confirmOrder(int orderNbr)
+    {
+        ResultSet rs = createStatementAndExecuteProcedure("confirm_order " + orderNbr);
+    }
+
     public void orderHistory(int customerId) {
         createStatementAndExecuteProcedure(
                 "add_procuct"

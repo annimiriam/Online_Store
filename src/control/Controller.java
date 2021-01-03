@@ -344,10 +344,11 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void confirmOrder() {
+    //TODO: när denna anropas ska ordernumret skickas med viletk plockas från tabellen med ordrar
+    public void confirmOrder(int orderNbr) {
         jdbc.connectToDatabase(user, password);
-        //jdbc.confirmOrder();   TODO - Finns inte än, lägg till metod i jdbc
-        //TODO
+        jdbc.confirmOrder(orderNbr);
+        // TODO: Uppdatera listan med ordrar så den konfirmerade ordern försvinner
         jdbc.disconnectFromDatabase();
     }
 
