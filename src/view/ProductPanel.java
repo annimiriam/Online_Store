@@ -16,7 +16,7 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
     private DefaultTableModel productData;
     private JTable productsTable;
     private JScrollPane scrollPane;
-    private String[] columnNames = {"Produktkod", "Namn", "Baspris", "Leverantör", "Antal i lager"};
+    private String[] columnNames = {"Produktkod", "Namn", "Baspris", "Leverantör", "Antal i lager", "Pris"};
 
     public ProductPanel(MainPanel mainPanel, DefaultTableModel productData) {
         this.mainPanel = mainPanel;
@@ -58,6 +58,7 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
 
     public void setProductData(DefaultTableModel updatedSupplierData) {
         productData = updatedSupplierData;
+        productData.setColumnIdentifiers(columnNames);
         productsTable.setModel(productData);
     }
 

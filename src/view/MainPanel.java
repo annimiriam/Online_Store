@@ -75,10 +75,10 @@ public class MainPanel extends JPanel {
     public void showCustomerPanel() {
         removeAll();
         controller.setExtendedState();
-        add(new CustomerPanel(this,
-                        controller.listMyOrders(),
-                        controller.listAllProducts()),
-                BorderLayout.CENTER);
+        customerPanel = new CustomerPanel(this,
+                controller.listMyOrders(),
+                controller.listAllProducts());
+        add(customerPanel, BorderLayout.CENTER);
         repaint();
         revalidate();
     }
@@ -266,8 +266,8 @@ public class MainPanel extends JPanel {
     /**
      * @param productsDataTable
      */
-    public void presentTableProducts(String[][] productsDataTable) {
-        customerPanel.getPanelProducts().presentTableProducts(productsDataTable);
+    public void presentTableProducts(DefaultTableModel productsDataTable) {
+        customerPanel.getPanelProducts().setProductData(productsDataTable);
     }
 
 

@@ -178,16 +178,42 @@ public class Controller {
     }
 
     public void searchProduct() {
-        String productCode = mainPanel.getSearchProductCode();
+        String productIdString = mainPanel.getSearchProductCode();
+        int productCode = -1;
+        if(!(productIdString.equals(""))) {
+            productCode = Integer.parseInt(productIdString);
+        }
         String productName = mainPanel.getSearchProductName();
         String supplier = mainPanel.getSearchSupplier();
-        String price = mainPanel.getSearchPrice();
+        System.out.println("SUPPLIER" + supplier);
+        String priceString = mainPanel.getSearchPrice();
+        Double price = -1.0;
+        if(!(priceString.equals(""))) {
+            price = Double.parseDouble(priceString);
+        }
 
         jdbc.connectToDatabase(user, password);
-        //jdbc.searchProduct();
-        //TODO
-        String[][] data = null; //get from jdbc
-        mainPanel.presentTableProducts(data);
+
+       ResultSet rs = jdbc.searchProduct(productCode,productName,price, supplier);
+
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       mainPanel.presentTableProducts(datamodel);
         jdbc.disconnectFromDatabase();
     }
 

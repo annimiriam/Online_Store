@@ -13,7 +13,7 @@ public class JdbcSQLServerConnection {
     }
 
     public void connectToDatabase(String user, String password) {
-        String dbURL = "jdbc:sqlserver://localhost;DatabaseName=OnlineStore";
+        String dbURL = "jdbc:sqlserver://localhost:1433;DatabaseName=OnlineStore";
         try {
             connection = DriverManager.getConnection(dbURL, user, password);
             if (connection != null) {
@@ -146,6 +146,7 @@ public class JdbcSQLServerConnection {
 
         try (CallableStatement cstmt = connection.prepareCall("{? = call login_admin(?, ?)}");) {
 
+
             cstmt.registerOutParameter(1, Types.INTEGER);
             cstmt.setInt(2, admin_id);
             cstmt.setString(3, password);
@@ -223,15 +224,16 @@ public class JdbcSQLServerConnection {
     //Procedures search in database
 
     //TODO - vet ej om denna kommer funka med tomma parametrar? Eller är de null?
-    public void searchProduct(int prodId, String name, double maxPrice, String supplier) {
-        createStatementAndExecuteProcedure(
+    public ResultSet searchProduct(int prodId, String name, double maxPrice, String supplier) {
+        ResultSet rs = createStatementAndExecuteProcedure(
                 "search_product "
-                        + prodId + ", "
-                        + name + ", "
-                        + maxPrice + ", "
-                        + supplier + ";"
+                        + "@product_id = " + prodId + ", "
+                        + "@product_name = '" + name + "', "
+                        + "@maxprice = " + maxPrice + ", "
+                        + "@supplier_name = '" + supplier + "';"
         );
 
+        return rs;
     }
 
     public ResultSet listAllProducts() {
