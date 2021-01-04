@@ -60,6 +60,7 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
         productData = updatedSupplierData;
         productData.setColumnIdentifiers(columnNames);
         productsTable.setModel(productData);
+        productData.setColumnIdentifiers(columnNames);
     }
 
     // TODO: i mainpanel.getSelectedProduct så anropas adminpanel, det ger fel. Adminpanel är null om customer

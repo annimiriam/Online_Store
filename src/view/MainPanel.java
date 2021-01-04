@@ -93,12 +93,6 @@ public class MainPanel extends JPanel {
         );
         add(adminPanel, BorderLayout.CENTER);
 
-
-//        add(new AdminPanel(this,
-//                        controller.listAllSuppliers(),
-//                        controller.listAllProducts(),
-//                        controller.listAllDiscounts()),
-//                BorderLayout.CENTER);
         repaint();
         revalidate();
     }

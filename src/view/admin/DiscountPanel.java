@@ -18,7 +18,7 @@ public class DiscountPanel extends JPanel {
     private MainPanel mainPanel;
 
 
-    private UnconfirmedOrdersPanel panelUnconOrders;
+//    private UnconfirmedOrdersPanel panelUnconOrders;
 
     public DiscountPanel(MainPanel mainPanel, DefaultTableModel discountData) {
         this.mainPanel = mainPanel;
@@ -31,7 +31,7 @@ public class DiscountPanel extends JPanel {
 
     private void createElements() {
         pnlAddDiscount = new AddDiscountPanel(mainPanel);
-        panelUnconOrders = new UnconfirmedOrdersPanel(mainPanel);
+//        panelUnconOrders = new UnconfirmedOrdersPanel(mainPanel);
         southPanel = new JPanel(new BorderLayout());
 
 //        discountData = new DefaultTableModel();
@@ -46,7 +46,7 @@ public class DiscountPanel extends JPanel {
     private void addElements() {
         add(scrollPane, BorderLayout.CENTER);
         add(pnlAddDiscount, BorderLayout.NORTH);
-        add(panelUnconOrders, BorderLayout.SOUTH);
+//        add(panelUnconOrders, BorderLayout.SOUTH);
     }
 
     public AddDiscountPanel getPnlAddDiscount() {
