@@ -111,7 +111,7 @@ public class JdbcSQLServerConnection {
 
     public void updateQuantity(int prodId, int qty) {
         createStatementAndExecuteProcedure(
-                "add_supplier "
+                "change_quantity_of_product "
                         + prodId + ", "
                         + qty + ";"
         );

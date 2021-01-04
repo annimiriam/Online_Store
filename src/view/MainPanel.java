@@ -30,6 +30,10 @@ public class MainPanel extends JPanel {
         this.setPreferredSize(new Dimension(1200, 600));
     }
 
+
+   public void updateProductQty(){
+        controller.updateProductQty();
+   }
     /**
      *
      */
@@ -276,9 +280,16 @@ public class MainPanel extends JPanel {
      * @param productsDataTable
      */
     public void presentTableProducts(DefaultTableModel productsDataTable) {
-        customerPanel.getPanelProducts().setProductData(productsDataTable);
+        if(customerPanel!=null) {
+            customerPanel.getPanelProducts().setProductData(productsDataTable);
+        }else {
+            adminPanel.getPanelProducts().setProductData(productsDataTable);
+        }
     }
 
+    public void clearAddProductPanel(){
+        adminPanel.getAddProductsAdmin().clear();
+    }
 
     /**
      *

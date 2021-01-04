@@ -34,6 +34,17 @@ public class Controller {
 
     }
 
+    public void updateProductQty(){
+        int quantity = Integer.parseInt(mainPanel.getTxtQuantityFromAddProductsPanel());
+        int productId =  Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
+        jdbc.connectToDatabase(user, password);
+        jdbc.updateQuantity(productId, quantity);
+        jdbc.disconnectFromDatabase();
+        mainPanel.clearAddProductPanel();
+        DefaultTableModel dtm = listAllProducts();
+        mainPanel.presentTableProducts(dtm);
+    }
+
 
     // maximerar fönsterstorlek för att ge plats åt paneler
     public void setExtendedState() {
