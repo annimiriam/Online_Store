@@ -41,19 +41,22 @@ public class Controller {
     }
 
 
-    //get called when you register and press the register button
+    //TODO: Öppna customer panel och hämta rätt customer id
     public void addCustomer() {
+        jdbc.connectToDatabase(user, password);
 
         String fName = mainPanel.getTxtFirstNameFromRegisterPanel();
         String lName = mainPanel.getTxtLastNameFromRegisterPanel();
         String email = mainPanel.getTxtEmailFromRegisterPanel();
         String address = mainPanel.getTxtAddressFromRegisterPanel();
-        String postnbr = "";
+        String postnbr = "55555";
         String city = mainPanel.getTxtCityFromRegisterPanel();
         String country = mainPanel.getTxtCountryFromRegisterPanel();
         String tel = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
         jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
+
+        jdbc.disconnectFromDatabase();
     }
 
     // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database

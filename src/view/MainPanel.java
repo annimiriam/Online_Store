@@ -59,7 +59,7 @@ public class MainPanel extends JPanel {
      *
      */
     public void registerCustomer() {
-        controller.registerCustomer();
+        controller.addCustomer();
     }
 
     // Visar registrera-kund-panelen
