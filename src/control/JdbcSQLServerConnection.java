@@ -124,7 +124,7 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
+    public int registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -143,6 +143,7 @@ public class JdbcSQLServerConnection {
             throwables.printStackTrace();
         }
 
+        return getCustomerId(email);
     }
 
     // Checks if the username and password connected to an admin exists in the database

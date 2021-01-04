@@ -54,9 +54,10 @@ public class Controller {
         String country = mainPanel.getTxtCountryFromRegisterPanel();
         String tel = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
-        jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
+        customer_id = jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
 
         jdbc.disconnectFromDatabase();
+        mainPanel.showCustomerPanel();
     }
 
     // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database
