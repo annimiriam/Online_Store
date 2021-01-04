@@ -1,7 +1,6 @@
 package view;
 
 import control.Controller;
-import view.admin.UnconfirmedOrdersPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -41,19 +41,22 @@ public class Controller {
     }
 
 
-    //get called when you register and press the register button
-    public void addCustomer() {
+    public void registerCustomer() {
+        jdbc.connectToDatabase(user, password);
 
         String fName = mainPanel.getTxtFirstNameFromRegisterPanel();
         String lName = mainPanel.getTxtLastNameFromRegisterPanel();
         String email = mainPanel.getTxtEmailFromRegisterPanel();
         String address = mainPanel.getTxtAddressFromRegisterPanel();
-        String postnbr = "";
+        String postnbr = "55555";
         String city = mainPanel.getTxtCityFromRegisterPanel();
         String country = mainPanel.getTxtCountryFromRegisterPanel();
         String tel = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
-        jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
+        customer_id = jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
+
+        jdbc.disconnectFromDatabase();
+        mainPanel.showCustomerPanel();
     }
 
     // Checks if user is an admin or customer and opens the corresponding panel if the user exists in database
@@ -165,17 +168,6 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void registerCustomer() {
-        jdbc.connectToDatabase(user, password);
-        //TODO
-
-        //jdbc.registerCustomer();
-        if (true) {
-            mainPanel.showCustomerPanel();
-        }
-
-        jdbc.disconnectFromDatabase();
-    }
 
     public void searchProduct() {
         String productCode = mainPanel.getSearchProductCode();
