@@ -239,7 +239,11 @@ public class MainPanel extends JPanel {
     }
 
     public String getSearchProductCode() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        } else {
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        }
     }
 
     /**
