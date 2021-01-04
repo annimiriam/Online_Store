@@ -103,13 +103,17 @@ public class JdbcSQLServerConnection {
 
     public void assignDiscountToProduct(int discId, int prodId) {
 
-        System.out.println("prodid: " + prodId + ", discId: " + discId);
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            stmt.executeQuery("EXECUTE assign_discount_to_product "
+                    + prodId + ", "
+                    + discId + ";"
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
-        createStatementAndExecuteProcedure(
-                "assign_discount_to_product "
-                        + discId + ", "
-                        + prodId + ";"
-        );
     }
 
     public void updateQuantity(int prodId, int qty) {
