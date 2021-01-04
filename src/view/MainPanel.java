@@ -5,21 +5,29 @@ import control.Controller;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.nio.ByteOrder;
 
 public class MainPanel extends JPanel {
     private Controller controller;
     private LoginPanel loginPanel;
+    private JPanel eastPanel;
     private RegisterPanel registerPanel;
     private AdminPanel adminPanel;
     private CustomerPanel customerPanel;
+    private ProductPanel productPanel;
 
     public MainPanel(Controller controller) {
         this.controller = controller;
         this.loginPanel = new LoginPanel(this);
         this.registerPanel = new RegisterPanel(this);
+        eastPanel = new JPanel(new BorderLayout());
         setLayout(new BorderLayout());
-        add(loginPanel, BorderLayout.NORTH);
-        this.setPreferredSize(new Dimension(500, 300));
+        add(eastPanel, BorderLayout.EAST);
+        eastPanel.add(loginPanel, BorderLayout.NORTH);
+        eastPanel.setPreferredSize(new Dimension(400,200));
+        productPanel = new ProductPanel(this, controller.listAllProducts());
+        add(productPanel,BorderLayout.CENTER);
+        this.setPreferredSize(new Dimension(1200, 600));
     }
 
     /**
@@ -63,7 +71,11 @@ public class MainPanel extends JPanel {
 
     // Visar registrera-kund-panelen
     public void showRegisterCustomerPanel() {
-        add(registerPanel, BorderLayout.SOUTH);
+        eastPanel.removeAll();
+        eastPanel.add(loginPanel, BorderLayout.NORTH);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(registerPanel, BorderLayout.NORTH);
+        eastPanel.add(panel, BorderLayout.CENTER);
         repaint();
 
         revalidate();

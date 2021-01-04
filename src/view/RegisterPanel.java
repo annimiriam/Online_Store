@@ -36,6 +36,7 @@ public class RegisterPanel extends JPanel {
         this.mainPanel = mainPanel;
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setSize(new Dimension(200,200));
         createElements();
         addElements();
     }
