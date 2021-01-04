@@ -182,7 +182,6 @@ public class Controller {
         mainPanel.presentTableProducts(data);
         jdbc.disconnectFromDatabase();
     }
-
     public DefaultTableModel listAllSuppliers() {
         DefaultTableModel datamodel = new DefaultTableModel(0,6);
         jdbc.connectToDatabase(user, password);
@@ -209,7 +208,7 @@ public class Controller {
         return datamodel;
     }
     public DefaultTableModel listAllProducts() {
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        DefaultTableModel datamodel = new DefaultTableModel(0,5);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllProducts();
