@@ -65,6 +65,11 @@ public class AddDiscountPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Klickat på add Discount.knapp");
                 mainPanel.addDiscount();
+                txtName.setText("");
+                txtId.setText("");
+                txtPercent.setText("");
+                txtDateFrom.setText("");
+                txtDateTom.setText("");
             }
         });
         btnGiveProductDiscount = new JButton("Ge vara rabatt");
@@ -74,6 +79,7 @@ public class AddDiscountPanel extends JPanel {
                 int discountId = mainPanel.getChosenDiscountId();
                 int productId = Integer.parseInt(txtGiveProductDiscount.getText());
                 mainPanel.giveProductDiscount(discountId, productId);
+                txtGiveProductDiscount.setText("");
             }
         });
         btnRemoveDiscount = new JButton("Ta bort rabatt");
