@@ -57,6 +57,9 @@ public class DiscountPanel extends JPanel {
         //TODO
     }
 
+    public int getChosenDiscountId()
+    { return Integer.parseInt((String) discountTable.getValueAt(discountTable.getSelectedRow(), 0));}
+
     public void setDiscountTableData(DefaultTableModel updatedDiscountData) {
         discountData = updatedDiscountData;
         discountTable.setModel(discountData);

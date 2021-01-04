@@ -157,10 +157,10 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void adminAssignDiscountToProduct() {
+    public void adminAssignDiscountToProduct(int discountId, int productId) {
         jdbc.connectToDatabase(user, password);
         //TODO
-        //jdbc.assignDiscountToProduct();
+        jdbc.assignDiscountToProduct(discountId, productId);
         jdbc.disconnectFromDatabase();
 
     }

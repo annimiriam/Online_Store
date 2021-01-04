@@ -17,15 +17,18 @@ public class AddDiscountPanel extends JPanel {
     private JLabel lblPercent;
     private JLabel lblFrom;
     private JLabel lblTom;
+    private JLabel lblGiveProductDiscount;
 
     private JTextField txtName;
     private JTextField txtId;
     private JTextField txtPercent;
     private JTextField txtDateFrom;
     private JTextField txtDateTom;
+    private JTextField txtGiveProductDiscount;
 
     private JButton btnAddDiscount;
     private JButton btnRemoveDiscount;
+    private JButton btnGiveProductDiscount;
 
     private MainPanel mainPanel;
 
@@ -47,12 +50,14 @@ public class AddDiscountPanel extends JPanel {
         lblPercent = new JLabel("Procent");
         lblFrom = new JLabel("From yymmdd?");
         lblTom = new JLabel("Tom yymmdd?");
+        lblGiveProductDiscount = new JLabel("Produktkod");
 
         txtName = new JTextField();
         txtId = new JTextField();
         txtPercent = new JTextField();
         txtDateFrom = new JTextField();
         txtDateTom = new JTextField();
+        txtGiveProductDiscount = new JTextField();
 
         btnAddDiscount = new JButton("Lägg till rabatt");
         btnAddDiscount.addActionListener(new ActionListener() {
@@ -60,6 +65,15 @@ public class AddDiscountPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Klickat på add Discount.knapp");
                 mainPanel.addDiscount();
+            }
+        });
+        btnGiveProductDiscount = new JButton("Ge vara rabatt");
+        btnGiveProductDiscount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int discountId = mainPanel.getChosenDiscountId();
+                int productId = Integer.parseInt(txtGiveProductDiscount.getText());
+                mainPanel.giveProductDiscount(discountId, productId);
             }
         });
         btnRemoveDiscount = new JButton("Ta bort rabatt");
@@ -76,8 +90,11 @@ public class AddDiscountPanel extends JPanel {
         pnlInput.add(txtDateFrom);
         pnlInput.add(lblTom);
         pnlInput.add(txtDateTom);
+        pnlInput.add(lblGiveProductDiscount);
+        pnlInput.add(txtGiveProductDiscount);
         pnlButtons.add(btnAddDiscount);
         pnlButtons.add(btnRemoveDiscount);
+        pnlButtons.add(btnGiveProductDiscount);
 
         add(pnlInput, BorderLayout.CENTER);
         add(pnlButtons, BorderLayout.SOUTH);

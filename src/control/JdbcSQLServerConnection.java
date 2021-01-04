@@ -101,11 +101,14 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void assignDiscountToProduct(int prodId, int discId) {
+    public void assignDiscountToProduct(int discId, int prodId) {
+
+        System.out.println("prodid: " + prodId + ", discId: " + discId);
+
         createStatementAndExecuteProcedure(
-                "add_discount "
-                        + prodId + ", "
-                        + discId + ";"
+                "assign_discount_to_product "
+                        + discId + ", "
+                        + prodId + ";"
         );
     }
 
