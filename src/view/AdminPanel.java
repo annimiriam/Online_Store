@@ -12,11 +12,13 @@ import java.awt.*;
 
 public class AdminPanel extends JPanel {
 
+    private JPanel panelProductsLayout;
     private SuppliersPanel panelSuppliers;
     private ProductPanel panelProducts;
     private AddProductsAdmin panelAddProductsAdmin;
     private DiscountPanel panelDiscount;
     private MainPanel mainPanel;
+    private UnconfirmedOrdersPanel panelUnconOrders;
 
 
     public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata) {
@@ -25,13 +27,18 @@ public class AdminPanel extends JPanel {
         panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
         panelDiscount = new DiscountPanel(mainPanel, discountdata);
+        panelProductsLayout = new JPanel(new BorderLayout());
+        panelUnconOrders = new UnconfirmedOrdersPanel(mainPanel);
 
         setLayout(new BorderLayout());
 
+        panelProductsLayout.add(panelProducts, BorderLayout.CENTER);
+        panelProductsLayout.add(panelAddProductsAdmin, BorderLayout.SOUTH);
+
         add(panelSuppliers, BorderLayout.WEST);
-        add(panelProducts, BorderLayout.CENTER);
+        add(panelProductsLayout, BorderLayout.CENTER);
         add(panelDiscount, BorderLayout.EAST);
-        add(panelAddProductsAdmin, BorderLayout.SOUTH);
+        add(panelUnconOrders, BorderLayout.SOUTH); //Här sklle jag vilja ha unconfimed orders istället i south.
     }
 
     public SuppliersPanel getPanelSuppliers() {
@@ -58,7 +65,12 @@ public class AdminPanel extends JPanel {
         panelProducts.setProductData(updatedProductsData);
     }
 
-    public void setDiscountTableData(DefaultTableModel updatedDiscountData){
+    public void setDiscountTableData(DefaultTableModel updatedDiscountData) {
         panelDiscount.setDiscountTableData(updatedDiscountData);
     }
+
+
+
+
+
 }
