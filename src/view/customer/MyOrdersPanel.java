@@ -24,7 +24,7 @@ public class MyOrdersPanel extends JPanel {
 
     private JScrollPane scrollPaneMyOrders;
     private JScrollPane scrollPaneOrderDetails;
-    private String[] columnNamesMyOrders = {"Ordernr", "Pris", "Datum"};
+    private String[] columnNamesMyOrders = {"Ordernr", "Pris", "Datum", "Status"};
     private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris"};
 
     public MyOrdersPanel(MainPanel mainPanel, DefaultTableModel myOrdersData, DefaultTableModel orderDetailsData) {
