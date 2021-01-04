@@ -41,8 +41,7 @@ public class Controller {
     }
 
 
-    //TODO: Öppna customer panel och hämta rätt customer id
-    public void addCustomer() {
+    public void registerCustomer() {
         jdbc.connectToDatabase(user, password);
 
         String fName = mainPanel.getTxtFirstNameFromRegisterPanel();
@@ -169,17 +168,6 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void registerCustomer() {
-        jdbc.connectToDatabase(user, password);
-        //TODO
-
-        //jdbc.registerCustomer();
-        if (true) {
-            mainPanel.showCustomerPanel();
-        }
-
-        jdbc.disconnectFromDatabase();
-    }
 
     public void searchProduct() {
         String productCode = mainPanel.getSearchProductCode();
