@@ -1,7 +1,6 @@
 package view;
 
 import control.Controller;
-import view.admin.UnconfirmedOrdersPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,8 +36,8 @@ public class MainPanel extends JPanel {
         controller.searchProduct();
     }
 
-    public void confirmOrder() {
-
+    public void confirmOrder(int orderNbr) {
+        controller.confirmOrder(orderNbr);
     }
 
     //TODO kanske inte ska finnas sedan när vi får det andra att funka
@@ -239,7 +238,11 @@ public class MainPanel extends JPanel {
     }
 
     public String getSearchProductCode() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        } else {
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        }
     }
 
     /**

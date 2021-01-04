@@ -124,19 +124,26 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
-        createStatementAndExecuteProcedure(
-                "add_procuct"
-                        + firstName + ", "
-                        + lastName + ", "
-                        + email + ", "
-                        + address + ", "
-                        + postnbr + ", "
-                        + city + ", "
-                        + country + ","
-                        + tel + ", "
-                        + password + ";"
-        );
+    public int registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            stmt.executeQuery(
+                    "register_customer "
+                            + firstName + ", "
+                            + lastName + ", "
+                            + email + ", "
+                            + address + ", "
+                            + postnbr + ", "
+                            + city + ", "
+                            + country + ","
+                            + tel + ", "
+                            + password + ";" );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return getCustomerId(email);
     }
 
     // Checks if the username and password connected to an admin exists in the database
