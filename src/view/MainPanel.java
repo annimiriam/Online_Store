@@ -5,6 +5,8 @@ import control.Controller;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.nio.ByteOrder;
 
 public class MainPanel extends JPanel {
@@ -15,12 +17,15 @@ public class MainPanel extends JPanel {
     private AdminPanel adminPanel;
     private CustomerPanel customerPanel;
     private ProductPanel productPanel;
+    private JPanel logOutPanel;
+    private JButton logOutButton;
 
     public MainPanel(Controller controller) {
         this.controller = controller;
         this.loginPanel = new LoginPanel(this);
         this.registerPanel = new RegisterPanel(this);
         eastPanel = new JPanel(new BorderLayout());
+        createLogOutPanel();
         setLayout(new BorderLayout());
         add(eastPanel, BorderLayout.EAST);
         eastPanel.add(loginPanel, BorderLayout.NORTH);
@@ -30,7 +35,19 @@ public class MainPanel extends JPanel {
         this.setPreferredSize(new Dimension(1200, 600));
     }
 
-
+   public void createLogOutPanel(){
+        logOutPanel = new JPanel(new BorderLayout());
+        logOutButton = new JButton("Log out");
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.logOut();
+            }
+        });
+        JPanel panel = new JPanel(new BorderLayout());
+        logOutPanel.add(panel,BorderLayout.NORTH);
+        panel.add(logOutButton, BorderLayout.EAST);
+    }
    public void updateProductQty(){
         controller.updateProductQty();
    }
@@ -93,7 +110,8 @@ public class MainPanel extends JPanel {
         customerPanel = new CustomerPanel(this,
                 controller.listMyOrders(),
                 controller.listAllProducts());
-        add(customerPanel, BorderLayout.CENTER);
+        logOutPanel.add(customerPanel, BorderLayout.CENTER);
+        add(logOutPanel, BorderLayout.CENTER);
         repaint();
         revalidate();
     }
@@ -102,12 +120,14 @@ public class MainPanel extends JPanel {
     public void showAdminPanel() {
         removeAll();
         controller.setExtendedState();
+
         adminPanel = new AdminPanel(this,
                 controller.listAllSuppliers(),
                 controller.listAllProducts(),
                 controller.listAllDiscounts()
         );
-        add(adminPanel, BorderLayout.CENTER);
+        logOutPanel.add(adminPanel, BorderLayout.CENTER);
+        add(logOutPanel, BorderLayout.CENTER);
 
         repaint();
         revalidate();
