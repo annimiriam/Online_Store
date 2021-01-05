@@ -260,7 +260,7 @@ public class MainPanel extends JPanel {
     public String getSearchProductCode() {
         if (customerPanel!=null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
-        } else {
+        } else if (adminPanel != null){
             return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
         } else {
             return productPanel.getSearchProductPanel().getTxtProductCode();
@@ -301,18 +301,29 @@ public class MainPanel extends JPanel {
      * @return
      */
     public String getSearchPrice() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        } else if(adminPanel != null){
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtPrice();
+        }
+
     }
 
     /**
      * @param productsDataTable
      */
     public void presentTableProducts(DefaultTableModel productsDataTable) {
-        if(customerPanel!=null) {
-            customerPanel.getPanelProducts().setProductData(productsDataTable);
-        }else {
-            adminPanel.getPanelProducts().setProductData(productsDataTable);
+
+        if (customerPanel!=null) {
+        customerPanel.getPanelProducts().setProductData(productsDataTable);
+        } else if(adminPanel != null){
+             adminPanel.getPanelProducts().setProductData(productsDataTable);
+        } else {
+             productPanel.setProductData(productsDataTable);
         }
+
     }
 
     public void clearAddProductPanel(){
@@ -331,7 +342,7 @@ public class MainPanel extends JPanel {
         adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
         adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
         adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
-
+    }
     public void addToChart() {
         int productID = customerPanel.getPanelProducts().getSelectedProduct();
         int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();

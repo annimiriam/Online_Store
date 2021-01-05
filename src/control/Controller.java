@@ -250,7 +250,7 @@ public class Controller {
         return datamodel;
     }
     public DefaultTableModel listAllProducts() {
-        DefaultTableModel datamodel = new DefaultTableModel(0,5);
+        DefaultTableModel datamodel = new DefaultTableModel(0,6);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllProducts();
@@ -262,6 +262,7 @@ public class Controller {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
+                        rs.getString(6),
                 };
 
                 datamodel.addRow(data);
