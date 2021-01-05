@@ -157,6 +157,14 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    // Custoemr can delete orders with status 'unconfirmed'
+    public void customerDeleteUnconfirmedOrder(int orderNbr)
+    {
+        jdbc.connectToDatabase(user, password);
+        jdbc.deleteUnconfirmedOrder(orderNbr);
+        jdbc.disconnectFromDatabase();
+    }
+
     public void adminAssignDiscountToProduct(int discountId, int productId) {
         jdbc.connectToDatabase(user, password);
         //TODO
