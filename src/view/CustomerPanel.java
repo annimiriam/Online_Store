@@ -1,5 +1,6 @@
 package view;
 
+import view.customer.AddProductsCustomer;
 import view.customer.MyOrdersPanel;
 import view.customer.ShoppingListPanel;
 
@@ -9,6 +10,8 @@ import java.awt.*;
 
 public class CustomerPanel extends JPanel {
 
+    private JPanel panelProductsLayout;
+    private AddProductsCustomer panelAddProducts;
     private MyOrdersPanel panelMyOrders;
     private ProductPanel panelProducts;
     private ShoppingListPanel panelShoppinglist;
@@ -19,17 +22,24 @@ public class CustomerPanel extends JPanel {
         panelMyOrders = new MyOrdersPanel(mainPanel, myOrdersData, productdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
         panelShoppinglist = new ShoppingListPanel();
+        panelAddProducts = new AddProductsCustomer(this.mainPanel);
+        panelProductsLayout = new JPanel(new BorderLayout());
 
         setLayout(new BorderLayout());
 
+        panelProductsLayout.add(panelProducts, BorderLayout.CENTER);
+        panelProductsLayout.add(panelAddProducts, BorderLayout.SOUTH);
         add(panelMyOrders, BorderLayout.WEST);
-        add(panelProducts, BorderLayout.CENTER);
+        add(panelProductsLayout, BorderLayout.CENTER);
         add(panelShoppinglist, BorderLayout.EAST);
     }
 
     public ProductPanel getPanelProducts() {
         return panelProducts;
     }
-// Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
+
+    public AddProductsCustomer getPanelAddProductsCustomer() {
+        return panelAddProducts;
+    }
 
 }
