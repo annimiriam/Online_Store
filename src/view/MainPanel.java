@@ -5,6 +5,8 @@ import control.Controller;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.nio.ByteOrder;
 
 public class MainPanel extends JPanel {
@@ -15,22 +17,37 @@ public class MainPanel extends JPanel {
     private AdminPanel adminPanel;
     private CustomerPanel customerPanel;
     private ProductPanel productPanel;
+    private JPanel logOutPanel;
+    private JButton logOutButton;
 
     public MainPanel(Controller controller) {
         this.controller = controller;
         this.loginPanel = new LoginPanel(this);
         this.registerPanel = new RegisterPanel(this);
         eastPanel = new JPanel(new BorderLayout());
+        createLogOutPanel();
         setLayout(new BorderLayout());
         add(eastPanel, BorderLayout.EAST);
         eastPanel.add(loginPanel, BorderLayout.NORTH);
-        eastPanel.setPreferredSize(new Dimension(400, 200));
+        eastPanel.setPreferredSize(new Dimension(400,200));
         productPanel = new ProductPanel(this, controller.listAllProducts());
-        add(productPanel, BorderLayout.CENTER);
+        add(productPanel,BorderLayout.CENTER);
         this.setPreferredSize(new Dimension(1200, 600));
     }
 
-
+   public void createLogOutPanel(){
+        logOutPanel = new JPanel(new BorderLayout());
+        logOutButton = new JButton("Log out");
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.logOut();
+            }
+        });
+        JPanel panel = new JPanel(new BorderLayout());
+        logOutPanel.add(panel,BorderLayout.NORTH);
+        panel.add(logOutButton, BorderLayout.EAST);
+    }
    public void updateProductQty(){
         controller.updateProductQty();
    }
@@ -93,7 +110,8 @@ public class MainPanel extends JPanel {
         customerPanel = new CustomerPanel(this,
                 controller.listMyOrders(),
                 controller.listAllProducts());
-        add(customerPanel, BorderLayout.CENTER);
+        logOutPanel.add(customerPanel, BorderLayout.CENTER);
+        add(logOutPanel, BorderLayout.CENTER);
         repaint();
         revalidate();
     }
@@ -102,12 +120,14 @@ public class MainPanel extends JPanel {
     public void showAdminPanel() {
         removeAll();
         controller.setExtendedState();
+
         adminPanel = new AdminPanel(this,
                 controller.listAllSuppliers(),
                 controller.listAllProducts(),
                 controller.listAllDiscounts()
         );
-        add(adminPanel, BorderLayout.CENTER);
+        logOutPanel.add(adminPanel, BorderLayout.CENTER);
+        add(logOutPanel, BorderLayout.CENTER);
 
         repaint();
         revalidate();
@@ -233,13 +253,11 @@ public class MainPanel extends JPanel {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
     }
 
-    public String getDiscountDateFrom() {
-        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateFrom();
-    }
+    public String getDiscountDateFrom()
+    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateFrom();}
 
-    public String getDiscountDateTom() {
-        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();
-    }
+    public String getDiscountDateTom()
+    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();}
 
     public int getChosenDiscountId()
     { return adminPanel.getPanelDiscount().getChosenDiscountId();}
@@ -254,15 +272,18 @@ public class MainPanel extends JPanel {
         adminPanel.setDiscountTableData(controller.listAllDiscounts());
     }
 
-    public DefaultTableModel getUnconfirmedOrders() {
+    public DefaultTableModel getUnconfirmedOrders()
+    {
         return controller.searchUnconfirmedOrders();
     }
 
     public String getSearchProductCode() {
-        if (customerPanel != null) {
+        if (customerPanel!=null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
-        } else {
+        } else if (adminPanel != null){
             return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtProductCode();
         }
     }
 
@@ -270,36 +291,59 @@ public class MainPanel extends JPanel {
      * @return
      */
     public String getSearchProductName() {
-        if (customerPanel != null) {
+
+        if (customerPanel!=null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
-        } else {
+        } else if(adminPanel != null){
             return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtProductName();
         }
+
     }
 
     /**
      * @return
      */
     public String getSearchSupplier() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+        } else if(adminPanel != null){
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtSupplier();
+        }
+
     }
 
     /**
      * @return
      */
     public String getSearchPrice() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        } else if(adminPanel != null){
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtPrice();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtPrice();
+        }
+
     }
 
     /**
      * @param productsDataTable
      */
     public void presentTableProducts(DefaultTableModel productsDataTable) {
-        if(customerPanel!=null) {
-            customerPanel.getPanelProducts().setProductData(productsDataTable);
-        }else {
-            adminPanel.getPanelProducts().setProductData(productsDataTable);
+
+        if (customerPanel!=null) {
+        customerPanel.getPanelProducts().setProductData(productsDataTable);
+        } else if(adminPanel != null){
+             adminPanel.getPanelProducts().setProductData(productsDataTable);
+        } else {
+             productPanel.setProductData(productsDataTable);
         }
+
     }
 
     public void clearAddProductPanel(){
@@ -314,12 +358,21 @@ public class MainPanel extends JPanel {
         return controller.listOrderDetails(orderNbr);
     }
 
+    public void deleteUnconfirmedOrderCustomer(int orderNbr)
+    {
+        controller.customerDeleteUnconfirmedOrder(orderNbr);
+    }
+
+    public DefaultTableModel getMyOrders()
+    {
+        return controller.listMyOrders();
+    }
+
     public void test() {
         adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
         adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
         adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
     }
-
     public void addToChart() {
         int productID = customerPanel.getPanelProducts().getSelectedProduct();
         int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();

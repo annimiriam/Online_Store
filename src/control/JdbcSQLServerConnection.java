@@ -132,6 +132,14 @@ public class JdbcSQLServerConnection {
         }
     }
 
+    public void deleteUnconfirmedOrder(int orderNbr)
+    {
+        createStatementAndExecuteProcedure(
+                "delete_order "
+                + orderNbr + ";"
+        );
+    }
+
     public void assignDiscountToProduct(int discId, int prodId) {
 
         Statement stmt = null;

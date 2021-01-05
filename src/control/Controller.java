@@ -1,5 +1,6 @@
 package control;
 
+import com.sun.tools.javac.Main;
 import view.*;
 
 import javax.swing.*;
@@ -46,6 +47,12 @@ public class Controller {
         mainPanel.presentTableProducts(dtm);
     }
 
+    public void logOut() {
+        //TODO här ska vi lägga till kod som tömmer kundvagnen i databasen
+        mainFrame.dispose();
+        mainPanel = new MainPanel(this);
+        mainFrame = new MainFrame(mainPanel);
+    }
 
     // maximerar fönsterstorlek för att ge plats åt paneler
     public void setExtendedState() {
@@ -163,6 +170,14 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    // Custoemr can delete orders with status 'unconfirmed'
+    public void customerDeleteUnconfirmedOrder(int orderNbr)
+    {
+        jdbc.connectToDatabase(user, password);
+        jdbc.deleteUnconfirmedOrder(orderNbr);
+        jdbc.disconnectFromDatabase();
+    }
+
     public void adminAssignDiscountToProduct(int discountId, int productId) {
         jdbc.connectToDatabase(user, password);
         //TODO
@@ -252,7 +267,8 @@ public class Controller {
     }
 
     public DefaultTableModel listAllProducts() {
-        DefaultTableModel datamodel = new DefaultTableModel(0, 5);
+
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllProducts();
@@ -264,6 +280,7 @@ public class Controller {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
+                        rs.getString(6),
                 };
 
                 datamodel.addRow(data);

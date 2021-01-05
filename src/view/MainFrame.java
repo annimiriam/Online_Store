@@ -11,6 +11,7 @@ public class MainFrame extends JFrame {
         setContentPane(mainPanel);
         pack();
         setVisible(true);
+
     }
 
 }
