@@ -324,7 +324,11 @@ public class MainPanel extends JPanel {
         int productID = customerPanel.getPanelProducts().getSelectedProduct();
         int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();
         controller.customerAddProductToOrder(productID, nbrOfProducts);
-        System.out.println("addToChart(" + productID + ", " + nbrOfProducts + ")");
+        customerPanel.getPanelShoppinglist().setNewOrderData(controller.listNewOrder());
+        //adminPanel.setProductTableData(controller.listAllProducts());
+
+
+
     }
 
 

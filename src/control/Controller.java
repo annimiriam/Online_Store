@@ -35,9 +35,9 @@ public class Controller {
 
     }
 
-    public void updateProductQty(){
+    public void updateProductQty() {
         int quantity = Integer.parseInt(mainPanel.getTxtQuantityFromAddProductsPanel());
-        int productId =  Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
+        int productId = Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
         jdbc.connectToDatabase(user, password);
         jdbc.updateQuantity(productId, quantity);
         jdbc.disconnectFromDatabase();
@@ -96,8 +96,8 @@ public class Controller {
                 System.out.println("customer id: " + customer_id);
 
                 //TODO spara en ny orderID som blir ny varje gång och deleteas om den ej blivit okejad innan utlogg
-                //currentOrderId = jdbc.newOrder(customer_id);
-                //System.out.println("ny order på denna kund: " + currentOrderId);
+                currentOrderId = jdbc.newOrder(customer_id);
+                System.out.println("ny order på denna kund: " + currentOrderId);
                 //Open customerpanel
                 mainPanel.showCustomerPanel();
             } else {
@@ -145,7 +145,7 @@ public class Controller {
         String discountName = mainPanel.getDiscountName();
         int discountPercent = Integer.parseInt(mainPanel.getDiscountPercent());
         int dateFrom = Integer.parseInt(mainPanel.getDiscountDateFrom());
-        int  dateTo = Integer.parseInt(mainPanel.getDiscountDateTom());
+        int dateTo = Integer.parseInt(mainPanel.getDiscountDateTom());
         System.out.println("SQL date: " + dateFrom + ", " + dateTo);
 
         jdbc.connectToDatabase(user, password);
@@ -157,8 +157,9 @@ public class Controller {
     public void customerAddProductToOrder(int productID, int nbrOfProducts) {
         jdbc.connectToDatabase(user, password);
 
+        System.out.println("addProductToOrder " + currentOrderId + " " + productID + " " + nbrOfProducts);
         //TODO
-        jdbc.addProductToOrder(productID, currentOrderId, nbrOfProducts);
+        jdbc.addProductToOrder(currentOrderId, productID, nbrOfProducts);
         jdbc.disconnectFromDatabase();
     }
 
@@ -184,11 +185,10 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-
     public void searchProduct() {
         String productIdString = mainPanel.getSearchProductCode();
         int productCode = -1;
-        if(!(productIdString.equals(""))) {
+        if (!(productIdString.equals(""))) {
             productCode = Integer.parseInt(productIdString);
         }
         String productName = mainPanel.getSearchProductName();
@@ -196,15 +196,15 @@ public class Controller {
         System.out.println("SUPPLIER" + supplier);
         String priceString = mainPanel.getSearchPrice();
         Double price = -1.0;
-        if(!(priceString.equals(""))) {
+        if (!(priceString.equals(""))) {
             price = Double.parseDouble(priceString);
         }
 
         jdbc.connectToDatabase(user, password);
 
-       ResultSet rs = jdbc.searchProduct(productCode,productName,price, supplier);
+        ResultSet rs = jdbc.searchProduct(productCode, productName, price, supplier);
 
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         try {
 
             while (rs.next()) {
@@ -221,11 +221,12 @@ public class Controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       mainPanel.presentTableProducts(datamodel);
+        mainPanel.presentTableProducts(datamodel);
         jdbc.disconnectFromDatabase();
     }
+
     public DefaultTableModel listAllSuppliers() {
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllSuppliers();
@@ -249,8 +250,9 @@ public class Controller {
         jdbc.disconnectFromDatabase();
         return datamodel;
     }
+
     public DefaultTableModel listAllProducts() {
-        DefaultTableModel datamodel = new DefaultTableModel(0,5);
+        DefaultTableModel datamodel = new DefaultTableModel(0, 5);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllProducts();
@@ -273,8 +275,9 @@ public class Controller {
         jdbc.disconnectFromDatabase();
         return datamodel;
     }
-    public DefaultTableModel listAllDiscounts(){
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+
+    public DefaultTableModel listAllDiscounts() {
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listAllDiscounts();
@@ -297,8 +300,9 @@ public class Controller {
         jdbc.disconnectFromDatabase();
         return datamodel;
     }
-    public DefaultTableModel listMyOrders(){
-        DefaultTableModel datamodel = new DefaultTableModel(0,5);
+
+    public DefaultTableModel listMyOrders() {
+        DefaultTableModel datamodel = new DefaultTableModel(0, 5);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listMyOrders(customer_id);
@@ -321,8 +325,9 @@ public class Controller {
         jdbc.disconnectFromDatabase();
         return datamodel;
     }
-    public DefaultTableModel listOrderDetails(int orderNbr){
-        DefaultTableModel datamodel = new DefaultTableModel(0,3);
+
+    public DefaultTableModel listOrderDetails(int orderNbr) {
+        DefaultTableModel datamodel = new DefaultTableModel(0, 3);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listOrderDetails(orderNbr);
@@ -346,9 +351,33 @@ public class Controller {
         return datamodel;
     }
 
+    public DefaultTableModel listNewOrder(){
+        DefaultTableModel dataModel = new DefaultTableModel(0, 3);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listOrderDetails(currentOrderId);
+
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(3),
+                };
+
+                dataModel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return dataModel;
+    }
+
     public DefaultTableModel searchUnconfirmedOrders() {
 
-        DefaultTableModel datamodel = new DefaultTableModel(0,6);
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.searchUnconfirmedOrders();

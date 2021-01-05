@@ -4,10 +4,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-
-import javax.xml.transform.Result;
-
 public class JdbcSQLServerConnection {
 
     private Connection connection;
@@ -96,19 +92,25 @@ public class JdbcSQLServerConnection {
     }
 
     public int newOrder(int customerID) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        System.out.println(LocalDate.now().format(formatter));
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+//        System.out.println(LocalDate.now().format(formatter));
+//        System.out.println(formatter.toString());
+
+//TODO: fixa så att datumet är dagens datum och blir i rätt format så att det kan skickas i SQL-queryn.
 
         ResultSet rs = createStatementAndExecuteProcedure(
                 "new_order "
                         + customerID + ", "
-                        + formatter + ";"
+                        + "'20210105';"
         );
 
         try {
 
-            rs.getInt(1);
-            System.out.println("Här är vad som kommer ut rs ny order: " + rs.getInt(1));
+            while (rs.next()) {
+                System.out.println("Här är vad som kommer ut rs ny order: " + rs.getInt(1));
+                return rs.getInt(1);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -118,14 +120,16 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void addProductToOrder(int prodId, int orderId, int qty) {
-        createStatementAndExecuteProcedure(
-                "add_product_to_order "
-                        + prodId + ", "
-                        + orderId + ", "
-                        + qty + ";"
-        );
-
+    public void addProductToOrder(int orderId, int prodId, int qty) {
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeQuery("EXECUTE add_product_to_order "
+                    + orderId + ", "
+                    + prodId + ", "
+                    + qty + ";");
+        } catch (SQLException throwables) {
+            System.out.println("Här kommer ett exception om att queryn add_product_to_order inte returnerade något resultset. OK! ");
+        }
     }
 
     public void assignDiscountToProduct(int discId, int prodId) {
@@ -245,7 +249,6 @@ public class JdbcSQLServerConnection {
     }
 
     public int getCustomerId(String username) {
-
         ResultSet rs = createStatementAndExecuteProcedure(
                 "getCustomerId '"
                         + username + "';"

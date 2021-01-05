@@ -41,10 +41,14 @@ public class ShoppingListPanel extends JPanel {
         add(panelSouth, BorderLayout.SOUTH);
     }
 
+    public void setNewOrderData(DefaultTableModel newOrderData){
+        shoppingListData = newOrderData;
+        shoppingListTable.setModel(shoppingListData);
+        shoppingListData.setColumnIdentifiers(columnNames);
+    }
 
     public void addItemToShoppingList(String[] item){
         //TODO
     }
 
-    // Metod eller metoder för att skicka meddelande från knapptrycken till controllern. Via MainPanel?
 }
