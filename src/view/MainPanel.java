@@ -214,6 +214,7 @@ public class MainPanel extends JPanel {
     }
 
     public void getSelectedProduct(String id, String name, String qty) {
+        if(adminPanel != null)
         adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
     }
 
@@ -258,8 +259,10 @@ public class MainPanel extends JPanel {
     public String getSearchProductCode() {
         if (customerPanel!=null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
-        } else {
+        } else if(adminPanel != null){
             return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtProductCode();
         }
     }
 
@@ -267,14 +270,30 @@ public class MainPanel extends JPanel {
      * @return
      */
     public String getSearchProductName() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        } else if(adminPanel != null){
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtProductName();
+        }
+
     }
 
     /**
      * @return
      */
     public String getSearchSupplier() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+
+        if (customerPanel!=null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+        } else if(adminPanel != null){
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtSupplier();
+        } else {
+            return productPanel.getSearchProductPanel().getTxtSupplier();
+        }
+
     }
 
     /**

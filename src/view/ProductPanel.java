@@ -68,6 +68,7 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
+
             mainPanel.getSelectedProduct(
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 0),
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 1),
