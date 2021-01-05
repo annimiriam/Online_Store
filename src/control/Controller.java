@@ -47,8 +47,20 @@ public class Controller {
         mainPanel.presentTableProducts(dtm);
     }
 
+    // Kollar om order med currentOrderId har status 'unordered' i så fall raderas den innan utloggning
     public void logOut() {
-        //TODO här ska vi lägga till kod som tömmer kundvagnen i databasen
+        if(customer_id != 0)
+        {
+        jdbc.connectToDatabase(user, password);
+        String status = jdbc.checkOrderStatus(currentOrderId);
+        System.out.println("status: " + status);
+            if(status.equals("unordered"))
+              {
+                 jdbc.deleteUnconfirmedOrder(currentOrderId);
+              }
+        jdbc.disconnectFromDatabase();
+            customer_id = 0;
+        }
         mainFrame.dispose();
         mainPanel = new MainPanel(this);
         mainFrame = new MainFrame(mainPanel);
