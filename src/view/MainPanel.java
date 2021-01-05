@@ -358,6 +358,16 @@ public class MainPanel extends JPanel {
         return controller.listOrderDetails(orderNbr);
     }
 
+    public void deleteUnconfirmedOrderCustomer(int orderNbr)
+    {
+        controller.customerDeleteUnconfirmedOrder(orderNbr);
+    }
+
+    public DefaultTableModel getMyOrders()
+    {
+        return controller.listMyOrders();
+    }
+
     public void test() {
         adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
         adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
