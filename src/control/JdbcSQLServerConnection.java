@@ -253,7 +253,7 @@ public class JdbcSQLServerConnection {
     public ResultSet listAllProducts() {
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM product");
+            ResultSet rs = stmt.executeQuery("list_all_products;");
             return rs;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
