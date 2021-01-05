@@ -21,6 +21,7 @@ public class Controller {
 
     private String customer_email = "";
     private int customer_id;
+    private int currentOrderId;
 
     public Controller() {
         mainPanel = new MainPanel(this);
@@ -93,6 +94,10 @@ public class Controller {
                 System.out.println("mejl: " + customer_email);
                 customer_id = jdbc.getCustomerId(customer_email);
                 System.out.println("customer id: " + customer_id);
+
+                //TODO spara en ny orderID som blir ny varje gång och deleteas om den ej blivit okejad innan utlogg
+                //currentOrderId = jdbc.newOrder(customer_id);
+                //System.out.println("ny order på denna kund: " + currentOrderId);
                 //Open customerpanel
                 mainPanel.showCustomerPanel();
             } else {
@@ -149,11 +154,11 @@ public class Controller {
 
     }
 
-    public void customerAddProductToOrder() {
+    public void customerAddProductToOrder(int productID, int nbrOfProducts) {
         jdbc.connectToDatabase(user, password);
 
         //TODO
-        //jdbc.addProductToOrder();
+        jdbc.addProductToOrder(productID, currentOrderId, nbrOfProducts);
         jdbc.disconnectFromDatabase();
     }
 
