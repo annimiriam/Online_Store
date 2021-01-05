@@ -128,17 +128,24 @@ public class JdbcSQLServerConnection {
 
     }
 
-    public void assignDiscountToProduct(int prodId, int discId) {
-        createStatementAndExecuteProcedure(
-                "add_discount "
-                        + prodId + ", "
-                        + discId + ";"
-        );
+    public void assignDiscountToProduct(int discId, int prodId) {
+
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            stmt.executeQuery("EXECUTE assign_discount_to_product "
+                    + prodId + ", "
+                    + discId + ";"
+            );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     public void updateQuantity(int prodId, int qty) {
         createStatementAndExecuteProcedure(
-                "add_supplier "
+                "change_quantity_of_product "
                         + prodId + ", "
                         + qty + ";"
         );
@@ -273,7 +280,7 @@ public class JdbcSQLServerConnection {
     public ResultSet listAllProducts() {
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM product");
+            ResultSet rs = stmt.executeQuery("list_all_products;");
             return rs;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

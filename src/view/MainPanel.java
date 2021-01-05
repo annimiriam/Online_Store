@@ -30,6 +30,10 @@ public class MainPanel extends JPanel {
         this.setPreferredSize(new Dimension(1200, 600));
     }
 
+
+   public void updateProductQty(){
+        controller.updateProductQty();
+   }
     /**
      *
      */
@@ -237,6 +241,14 @@ public class MainPanel extends JPanel {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();
     }
 
+    public int getChosenDiscountId()
+    { return adminPanel.getPanelDiscount().getChosenDiscountId();}
+
+    public void giveProductDiscount(int discountId, int productId)
+    {
+        controller.adminAssignDiscountToProduct(discountId,productId);
+    }
+
     public void addDiscount() {
         controller.adminAddDiscount();
         adminPanel.setDiscountTableData(controller.listAllDiscounts());
@@ -283,9 +295,16 @@ public class MainPanel extends JPanel {
      * @param productsDataTable
      */
     public void presentTableProducts(DefaultTableModel productsDataTable) {
-        customerPanel.getPanelProducts().setProductData(productsDataTable);
+        if(customerPanel!=null) {
+            customerPanel.getPanelProducts().setProductData(productsDataTable);
+        }else {
+            adminPanel.getPanelProducts().setProductData(productsDataTable);
+        }
     }
 
+    public void clearAddProductPanel(){
+        adminPanel.getAddProductsAdmin().clear();
+    }
 
     /**
      *

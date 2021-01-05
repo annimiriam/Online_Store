@@ -107,13 +107,13 @@ public class AddProductsAdmin extends JPanel {
             }
         });
 
-//        btnUpdateQuantity.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("klickat på uppdatera lager-lnappen");
-//                mainPanel.updateProductQty();
-//            }
-//        });
+        btnUpdateQuantity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("klickat på uppdatera lager-lnappen");
+                mainPanel.updateProductQty();
+            }
+        });
 
 
     }
@@ -124,6 +124,14 @@ public class AddProductsAdmin extends JPanel {
         txtName.setText(name);
         txtName.setEnabled(false);
         txtQuantity.setText(qty);
+    }
+
+    public void clear(){
+        txtId.setText("");
+        txtId.setEnabled(true);
+        txtName.setText("");
+        txtName.setEnabled(true);
+        txtQuantity.setText("");
     }
 
 

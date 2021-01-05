@@ -35,6 +35,17 @@ public class Controller {
 
     }
 
+    public void updateProductQty(){
+        int quantity = Integer.parseInt(mainPanel.getTxtQuantityFromAddProductsPanel());
+        int productId =  Integer.parseInt(mainPanel.getTxtIdFromAddProductsPanel());
+        jdbc.connectToDatabase(user, password);
+        jdbc.updateQuantity(productId, quantity);
+        jdbc.disconnectFromDatabase();
+        mainPanel.clearAddProductPanel();
+        DefaultTableModel dtm = listAllProducts();
+        mainPanel.presentTableProducts(dtm);
+    }
+
 
     // maximerar fönsterstorlek för att ge plats åt paneler
     public void setExtendedState() {
@@ -151,10 +162,10 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void adminAssignDiscountToProduct() {
+    public void adminAssignDiscountToProduct(int discountId, int productId) {
         jdbc.connectToDatabase(user, password);
         //TODO
-        //jdbc.assignDiscountToProduct();
+        jdbc.assignDiscountToProduct(discountId, productId);
         jdbc.disconnectFromDatabase();
 
     }
@@ -298,6 +309,7 @@ public class Controller {
                 String[] data = {rs.getString(1),
                         rs.getString(4),
                         rs.getString(5),
+                        rs.getString(3)
                 };
 
                 datamodel.addRow(data);
