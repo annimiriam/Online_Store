@@ -24,9 +24,9 @@ public class MainPanel extends JPanel {
         setLayout(new BorderLayout());
         add(eastPanel, BorderLayout.EAST);
         eastPanel.add(loginPanel, BorderLayout.NORTH);
-        eastPanel.setPreferredSize(new Dimension(400,200));
+        eastPanel.setPreferredSize(new Dimension(400, 200));
         productPanel = new ProductPanel(this, controller.listAllProducts());
-        add(productPanel,BorderLayout.CENTER);
+        add(productPanel, BorderLayout.CENTER);
         this.setPreferredSize(new Dimension(1200, 600));
     }
 
@@ -210,7 +210,9 @@ public class MainPanel extends JPanel {
     }
 
     public void getSelectedProduct(String id, String name, String qty) {
-        adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
+        if (adminPanel != null) {
+            adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
+        }
     }
 
 
@@ -227,24 +229,25 @@ public class MainPanel extends JPanel {
         return adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtPercent();
     }
 
-    public String getDiscountDateFrom()
-    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateFrom();}
+    public String getDiscountDateFrom() {
+        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateFrom();
+    }
 
-    public String getDiscountDateTom()
-    {        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();}
+    public String getDiscountDateTom() {
+        return adminPanel.getPanelDiscount().getPnlAddDiscount().getDateTo();
+    }
 
     public void addDiscount() {
         controller.adminAddDiscount();
         adminPanel.setDiscountTableData(controller.listAllDiscounts());
     }
 
-    public DefaultTableModel getUnconfirmedOrders()
-    {
+    public DefaultTableModel getUnconfirmedOrders() {
         return controller.searchUnconfirmedOrders();
     }
 
     public String getSearchProductCode() {
-        if (customerPanel!=null) {
+        if (customerPanel != null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
         } else {
             return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();
@@ -255,7 +258,11 @@ public class MainPanel extends JPanel {
      * @return
      */
     public String getSearchProductName() {
-        return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        if (customerPanel != null) {
+            return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        } else {
+            return adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+        }
     }
 
     /**
@@ -292,8 +299,13 @@ public class MainPanel extends JPanel {
         adminPanel.getPanelSuppliers().getPnlAddSupplier().getTxtName();
         adminPanel.getPanelDiscount().getPnlAddDiscount().getTxtName();
         adminPanel.getPanelProducts().getSearchProductPanel().getTxtProductName();
+    }
 
-
+    public void addToChart() {
+        int productID = customerPanel.getPanelProducts().getSelectedProduct();
+        int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();
+        controller.customerAddProductToOrder(productID, nbrOfProducts);
+        System.out.println("addToChart(" + productID + ", " + nbrOfProducts + ")");
     }
 
 

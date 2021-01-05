@@ -1,8 +1,12 @@
 package control;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
+import javax.xml.transform.Result;
 
 public class JdbcSQLServerConnection {
 
@@ -91,6 +95,29 @@ public class JdbcSQLServerConnection {
         );
     }
 
+    public int newOrder(int customerID) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        System.out.println(LocalDate.now().format(formatter));
+
+        ResultSet rs = createStatementAndExecuteProcedure(
+                "new_order "
+                        + customerID + ", "
+                        + formatter + ";"
+        );
+
+        try {
+
+            rs.getInt(1);
+            System.out.println("Här är vad som kommer ut rs ny order: " + rs.getInt(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return -1;
+
+    }
+
     public void addProductToOrder(int prodId, int orderId, int qty) {
         createStatementAndExecuteProcedure(
                 "add_product_to_order "
@@ -138,7 +165,7 @@ public class JdbcSQLServerConnection {
                             + city + ", "
                             + country + ","
                             + tel + ", "
-                            + password + ";" );
+                            + password + ";");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -292,15 +319,13 @@ public class JdbcSQLServerConnection {
         return rs;
     }
 
-
     public ResultSet searchUnconfirmedOrders() {
         ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");
         return rs;
     }
 
     // Confirms an order
-    public void confirmOrder(int orderNbr)
-    {
+    public void confirmOrder(int orderNbr) {
         ResultSet rs = createStatementAndExecuteProcedure("confirm_order " + orderNbr);
     }
 
