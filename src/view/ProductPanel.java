@@ -12,7 +12,6 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
 
     private MainPanel mainPanel;
 
-
     private DefaultTableModel productData;
     private JTable productsTable;
     private JScrollPane scrollPane;
@@ -63,11 +62,20 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
         productData.setColumnIdentifiers(columnNames);
     }
 
+    public int getSelectedProduct() {
+        System.out.println((String) productsTable.getValueAt(productsTable.getSelectedRow(), 0));
+        return Integer.parseInt((String) productsTable.getValueAt(productsTable.getSelectedRow(), 0));
+
+//        return selectedProduct;
+    }
+
+
     // TODO: i mainpanel.getSelectedProduct så anropas adminpanel, det ger fel. Adminpanel är null om customer
     // loggats in.
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
+
             mainPanel.getSelectedProduct(
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 0),
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 1),
