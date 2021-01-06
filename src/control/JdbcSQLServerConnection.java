@@ -132,6 +132,20 @@ public class JdbcSQLServerConnection {
         }
     }
 
+    public String checkOrderStatus(int orderNbr)
+    {
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("select status from orders where id = " + orderNbr + ";");
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void deleteUnconfirmedOrder(int orderNbr)
     {
         createStatementAndExecuteProcedure(
