@@ -101,6 +101,7 @@ public class JdbcSQLServerConnection {
         ResultSet rs = createStatementAndExecuteProcedure(
                 "new_order "
                         + customerID + ", "
+                        + "unordered, "
                         + "'20210105';"
         );
 
