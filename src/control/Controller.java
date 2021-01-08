@@ -182,6 +182,14 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    public int getShoppingListTotalPrice()
+    {
+        jdbc.connectToDatabase(user, password);
+        int totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
+        jdbc.disconnectFromDatabase();
+        return totalPrice;
+    }
+
     // Custoemr can delete orders with status 'unconfirmed'
     public void customerDeleteUnconfirmedOrder(int orderNbr)
     {

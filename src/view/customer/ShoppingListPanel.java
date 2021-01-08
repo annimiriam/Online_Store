@@ -13,6 +13,7 @@ public class ShoppingListPanel extends JPanel {
 
     private JButton btnRemove;
     private JButton btnCreateOrder;
+    private JLabel lblTotalPrice;
 
     public ShoppingListPanel(){
         setLayout(new BorderLayout());
@@ -31,11 +32,13 @@ public class ShoppingListPanel extends JPanel {
         shoppingListTable.setModel(shoppingListData);
         btnCreateOrder = new JButton("Beställ");
         btnRemove = new JButton("Ta bort");
+        lblTotalPrice = new JLabel("Totalpris: 0");
     };
 
     private void addElements(){
         panelSouth.add(btnRemove);
         panelSouth.add(btnCreateOrder);
+        panelSouth.add(lblTotalPrice);
 
         add(scrollPane, BorderLayout.CENTER);
         add(panelSouth, BorderLayout.SOUTH);
@@ -45,6 +48,11 @@ public class ShoppingListPanel extends JPanel {
         shoppingListData = newOrderData;
         shoppingListTable.setModel(shoppingListData);
         shoppingListData.setColumnIdentifiers(columnNames);
+    }
+
+    public void updateTotalPrice(int totalPrice)
+    {
+        lblTotalPrice.setText("Totalpris: " + totalPrice);
     }
 
     public void addItemToShoppingList(String[] item){

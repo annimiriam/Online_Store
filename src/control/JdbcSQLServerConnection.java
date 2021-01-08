@@ -147,6 +147,26 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
+    public int checkShoppingListTotalPrice(int orderNbr) {
+        ResultSet rs = createStatementAndExecuteProcedure(
+                "price_of_shoppinglist "
+                 + orderNbr + ";"
+        );
+        while (true) {
+            try {
+                if (!rs.next()) break;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                return Integer.parseInt(rs.getString(1));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
     public void deleteUnconfirmedOrder(int orderNbr)
     {
         createStatementAndExecuteProcedure(
