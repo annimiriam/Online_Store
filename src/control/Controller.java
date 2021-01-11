@@ -139,7 +139,7 @@ public class Controller {
         String country = mainPanel.getTxtCountryFromAddSupplierPanel();
         String phone = mainPanel.getTxtPhoneFromAddSupplierPanel();
 
-        jdbc.addSupplier(name, address, postnbr, city, country, phone);
+        jdbc.addSupplier(name, phone, address, postnbr, city, country);
 
         jdbc.disconnectFromDatabase();
     }
