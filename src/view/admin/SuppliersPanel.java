@@ -54,5 +54,5 @@ public class SuppliersPanel extends JPanel {
     public void setSupplierData(DefaultTableModel updatedSupplierData) {
         supplierData = updatedSupplierData;
         supplierTable.setModel(supplierData);
-    }
+        supplierData.setColumnIdentifiers(columnNames);    }
 }
