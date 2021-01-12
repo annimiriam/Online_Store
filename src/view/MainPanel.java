@@ -65,6 +65,13 @@ public class MainPanel extends JPanel {
         controller.searchProduct();
     }
 
+    public DefaultTableModel listAllProducts(){
+        return controller.listAllProducts();
+    }
+    public DefaultTableModel listDiscountedProducts(){
+        return controller.listDiscountedProducts();
+    }
+
     public void confirmOrder(int orderNbr) {
         controller.confirmOrder(orderNbr);
     }
@@ -233,6 +240,11 @@ public class MainPanel extends JPanel {
         adminPanel.setProductTableData(controller.listAllProducts());
     }
 
+    public void deleteProduct(int productId) {
+        controller.adminDeleteProduct(productId);
+        adminPanel.setProductTableData(controller.listAllProducts());
+    }
+
     public void getShoppingListTotalPrice()
     {
         int totalPrice = controller.getShoppingListTotalPrice();
@@ -244,7 +256,6 @@ public class MainPanel extends JPanel {
             adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
         }
     }
-
 
     //Get-metoder för textinput från AddDiscountPanelen
     public String getDiscountName() {
@@ -394,6 +405,7 @@ public class MainPanel extends JPanel {
 
 
     }
+
 
 
 }

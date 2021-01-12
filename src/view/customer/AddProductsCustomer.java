@@ -42,6 +42,20 @@ public class AddProductsCustomer extends JPanel {
     }
 
     private void addListeners() {
+
+        btnAllProducts.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.presentTableProducts(mainPanel.listAllProducts());
+            }
+        });
+
+        btnSaleProducts.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.presentTableProducts(mainPanel.listDiscountedProducts());
+            }
+        });
         btnAddToChart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
