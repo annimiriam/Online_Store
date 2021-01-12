@@ -528,5 +528,12 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
+    public void makeOrder()
+    {
+        jdbc.connectToDatabase(user, password);
+        jdbc.makeOrder(currentOrderId);
+        jdbc.disconnectFromDatabase();
+    }
+
 
 }

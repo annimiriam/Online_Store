@@ -426,6 +426,14 @@ public class JdbcSQLServerConnection {
         );
     }
 
+    public void makeOrder(int orderNbr)
+    {
+        createStatementAndExecuteProcedure(
+                "make_order "
+                        + orderNbr + ";"
+        );
+    }
+
 
 //    public void testQuery(Connection conn) {
 //

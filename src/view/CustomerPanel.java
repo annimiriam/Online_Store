@@ -21,7 +21,7 @@ public class CustomerPanel extends JPanel {
         this.mainPanel = mainPanel;
         panelMyOrders = new MyOrdersPanel(mainPanel, myOrdersData, productdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
-        panelShoppinglist = new ShoppingListPanel();
+        panelShoppinglist = new ShoppingListPanel(mainPanel);
         panelAddProducts = new AddProductsCustomer(this.mainPanel);
         panelProductsLayout = new JPanel(new BorderLayout());
 
