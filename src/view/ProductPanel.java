@@ -57,7 +57,6 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
 
     public void setProductData(DefaultTableModel updatedProductData) {
         productData = updatedProductData;
-        //productData.setColumnIdentifiers(columnNames);
         productsTable.setModel(productData);
         productData.setColumnIdentifiers(columnNames);
     }
@@ -65,8 +64,10 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
     public int getSelectedProduct() {
         System.out.println((String) productsTable.getValueAt(productsTable.getSelectedRow(), 0));
         return Integer.parseInt((String) productsTable.getValueAt(productsTable.getSelectedRow(), 0));
+    }
 
-//        return selectedProduct;
+    public void clearSelectionInTable(){
+        productsTable.clearSelection();
     }
 
 
@@ -75,7 +76,7 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
-
+            if(productsTable.getSelectedRow()!=-1)
             mainPanel.getSelectedProduct(
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 0),
                     (String) productsTable.getValueAt(productsTable.getSelectedRow(), 1),

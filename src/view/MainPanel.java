@@ -243,6 +243,7 @@ public class MainPanel extends JPanel {
     public void deleteProduct(int productId) {
         controller.adminDeleteProduct(productId);
         adminPanel.setProductTableData(controller.listAllProducts());
+        adminPanel.getPanelProducts().clearSelectionInTable();
     }
 
     public void getShoppingListTotalPrice()

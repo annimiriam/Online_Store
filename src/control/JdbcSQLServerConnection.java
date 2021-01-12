@@ -202,14 +202,14 @@ public class JdbcSQLServerConnection {
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("EXECUTE delete_product "
+            stmt.executeQuery("EXECUTE delete_product "
                                                             + prodId + ";"
             );
-//            System.out.println(rs);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Produkten går inte att ta bort");
+            System.out.println("Statementet returnear inget resultset men det gör inget");
+            //JOptionPane.showMessageDialog(null, "Produkten går inte att ta bort");
         }
 
 
