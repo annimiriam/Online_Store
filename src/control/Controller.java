@@ -112,6 +112,7 @@ public class Controller {
         String tel = mainPanel.getTxtPhonenumberFromRegisterPanel();
         String password1 = mainPanel.getTxtPasswordFromRegisterPanel();
         customer_id = jdbc.registerCustomer(fName, lName, email, address, postnbr, city, country, tel, password1);
+        currentOrderId = jdbc.newOrder(customer_id);
 
         jdbc.disconnectFromDatabase();
         mainPanel.showCustomerPanel();
