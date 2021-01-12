@@ -16,6 +16,7 @@ public class UnconfirmedOrdersPanel extends JPanel{
     private JScrollPane scrollPane;
     private String[] columnNames = {"Ordernummer", "Kund", "Status" };
     private MainPanel mainPanel;
+    private MostSoldProductsPanel pnlMostSoldProducts;
 
     public UnconfirmedOrdersPanel (MainPanel mainPanel) {
 
@@ -29,6 +30,7 @@ public class UnconfirmedOrdersPanel extends JPanel{
 
     private void createElements(){
         pnlConfirmOrder = new ConfirmOrderPanel();
+        pnlMostSoldProducts = new MostSoldProductsPanel(mainPanel);
 
         ordersData = new DefaultTableModel();
         ordersTable = new JTable();
@@ -43,7 +45,9 @@ public class UnconfirmedOrdersPanel extends JPanel{
     private void addElements(){
         add(scrollPane, BorderLayout.CENTER);
         add(pnlConfirmOrder, BorderLayout.SOUTH);
+        add(pnlMostSoldProducts, BorderLayout.EAST);
         addItemToOrderTable(); // TODO, detta bör nog flyttas, se kommentar nedan
+        addItemsToMostSoldProductPanel();
     }
 
     public ConfirmOrderPanel getPnlConfirmOrder() {
@@ -54,6 +58,12 @@ public class UnconfirmedOrdersPanel extends JPanel{
     public void addItemToOrderTable(){
         DefaultTableModel item = mainPanel.getUnconfirmedOrders();
         ordersTable.setModel(item);
+    }
+
+    public void addItemsToMostSoldProductPanel()
+    {
+        DefaultTableModel item = mainPanel.getMostSoldProducts();
+        pnlMostSoldProducts.setMostSoldData(item);
     }
 
     private class ConfirmOrderPanel extends JPanel

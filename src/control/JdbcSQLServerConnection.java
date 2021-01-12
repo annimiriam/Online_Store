@@ -1,6 +1,8 @@
 package control;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -91,18 +93,18 @@ public class JdbcSQLServerConnection {
         );
     }
 
+    // Creates a new order when a customer is signed in
     public int newOrder(int customerID) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-//        System.out.println(LocalDate.now().format(formatter));
-//        System.out.println(formatter.toString());
 
-//TODO: fixa så att datumet är dagens datum och blir i rätt format så att det kan skickas i SQL-queryn.
+        DateFormat df = new SimpleDateFormat("yyMMdd");
+        String date = df.format(new java.util.Date());
+        System.out.println("Todays date: " + date);
 
         ResultSet rs = createStatementAndExecuteProcedure(
                 "new_order "
                         + customerID + ", "
                         + "unordered, "
-                        + "'20210105';"
+                        + date + ";"
         );
 
         try {
@@ -115,7 +117,6 @@ public class JdbcSQLServerConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         return -1;
 
@@ -384,6 +385,12 @@ public class JdbcSQLServerConnection {
 
     public ResultSet searchUnconfirmedOrders() {
         ResultSet rs = createStatementAndExecuteProcedure("unconfirmed_orders");
+        return rs;
+    }
+
+    public ResultSet getMostSoldProducts()
+    {
+        ResultSet rs = createStatementAndExecuteProcedure("most_sold_product");
         return rs;
     }
 
