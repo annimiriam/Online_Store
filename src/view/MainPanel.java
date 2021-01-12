@@ -402,8 +402,11 @@ public class MainPanel extends JPanel {
         customerPanel.getPanelShoppinglist().setNewOrderData(controller.listNewOrder());
         //adminPanel.setProductTableData(controller.listAllProducts());
 
+    }
 
-
+    public void makeOrder()
+    {
+        controller.makeOrder();
     }
 
 

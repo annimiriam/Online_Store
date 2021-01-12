@@ -1,7 +1,11 @@
 package view.customer;
+import view.MainPanel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ShoppingListPanel extends JPanel {
 
@@ -15,7 +19,10 @@ public class ShoppingListPanel extends JPanel {
     private JButton btnCreateOrder;
     private JLabel lblTotalPrice;
 
-    public ShoppingListPanel(){
+    private MainPanel mainPanel;
+
+    public ShoppingListPanel(MainPanel mainpanel){
+        this.mainPanel = mainpanel;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Shopplinglista"));
         createElements();
@@ -33,6 +40,16 @@ public class ShoppingListPanel extends JPanel {
         btnCreateOrder = new JButton("Beställ");
         btnRemove = new JButton("Ta bort");
         lblTotalPrice = new JLabel("Totalpris: 0");
+
+        btnCreateOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainPanel.makeOrder();
+                DefaultTableModel newShoppingListData = new DefaultTableModel();
+                setNewOrderData(newShoppingListData);
+                updateTotalPrice(0);
+            }
+        });
     };
 
     private void addElements(){
