@@ -11,16 +11,26 @@ public class DiscountPanel extends JPanel {
     private JPanel southPanel;
     private AddDiscountPanel pnlAddDiscount;
 
+    //discounts
     private DefaultTableModel discountData;
     private JTable discountTable;
     private JScrollPane scrollPane;
     private String[] columnNames = {"Rabatt ID", "Namn", "Rabatt %", "from", "tom"};
+
+
+    //Discounted products
+    private DefaultTableModel discountedProductsData;
+    private JTable discountedProductsTable;
+    private JScrollPane discountedProductsscrollPane;
+    private String[] discountedProductscolumnNames = { "Produkt ID", "Produkt namn", "Rabatt ID", "Rabatt namn", "Rabatt %", "from", "tom"};
+
     private MainPanel mainPanel;
 
 
 //    private UnconfirmedOrdersPanel panelUnconOrders;
 
-    public DiscountPanel(MainPanel mainPanel, DefaultTableModel discountData) {
+    public DiscountPanel(MainPanel mainPanel, DefaultTableModel discountData,DefaultTableModel discountedProductsData) {
+       this.discountedProductsData = discountedProductsData;
         this.mainPanel = mainPanel;
         this.discountData = discountData;
         setLayout(new BorderLayout());
@@ -41,12 +51,19 @@ public class DiscountPanel extends JPanel {
         discountData.setColumnIdentifiers(columnNames);
         discountTable.setModel(discountData);
 
+        discountedProductsTable = new JTable();
+        discountedProductsData.setColumnIdentifiers(discountedProductscolumnNames);
+        discountedProductsscrollPane = new JScrollPane(discountedProductsTable);
+        discountedProductsTable.setModel(discountedProductsData);
+
     }
 
     private void addElements() {
         add(scrollPane, BorderLayout.CENTER);
         add(pnlAddDiscount, BorderLayout.NORTH);
 //        add(panelUnconOrders, BorderLayout.SOUTH);
+
+        add(discountedProductsscrollPane, BorderLayout.SOUTH);
     }
 
     public AddDiscountPanel getPnlAddDiscount() {
@@ -63,5 +80,10 @@ public class DiscountPanel extends JPanel {
     public void setDiscountTableData(DefaultTableModel updatedDiscountData) {
         discountData = updatedDiscountData;
         discountTable.setModel(discountData);
+    }
+
+    public void setDiscountedProductsTableData(DefaultTableModel updatedDiscountedProductsData) {
+        discountedProductsData = updatedDiscountedProductsData;
+        discountedProductsTable.setModel(discountedProductsData);
     }
 }

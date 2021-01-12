@@ -355,6 +355,16 @@ public class JdbcSQLServerConnection {
         }
         return null;
     }
+    public ResultSet listAllDiscountedProducts() {
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("EXECUTE list_all_discounted_products");
+            return rs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
     public ResultSet listMyOrders(int customerNbr) {
         ResultSet rs = createStatementAndExecuteProcedure(

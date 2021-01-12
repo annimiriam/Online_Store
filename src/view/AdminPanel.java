@@ -21,12 +21,12 @@ public class AdminPanel extends JPanel {
     private UnconfirmedOrdersPanel panelUnconOrders;
 
 
-    public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata) {
+    public AdminPanel(MainPanel mainPanel, DefaultTableModel supplierdata, DefaultTableModel productdata, DefaultTableModel discountdata, DefaultTableModel discountedProductsdata) {
         this.mainPanel = mainPanel;
         panelAddProductsAdmin = new AddProductsAdmin(mainPanel);
         panelSuppliers = new SuppliersPanel(mainPanel, supplierdata);
         panelProducts = new ProductPanel(mainPanel, productdata);
-        panelDiscount = new DiscountPanel(mainPanel, discountdata);
+        panelDiscount = new DiscountPanel(mainPanel, discountdata, discountedProductsdata);
         panelProductsLayout = new JPanel(new BorderLayout());
         panelUnconOrders = new UnconfirmedOrdersPanel(mainPanel);
 

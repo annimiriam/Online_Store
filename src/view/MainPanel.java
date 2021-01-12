@@ -124,7 +124,7 @@ public class MainPanel extends JPanel {
         adminPanel = new AdminPanel(this,
                 controller.listAllSuppliers(),
                 controller.listAllProducts(),
-                controller.listAllDiscounts()
+                controller.listAllDiscounts(), controller.listAllDiscountedProducts()
         );
         logOutPanel.add(adminPanel, BorderLayout.CENTER);
         add(logOutPanel, BorderLayout.CENTER);
