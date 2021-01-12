@@ -103,8 +103,8 @@ public class JdbcSQLServerConnection {
         ResultSet rs = createStatementAndExecuteProcedure(
                 "new_order "
                         + customerID + ", "
-                        + "unordered, "
-                        + date + ";"
+                        + "unordered, '"
+                        + date + "';"
         );
 
         try {
