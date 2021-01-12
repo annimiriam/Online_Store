@@ -241,8 +241,6 @@ public class Controller {
     }
 
     public void adminDeleteProduct(int productId) {
-        System.out.println("controller.adminDeleteProduct()");
-        System.out.println("productId: " + productId);
         jdbc.connectToDatabase(user, password);
         jdbc.deleteProduct(productId);
         jdbc.disconnectFromDatabase();
