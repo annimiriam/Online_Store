@@ -209,10 +209,10 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public int getShoppingListTotalPrice()
+    public double getShoppingListTotalPrice()
     {
         jdbc.connectToDatabase(user, password);
-        int totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
+        double totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
         jdbc.disconnectFromDatabase();
         return totalPrice;
     }

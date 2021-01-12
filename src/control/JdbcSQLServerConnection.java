@@ -148,7 +148,7 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
-    public int checkShoppingListTotalPrice(int orderNbr) {
+    public double checkShoppingListTotalPrice(int orderNbr) {
         ResultSet rs = createStatementAndExecuteProcedure(
                 "price_of_shoppinglist "
                         + orderNbr + ";"
@@ -160,7 +160,7 @@ public class JdbcSQLServerConnection {
                 throwables.printStackTrace();
             }
             try {
-                return Integer.parseInt(rs.getString(1));
+                return Double.parseDouble(rs.getString(1));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -169,10 +169,17 @@ public class JdbcSQLServerConnection {
     }
 
     public void deleteUnconfirmedOrder(int orderNbr) {
-        createStatementAndExecuteProcedure(
-                "delete_order "
-                        + orderNbr + ";"
-        );
+
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate("EXECUTE " + "delete_order "
+                    + orderNbr + ";");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     public void assignDiscountToProduct(int discId, int prodId) {
