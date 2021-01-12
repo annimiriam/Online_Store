@@ -47,8 +47,20 @@ public class Controller {
         mainPanel.presentTableProducts(dtm);
     }
 
+    // Kollar om order med currentOrderId har status 'unordered' i så fall raderas den innan utloggning
     public void logOut() {
-        //TODO här ska vi lägga till kod som tömmer kundvagnen i databasen
+        if(customer_id != 0)
+        {
+        jdbc.connectToDatabase(user, password);
+        String status = jdbc.checkOrderStatus(currentOrderId);
+        System.out.println("status: " + status);
+            if(status.equals("unordered"))
+              {
+                 jdbc.deleteUnconfirmedOrder(currentOrderId);
+              }
+        jdbc.disconnectFromDatabase();
+            customer_id = 0;
+        }
         mainFrame.dispose();
         mainPanel = new MainPanel(this);
         mainFrame = new MainFrame(mainPanel);
@@ -103,8 +115,8 @@ public class Controller {
                 System.out.println("customer id: " + customer_id);
 
                 //TODO spara en ny orderID som blir ny varje gång och deleteas om den ej blivit okejad innan utlogg
-                //currentOrderId = jdbc.newOrder(customer_id);
-                //System.out.println("ny order på denna kund: " + currentOrderId);
+                currentOrderId = jdbc.newOrder(customer_id);
+                System.out.println("ny order på denna kund: " + currentOrderId);
                 //Open customerpanel
                 mainPanel.showCustomerPanel();
             } else {
@@ -127,7 +139,7 @@ public class Controller {
         String country = mainPanel.getTxtCountryFromAddSupplierPanel();
         String phone = mainPanel.getTxtPhoneFromAddSupplierPanel();
 
-        jdbc.addSupplier(name, address, postnbr, city, country, phone);
+        jdbc.addSupplier(name, phone, address, postnbr, city, country);
 
         jdbc.disconnectFromDatabase();
     }
@@ -164,9 +176,18 @@ public class Controller {
     public void customerAddProductToOrder(int productID, int nbrOfProducts) {
         jdbc.connectToDatabase(user, password);
 
+        System.out.println("addProductToOrder " + currentOrderId + " " + productID + " " + nbrOfProducts);
         //TODO
-        jdbc.addProductToOrder(productID, currentOrderId, nbrOfProducts);
+        jdbc.addProductToOrder(currentOrderId, productID, nbrOfProducts);
         jdbc.disconnectFromDatabase();
+    }
+
+    public int getShoppingListTotalPrice()
+    {
+        jdbc.connectToDatabase(user, password);
+        int totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
+        jdbc.disconnectFromDatabase();
+        return totalPrice;
     }
 
     // Custoemr can delete orders with status 'unconfirmed'
@@ -198,7 +219,6 @@ public class Controller {
         //jdbc.deleteProduct();
         jdbc.disconnectFromDatabase();
     }
-
 
     public void searchProduct() {
         String productIdString = mainPanel.getSearchProductCode();
@@ -267,6 +287,7 @@ public class Controller {
     }
 
     public DefaultTableModel listAllProducts() {
+
         DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
@@ -365,6 +386,30 @@ public class Controller {
 
         jdbc.disconnectFromDatabase();
         return datamodel;
+    }
+
+    public DefaultTableModel listNewOrder(){
+        DefaultTableModel dataModel = new DefaultTableModel(0, 3);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listOrderDetails(currentOrderId);
+
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(3),
+                };
+
+                dataModel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return dataModel;
     }
 
     public DefaultTableModel searchUnconfirmedOrders() {

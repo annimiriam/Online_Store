@@ -104,6 +104,7 @@ public class AddProductsAdmin extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("klickat på add product-knappen");
                 mainPanel.addProduct();
+                clear();
             }
         });
 
@@ -112,6 +113,8 @@ public class AddProductsAdmin extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("klickat på uppdatera lager-lnappen");
                 mainPanel.updateProductQty();
+                clear();
+
             }
         });
 
@@ -132,6 +135,8 @@ public class AddProductsAdmin extends JPanel {
         txtName.setText("");
         txtName.setEnabled(true);
         txtQuantity.setText("");
+        txtBaseprice.setText("");
+        txtSupplier.setText("");
     }
 
 

@@ -42,4 +42,8 @@ public class CustomerPanel extends JPanel {
         return panelAddProducts;
     }
 
+    public ShoppingListPanel getPanelShoppinglist(){
+        return panelShoppinglist;
+    }
+
 }

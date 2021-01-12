@@ -233,6 +233,12 @@ public class MainPanel extends JPanel {
         adminPanel.setProductTableData(controller.listAllProducts());
     }
 
+    public void getShoppingListTotalPrice()
+    {
+        int totalPrice = controller.getShoppingListTotalPrice();
+        customerPanel.getPanelShoppinglist().updateTotalPrice(totalPrice);
+    }
+
     public void getSelectedProduct(String id, String name, String qty) {
         if (adminPanel != null) {
             adminPanel.getAddProductsAdmin().setSelectedProduct(id, name, qty);
@@ -377,7 +383,11 @@ public class MainPanel extends JPanel {
         int productID = customerPanel.getPanelProducts().getSelectedProduct();
         int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();
         controller.customerAddProductToOrder(productID, nbrOfProducts);
-        System.out.println("addToChart(" + productID + ", " + nbrOfProducts + ")");
+        customerPanel.getPanelShoppinglist().setNewOrderData(controller.listNewOrder());
+        //adminPanel.setProductTableData(controller.listAllProducts());
+
+
+
     }
 
 

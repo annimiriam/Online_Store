@@ -112,6 +112,12 @@ public class AddSupplierPanel extends JPanel {
                 System.out.println("klickat på add Supplier");
                 System.out.println(txtName.getText());
                 mainPanel.addSupplier();
+                txtName.setText("");
+                txtAddress.setText("");
+                txtCity.setText("");
+                txtCountry.setText("");
+                txtPhone.setText("");
+                txtPostnbr.setText("");
             }
         });
     }
