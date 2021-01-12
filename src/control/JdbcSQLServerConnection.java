@@ -223,9 +223,9 @@ public class JdbcSQLServerConnection {
             stmt.executeQuery(
                     "register_customer "
                             + firstName + ", "
-                            + lastName + ", "
-                            + email + ", "
-                            + address + ", "
+                            + lastName + ", '"
+                            + email + "', '"
+                            + address + "', "
                             + postnbr + ", "
                             + city + ", "
                             + country + ","
