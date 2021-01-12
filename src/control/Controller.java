@@ -240,10 +240,11 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void adminDeleteProduct() {
+    public void adminDeleteProduct(int productId) {
+        System.out.println("controller.adminDeleteProduct()");
+        System.out.println("productId: " + productId);
         jdbc.connectToDatabase(user, password);
-        //TODO
-        //jdbc.deleteProduct();
+        jdbc.deleteProduct(productId);
         jdbc.disconnectFromDatabase();
     }
 

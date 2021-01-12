@@ -63,6 +63,7 @@ public class AdminPanel extends JPanel {
 
     public void setProductTableData(DefaultTableModel updatedProductsData) {
         panelProducts.setProductData(updatedProductsData);
+
     }
 
     public void setDiscountTableData(DefaultTableModel updatedDiscountData) {

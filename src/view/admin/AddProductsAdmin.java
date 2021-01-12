@@ -27,6 +27,7 @@ public class AddProductsAdmin extends JPanel {
     private JTextField txtQuantity;
 
     private JButton btnAddNewProduct;
+    private JButton btnDeleteProduct;
     private JButton btnUpdateQuantity;
 
     public AddProductsAdmin(MainPanel mainpanel) {
@@ -55,6 +56,7 @@ public class AddProductsAdmin extends JPanel {
 
         btnAddNewProduct = new JButton("Lägg till ny");
         btnUpdateQuantity = new JButton("Uppdatera lager"); //Bättre namn, lägg till antal i lager? Vad ska den göra plussa på?
+        btnDeleteProduct = new JButton("Ta bort produkt"); //Bättre namn, lägg till antal i lager? Vad ska den göra plussa på?
     }
 
     public void addElements() {
@@ -70,6 +72,7 @@ public class AddProductsAdmin extends JPanel {
         pnlInput.add(txtQuantity);
 
         pnlButtons.add(btnAddNewProduct);
+        pnlButtons.add(btnDeleteProduct);
         pnlButtons.add(btnUpdateQuantity);
 
         addListeners();
@@ -115,6 +118,15 @@ public class AddProductsAdmin extends JPanel {
                 mainPanel.updateProductQty();
                 clear();
 
+            }
+        });
+
+        btnDeleteProduct.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("klickat på ta bort vara knappen");
+                mainPanel.deleteProduct(Integer.parseInt(txtId.getText()));
+                clear();
             }
         });
 
