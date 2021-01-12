@@ -55,9 +55,9 @@ public class ProductPanel extends JPanel implements ListSelectionListener {
         return panelSearchProducts;
     }
 
-    public void setProductData(DefaultTableModel updatedSupplierData) {
-        productData = updatedSupplierData;
-        productData.setColumnIdentifiers(columnNames);
+    public void setProductData(DefaultTableModel updatedProductData) {
+        productData = updatedProductData;
+        //productData.setColumnIdentifiers(columnNames);
         productsTable.setModel(productData);
         productData.setColumnIdentifiers(columnNames);
     }

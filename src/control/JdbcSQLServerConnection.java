@@ -1,5 +1,6 @@
 package control;
 
+import javax.swing.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -134,8 +135,7 @@ public class JdbcSQLServerConnection {
         }
     }
 
-    public String checkOrderStatus(int orderNbr)
-    {
+    public String checkOrderStatus(int orderNbr) {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("select status from orders where id = " + orderNbr + ";");
@@ -151,7 +151,7 @@ public class JdbcSQLServerConnection {
     public int checkShoppingListTotalPrice(int orderNbr) {
         ResultSet rs = createStatementAndExecuteProcedure(
                 "price_of_shoppinglist "
-                 + orderNbr + ";"
+                        + orderNbr + ";"
         );
         while (true) {
             try {
@@ -168,11 +168,10 @@ public class JdbcSQLServerConnection {
         return 0;
     }
 
-    public void deleteUnconfirmedOrder(int orderNbr)
-    {
+    public void deleteUnconfirmedOrder(int orderNbr) {
         createStatementAndExecuteProcedure(
                 "delete_order "
-                + orderNbr + ";"
+                        + orderNbr + ";"
         );
     }
 
@@ -200,10 +199,21 @@ public class JdbcSQLServerConnection {
     }
 
     public void deleteProduct(int prodId) {
-        createStatementAndExecuteProcedure(
-                "delete_product "
-                        + prodId + ";"
-        );
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("EXECUTE delete_product "
+                                                            + prodId + ";"
+            );
+//            System.out.println(rs);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Produkten går inte att ta bort");
+        }
+
+
+
     }
 
     public int registerCustomer(String firstName, String lastName, String email, String address, String postnbr, String city, String country, String tel, String password) {
@@ -399,8 +409,7 @@ public class JdbcSQLServerConnection {
         return rs;
     }
 
-    public ResultSet getMostSoldProducts()
-    {
+    public ResultSet getMostSoldProducts() {
         ResultSet rs = createStatementAndExecuteProcedure("most_sold_product");
         return rs;
     }
