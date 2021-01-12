@@ -54,8 +54,8 @@ public class JdbcSQLServerConnection {
             Statement stmt = connection.createStatement();
             stmt.executeQuery("EXECUTE add_supplier "
                     + name + ", "
-                    + tel + ", "
-                    + address + ", "
+                    + tel + ", '"
+                    + address + "', "
                     + postnbr + ", "
                     + city + ", "
                     + country + ";");
@@ -223,9 +223,9 @@ public class JdbcSQLServerConnection {
             stmt.executeQuery(
                     "register_customer "
                             + firstName + ", "
-                            + lastName + ", "
-                            + email + ", "
-                            + address + ", "
+                            + lastName + ", '"
+                            + email + "', '"
+                            + address + "', "
                             + postnbr + ", "
                             + city + ", "
                             + country + ","
