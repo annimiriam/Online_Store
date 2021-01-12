@@ -212,9 +212,10 @@ public class Controller {
     public int getShoppingListTotalPrice()
     {
         jdbc.connectToDatabase(user, password);
-        int totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
+       // int totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
         jdbc.disconnectFromDatabase();
-        return totalPrice;
+       // return totalPrice;
+        return -1;
     }
 
     // Custoemr can delete orders with status 'unconfirmed'
