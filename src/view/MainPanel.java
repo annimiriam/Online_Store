@@ -283,6 +283,11 @@ public class MainPanel extends JPanel {
         return controller.searchUnconfirmedOrders();
     }
 
+    public DefaultTableModel getMostSoldProducts()
+    {
+        return controller.getMostSoldProducts();
+    }
+
     public String getSearchProductCode() {
         if (customerPanel!=null) {
             return customerPanel.getPanelProducts().getSearchProductPanel().getTxtProductCode();

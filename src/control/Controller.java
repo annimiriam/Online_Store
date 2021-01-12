@@ -437,6 +437,31 @@ public class Controller {
 
     }
 
+    public DefaultTableModel getMostSoldProducts()
+    {
+        DefaultTableModel datamodel = new DefaultTableModel(0, 4);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.getMostSoldProducts();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4)
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
+
     public void orderHistory() {
         jdbc.connectToDatabase(user, password);
         //jdbc.orderHistory();

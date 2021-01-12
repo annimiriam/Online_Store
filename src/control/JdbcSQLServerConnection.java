@@ -377,6 +377,12 @@ public class JdbcSQLServerConnection {
         return rs;
     }
 
+    public ResultSet getMostSoldProducts()
+    {
+        ResultSet rs = createStatementAndExecuteProcedure("most_sold_product");
+        return rs;
+    }
+
     // Confirms an order
     public void confirmOrder(int orderNbr) {
         ResultSet rs = createStatementAndExecuteProcedure("confirm_order " + orderNbr);
