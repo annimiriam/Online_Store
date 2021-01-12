@@ -65,6 +65,13 @@ public class MainPanel extends JPanel {
         controller.searchProduct();
     }
 
+    public DefaultTableModel listAllProducts(){
+        return controller.listAllProducts();
+    }
+    public DefaultTableModel listDiscountedProducts(){
+        return controller.listDiscountedProducts();
+    }
+
     public void confirmOrder(int orderNbr) {
         controller.confirmOrder(orderNbr);
     }

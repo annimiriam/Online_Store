@@ -335,6 +335,17 @@ public class JdbcSQLServerConnection {
         return null;
     }
 
+    public ResultSet listDiscountedProducts() {
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("list_discounted_products;");
+            return rs;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public ResultSet listAllSuppliers() {
         try {
             Statement stmt = connection.createStatement();
@@ -359,7 +370,7 @@ public class JdbcSQLServerConnection {
     public ResultSet listAllDiscountedProducts() {
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("EXECUTE list_all_discounted_products");
+            ResultSet rs = stmt.executeQuery("EXECUTE list_all_product_discounts;");
             return rs;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

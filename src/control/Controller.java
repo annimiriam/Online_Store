@@ -286,6 +286,31 @@ public class Controller {
         mainPanel.presentTableProducts(datamodel);
         jdbc.disconnectFromDatabase();
     }
+    public DefaultTableModel listDiscountedProducts(){
+        DefaultTableModel datamodel = new DefaultTableModel(0, 6);
+        jdbc.connectToDatabase(user, password);
+
+        ResultSet rs = jdbc.listDiscountedProducts();
+        try {
+
+            while (rs.next()) {
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                };
+
+                datamodel.addRow(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        jdbc.disconnectFromDatabase();
+        return datamodel;
+    }
 
     public DefaultTableModel listAllSuppliers() {
         DefaultTableModel datamodel = new DefaultTableModel(0, 6);
