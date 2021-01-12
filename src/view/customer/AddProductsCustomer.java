@@ -28,7 +28,7 @@ public class AddProductsCustomer extends JPanel {
         btnSaleProducts = new JButton("Reaprodukter");
         btnAddToChart = new JButton("Lägg till i kundvagn");
         lblNbrOfProducts = new JLabel("Antal produkter: ");
-        txtNbrOfProducts = new JTextField();
+        txtNbrOfProducts = new JTextField("1");
         txtNbrOfProducts.setPreferredSize(new Dimension(30,20));
 
     }
