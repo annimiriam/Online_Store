@@ -29,7 +29,7 @@ public class MyOrdersPanel extends JPanel {
     private JScrollPane scrollPaneMyOrders;
     private JScrollPane scrollPaneOrderDetails;
     private String[] columnNamesMyOrders = {"Ordernr", "Pris", "Datum", "Status"};
-    private String[] columnNamesOrderDetails = {"Produkt", "Antal", "Pris"};
+    private String[] columnNamesOrderDetails = {"Produkt", "Antal"};
 
     public MyOrdersPanel(MainPanel mainPanel, DefaultTableModel myOrdersData, DefaultTableModel orderDetailsData) {
         this.mainPanel = mainPanel;
