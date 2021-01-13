@@ -79,11 +79,13 @@ public class DiscountPanel extends JPanel {
 
     public void setDiscountTableData(DefaultTableModel updatedDiscountData) {
         discountData = updatedDiscountData;
+        discountData.setColumnIdentifiers(columnNames);
         discountTable.setModel(discountData);
     }
 
     public void setDiscountedProductsTableData(DefaultTableModel updatedDiscountedProductsData) {
         discountedProductsData = updatedDiscountedProductsData;
+        discountedProductsData.setColumnIdentifiers(discountedProductscolumnNames);
         discountedProductsTable.setModel(discountedProductsData);
     }
 }

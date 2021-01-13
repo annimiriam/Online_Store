@@ -84,6 +84,7 @@ public class JdbcSQLServerConnection {
 
 
     public void addDiscount(int id, String name, int percent, int from, int tom) {
+        System.out.println("lägga till " + id);
         createStatementAndExecuteProcedure(
                 "add_discount "
                         + id + ", "
