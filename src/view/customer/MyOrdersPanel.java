@@ -93,10 +93,6 @@ public class MyOrdersPanel extends JPanel {
         add(panelOrderInventory, BorderLayout.SOUTH);
     }
 
-    public void addItemToOrderTable(String[] item) {
-        //TODO
-    }
-
     public int getSelectedOrderDetails() {
         return Integer.parseInt((String) tblMyOrders.getValueAt(tblMyOrders.getSelectedRow(), 0));
     }
@@ -138,6 +134,7 @@ public class MyOrdersPanel extends JPanel {
 
     public void setOrderDetailsData(DefaultTableModel orderDetailsData){
         this.orderDetailsData = orderDetailsData;
+        orderDetailsData.setColumnIdentifiers(columnNamesOrderDetails);
     }
 
 
