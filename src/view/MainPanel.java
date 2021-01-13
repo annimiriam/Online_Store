@@ -413,10 +413,12 @@ public class MainPanel extends JPanel {
     public void makeOrder()
     {
         controller.makeOrder();
+
         customerPanel.setOrderTableData(controller.listMyOrders());
     }
 
 
+    }
 
 
 }
