@@ -450,8 +450,8 @@ public class Controller {
         try {
 
             while (rs.next()) {
-                String[] data = {rs.getString(2),
-                        rs.getString(3),
+                String[] data = {rs.getString(1),
+                        rs.getString(2),
                         rs.getString(3),
                 };
 
