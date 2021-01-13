@@ -52,8 +52,8 @@ public class JdbcSQLServerConnection {
     public void addSupplier(String name, String tel, String address, String postnbr, String city, String country) {
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("EXECUTE add_supplier "
-                    + name + ", "
+            stmt.executeUpdate("EXECUTE add_supplier '"
+                    + name + "', "
                     + tel + ", '"
                     + address + "', "
                     + postnbr + ", "
@@ -61,8 +61,7 @@ public class JdbcSQLServerConnection {
                     + country + ";");
 
         } catch (SQLException throwables) {
-            //throwables.printStackTrace();
-            System.out.println("Här kommer ett exception om att queryn add_supplier inte returnerar ett resultset, men det gör inget");
+            throwables.printStackTrace();
         }
     }
 
@@ -213,7 +212,7 @@ public class JdbcSQLServerConnection {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("EXECUTE delete_product "
-                                                            + prodId + ";"
+                    + prodId + ";"
             );
 
         } catch (SQLException throwables) {
@@ -221,7 +220,6 @@ public class JdbcSQLServerConnection {
             System.out.println("Statementet returnear inget resultset men det gör inget");
             //JOptionPane.showMessageDialog(null, "Produkten går inte att ta bort");
         }
-
 
 
     }
@@ -437,8 +435,7 @@ public class JdbcSQLServerConnection {
         );
     }
 
-    public void makeOrder(int orderNbr)
-    {
+    public void makeOrder(int orderNbr) {
         createStatementAndExecuteProcedure(
                 "make_order "
                         + orderNbr + ";"
