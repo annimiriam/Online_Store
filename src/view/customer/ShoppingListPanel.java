@@ -15,7 +15,7 @@ public class ShoppingListPanel extends JPanel {
     private JScrollPane scrollPane;
     private String[] columnNames = {"Produktkod", "Namn", "Antal", "Pris" };
 
-    private JButton btnRemove;
+
     private JButton btnCreateOrder;
     private JLabel lblTotalPrice;
 
@@ -38,7 +38,6 @@ public class ShoppingListPanel extends JPanel {
         shoppingListData.setColumnIdentifiers(columnNames);
         shoppingListTable.setModel(shoppingListData);
         btnCreateOrder = new JButton("Beställ");
-        btnRemove = new JButton("Ta bort");
         lblTotalPrice = new JLabel("Totalpris: 0");
 
         btnCreateOrder.addActionListener(new ActionListener() {
@@ -53,7 +52,6 @@ public class ShoppingListPanel extends JPanel {
     };
 
     private void addElements(){
-        panelSouth.add(btnRemove);
         panelSouth.add(btnCreateOrder);
         panelSouth.add(lblTotalPrice);
 
