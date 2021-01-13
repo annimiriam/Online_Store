@@ -534,6 +534,7 @@ public class Controller {
     {
         jdbc.connectToDatabase(user, password);
         jdbc.makeOrder(currentOrderId);
+        currentOrderId = jdbc.newOrder(customer_id);
         jdbc.disconnectFromDatabase();
     }
 
