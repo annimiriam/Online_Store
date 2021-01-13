@@ -34,6 +34,15 @@ public class CustomerPanel extends JPanel {
         add(panelShoppinglist, BorderLayout.EAST);
     }
 
+    public void setProductTableData(DefaultTableModel updatedProductsData) {
+        panelProducts.setProductData(updatedProductsData);
+
+    }
+
+    public void setOrderTableData(DefaultTableModel updatedProductsData) {
+        panelMyOrders.setOrderTableData(updatedProductsData);
+
+    }
     public ProductPanel getPanelProducts() {
         return panelProducts;
     }
@@ -46,4 +55,7 @@ public class CustomerPanel extends JPanel {
         return panelShoppinglist;
     }
 
+    public MyOrdersPanel getPanelMyOrders() {
+        return panelMyOrders;
+    }
 }
