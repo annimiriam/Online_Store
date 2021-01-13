@@ -213,13 +213,10 @@ public class JdbcSQLServerConnection {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("EXECUTE delete_product "
                     + prodId + ";"
-                              
-                              );
+            );
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            System.out.println("Statementet returnear inget resultset men det gör inget");
-            //JOptionPane.showMessageDialog(null, "Produkten går inte att ta bort");
         }
 
 
