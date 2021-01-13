@@ -68,6 +68,7 @@ public class MyOrdersPanel extends JPanel {
                 else{
                     mainPanel.deleteUnconfirmedOrderCustomer(orderNbr);
                     myOrdersData = mainPanel.getMyOrders();
+                    myOrdersData.setColumnIdentifiers(columnNamesMyOrders);
                     tblMyOrders.setModel(myOrdersData);
                     JOptionPane.showMessageDialog(null, "Din order är nu raderad.");
                 }
