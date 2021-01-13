@@ -138,7 +138,15 @@ public class MyOrdersPanel extends JPanel {
 
     public void setOrderDetailsData(DefaultTableModel orderDetailsData){
         this.orderDetailsData = orderDetailsData;
+        orderDetailsData.setColumnIdentifiers(columnNamesOrderDetails);
+        tblOrderDetails.setModel(orderDetailsData);
     }
 
+    public void setOrderTableData(DefaultTableModel updatedProductsData) {
+        myOrdersData = updatedProductsData;
+        myOrdersData.setColumnIdentifiers(columnNamesMyOrders);
+        tblMyOrders.setModel(myOrdersData);
+
+    }
 
 }

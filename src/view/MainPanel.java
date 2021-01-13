@@ -386,6 +386,9 @@ public class MainPanel extends JPanel {
     public void deleteUnconfirmedOrderCustomer(int orderNbr)
     {
         controller.customerDeleteUnconfirmedOrder(orderNbr);
+        customerPanel.setOrderTableData(controller.listMyOrders());
+        customerPanel.getPanelProducts().setProductData(controller.listAllProducts());
+        customerPanel.getPanelMyOrders().setOrderDetailsData(new DefaultTableModel());
     }
 
     public DefaultTableModel getMyOrders()
@@ -403,14 +406,16 @@ public class MainPanel extends JPanel {
         int nbrOfProducts = customerPanel.getPanelAddProductsCustomer().getNbrOfProductsToChart();
         controller.customerAddProductToOrder(productID, nbrOfProducts);
         customerPanel.getPanelShoppinglist().setNewOrderData(controller.listNewOrder());
-        //adminPanel.setProductTableData(controller.listAllProducts());
+        customerPanel.getPanelProducts().setProductData(controller.listAllProducts());
 
     }
 
     public void makeOrder()
     {
         controller.makeOrder();
+        customerPanel.setOrderTableData(controller.listMyOrders());
     }
+
 
 
 
