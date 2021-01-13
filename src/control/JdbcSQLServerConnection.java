@@ -210,7 +210,7 @@ public class JdbcSQLServerConnection {
 
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("EXECUTE delete_product "
+            stmt.executeUpdate("EXECUTE delete_product "
                                                             + prodId + ";"
             );
 
