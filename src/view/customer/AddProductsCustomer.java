@@ -29,7 +29,7 @@ public class AddProductsCustomer extends JPanel {
         btnAddToChart = new JButton("Lägg till i kundvagn");
         lblNbrOfProducts = new JLabel("Antal produkter: ");
         txtNbrOfProducts = new JTextField("1");
-        txtNbrOfProducts.setPreferredSize(new Dimension(30,20));
+        txtNbrOfProducts.setPreferredSize(new Dimension(30, 20));
 
     }
 
@@ -60,7 +60,7 @@ public class AddProductsCustomer extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.addToChart();
-               // mainPanel.getShoppingListTotalPrice();
+                mainPanel.getShoppingListTotalPrice();
             }
         });
 

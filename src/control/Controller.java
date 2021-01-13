@@ -49,16 +49,14 @@ public class Controller {
 
     // Kollar om order med currentOrderId har status 'unordered' i så fall raderas den innan utloggning
     public void logOut() {
-        if(customer_id != 0)
-        {
-        jdbc.connectToDatabase(user, password);
-        String status = jdbc.checkOrderStatus(currentOrderId);
-        System.out.println("status: " + status);
-            if(status.equals("unordered"))
-              {
-                 jdbc.deleteUnconfirmedOrder(currentOrderId);
-              }
-        jdbc.disconnectFromDatabase();
+        if (customer_id != 0) {
+            jdbc.connectToDatabase(user, password);
+            String status = jdbc.checkOrderStatus(currentOrderId);
+            System.out.println("status: " + status);
+            if (status.equals("unordered")) {
+                jdbc.deleteUnconfirmedOrder(currentOrderId);
+            }
+            jdbc.disconnectFromDatabase();
             customer_id = 0;
         }
         mainFrame.dispose();
@@ -210,18 +208,15 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public double getShoppingListTotalPrice()
-    {
+    public double getShoppingListTotalPrice() {
         jdbc.connectToDatabase(user, password);
         double totalPrice = jdbc.checkShoppingListTotalPrice(currentOrderId);
         jdbc.disconnectFromDatabase();
-       // return totalPrice;
-        return -1;
+        return totalPrice;
     }
 
     // Custoemr can delete orders with status 'unconfirmed'
-    public void customerDeleteUnconfirmedOrder(int orderNbr)
-    {
+    public void customerDeleteUnconfirmedOrder(int orderNbr) {
         jdbc.connectToDatabase(user, password);
         jdbc.deleteUnconfirmedOrder(orderNbr);
         jdbc.disconnectFromDatabase();
@@ -287,7 +282,8 @@ public class Controller {
         mainPanel.presentTableProducts(datamodel);
         jdbc.disconnectFromDatabase();
     }
-    public DefaultTableModel listDiscountedProducts(){
+
+    public DefaultTableModel listDiscountedProducts() {
         DefaultTableModel datamodel = new DefaultTableModel(0, 6);
         jdbc.connectToDatabase(user, password);
 
@@ -440,7 +436,7 @@ public class Controller {
         return datamodel;
     }
 
-    public DefaultTableModel listNewOrder(){
+    public DefaultTableModel listNewOrder() {
         DefaultTableModel dataModel = new DefaultTableModel(0, 4);
         jdbc.connectToDatabase(user, password);
 
@@ -490,8 +486,7 @@ public class Controller {
 
     }
 
-    public DefaultTableModel getMostSoldProducts()
-    {
+    public DefaultTableModel getMostSoldProducts() {
         DefaultTableModel datamodel = new DefaultTableModel(0, 4);
         jdbc.connectToDatabase(user, password);
 
@@ -530,8 +525,7 @@ public class Controller {
         jdbc.disconnectFromDatabase();
     }
 
-    public void makeOrder()
-    {
+    public void makeOrder() {
         jdbc.connectToDatabase(user, password);
         jdbc.makeOrder(currentOrderId);
         currentOrderId = jdbc.newOrder(customer_id);
