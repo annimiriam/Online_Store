@@ -60,7 +60,7 @@ public class AddProductsCustomer extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainPanel.addToChart();
-                mainPanel.getShoppingListTotalPrice();
+               // mainPanel.getShoppingListTotalPrice();
             }
         });
 
