@@ -67,9 +67,10 @@ public class JdbcSQLServerConnection {
     }
 
     public void addProduct(int id, String name, double baseprice, String supplier, int qty) {
+
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("EXECUTE add_product "
+            stmt.executeUpdate("EXECUTE add_product "
                     + id + ", "
                     + name + ", "
                     + baseprice + ", "
@@ -77,8 +78,9 @@ public class JdbcSQLServerConnection {
                     + qty + ";");
 
         } catch (SQLException throwables) {
-            //throwables.printStackTrace();
-            System.out.println("Här kommer ett exception om att queryn add_product inte returnerar ett resultset, men det gör inget");
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Leverantören finns ej");
+            //System.out.println("Leverantören finns inte");
         }
     }
 
@@ -442,33 +444,6 @@ public class JdbcSQLServerConnection {
         );
     }
 
-
-//    public void testQuery(Connection conn) {
-//
-//        try {
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery("select * from customer");
-//
-//            while (rs.next()) {
-//                System.out.println(rs.getInt(1) + " "
-//                        + rs.getString(2) + " "
-//                        + rs.getString(3) + " "
-//                        + rs.getString(4) + " "
-//                        + rs.getString(5) + " "
-//                        + rs.getString(6) + " "
-//                        + rs.getString(7) + " "
-//                        + rs.getString(8) + " "
-//                        + rs.getString(9) + " "
-//                        + rs.getString(10) + " "
-//                );
-//            }
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//
-//
-//    }
 
 //    public void addCustomer(String name, String phonenumber, String address, String password) {
 //        try {
