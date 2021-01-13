@@ -72,8 +72,4 @@ public class ShoppingListPanel extends JPanel {
         lblTotalPrice.setText("Totalpris: " + totalPrice);
     }
 
-    public void addItemToShoppingList(String[] item){
-        //TODO
-    }
-
 }

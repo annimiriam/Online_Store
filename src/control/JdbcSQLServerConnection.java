@@ -129,12 +129,12 @@ public class JdbcSQLServerConnection {
     public void addProductToOrder(int orderId, int prodId, int qty) {
         try {
             Statement stmt = connection.createStatement();
-            stmt.executeQuery("EXECUTE add_product_to_order "
+            stmt.executeUpdate("EXECUTE add_product_to_order "
                     + orderId + ", "
                     + prodId + ", "
                     + qty + ";");
         } catch (SQLException throwables) {
-            System.out.println("Här kommer ett exception om att queryn add_product_to_order inte returnerade något resultset. OK! ");
+            throwables.printStackTrace();
         }
     }
 
@@ -387,6 +387,7 @@ public class JdbcSQLServerConnection {
         }
         return null;
     }
+
     public ResultSet listAllDiscountedProducts() {
         try {
             Statement stmt = connection.createStatement();
