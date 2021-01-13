@@ -226,7 +226,7 @@ public class JdbcSQLServerConnection {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
-            stmt.executeQuery(
+            stmt.executeUpdate(
                     "register_customer "
                             + firstName + ", "
                             + lastName + ", '"
