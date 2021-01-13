@@ -213,7 +213,8 @@ public class JdbcSQLServerConnection {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("EXECUTE delete_product "
                     + prodId + ";"
-            );
+                              
+                              );
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
