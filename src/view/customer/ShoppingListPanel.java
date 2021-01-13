@@ -67,7 +67,7 @@ public class ShoppingListPanel extends JPanel {
         shoppingListData.setColumnIdentifiers(columnNames);
     }
 
-    public void updateTotalPrice(int totalPrice)
+    public void updateTotalPrice(double totalPrice)
     {
         lblTotalPrice.setText("Totalpris: " + totalPrice);
     }

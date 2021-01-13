@@ -248,7 +248,7 @@ public class MainPanel extends JPanel {
 
     public void getShoppingListTotalPrice()
     {
-        int totalPrice = controller.getShoppingListTotalPrice();
+        double totalPrice = controller.getShoppingListTotalPrice();
         customerPanel.getPanelShoppinglist().updateTotalPrice(totalPrice);
     }
 
