@@ -69,6 +69,9 @@ public class AdminPanel extends JPanel {
     public void setDiscountTableData(DefaultTableModel updatedDiscountData) {
         panelDiscount.setDiscountTableData(updatedDiscountData);
     }
+    public void setDiscountedProductsTableData(DefaultTableModel updatedDiscountData) {
+        panelDiscount.setDiscountedProductsTableData(updatedDiscountData);
+    }
 
 
 

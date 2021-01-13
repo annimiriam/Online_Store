@@ -288,6 +288,7 @@ public class MainPanel extends JPanel {
     public void addDiscount() {
         controller.adminAddDiscount();
         adminPanel.setDiscountTableData(controller.listAllDiscounts());
+        adminPanel.setDiscountedProductsTableData(controller.listAllDiscountedProducts());
     }
 
     public DefaultTableModel getUnconfirmedOrders()
