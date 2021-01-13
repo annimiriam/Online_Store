@@ -428,7 +428,6 @@ public class Controller {
             while (rs.next()) {
                 String[] data = {rs.getString(2),
                         rs.getString(3),
-                        rs.getString(3),
                 };
 
                 datamodel.addRow(data);
@@ -442,7 +441,7 @@ public class Controller {
     }
 
     public DefaultTableModel listNewOrder(){
-        DefaultTableModel dataModel = new DefaultTableModel(0, 3);
+        DefaultTableModel dataModel = new DefaultTableModel(0, 4);
         jdbc.connectToDatabase(user, password);
 
         ResultSet rs = jdbc.listOrderDetails(currentOrderId);
@@ -453,6 +452,7 @@ public class Controller {
                 String[] data = {rs.getString(1),
                         rs.getString(2),
                         rs.getString(3),
+                        rs.getString(4)
                 };
 
                 dataModel.addRow(data);
